@@ -1,162 +1,1881 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="utf-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
 
-    <title>{{ c.title }} | {{ c.department }}</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description" content="{{ c.subtitle }}">
+    <meta
+        name="theme-color"
+        content="#03070c"
+    >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>
+        {{ c.title }} | {{ c.department }}
+    </title>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap"
-        rel="stylesheet"
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
     >
 
     <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
     >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+<style>
+
+/* ==========================================================
+   CONFIGURACIÓN GENERAL
+   ========================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+
+    --black:
+        #02060b;
+
+    --black-2:
+        #050c14;
+
+    --panel:
+        #07131f;
+
+    --panel-2:
+        #0a1927;
+
+    --blue:
+        #0878d1;
+
+    --blue-light:
+        #168cff;
+
+    --blue-soft:
+        #4aaeff;
+
+    --white:
+        #f2f7fb;
+
+    --text:
+        #dce8f2;
+
+    --muted:
+        #91a7ba;
+
+    --muted-2:
+        #60778c;
+
+    --border:
+        rgba(255,255,255,.09);
+
+}
+
+
+/* ==========================================================
+   BODY
+   ========================================================== */
+
+html {
+
+    scroll-behavior:
+        smooth;
+
+}
+
+body {
+
+    margin:
+        0;
+
+    min-height:
+        100vh;
+
+    color:
+        var(--text);
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    background:
+        var(--black);
+
+}
+
+
+/* ==========================================================
+   FONDO INSTITUCIONAL
+   ========================================================== */
+
+.site-background {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        -5;
+
+    background:
+
+        linear-gradient(
+            rgba(2,7,12,.88),
+            rgba(2,7,12,.94)
+        ),
+
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(8,120,209,.18),
+            transparent 45%
+        ),
+
+        #03070c;
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    filter:
+        blur(1px);
+
+    transform:
+        scale(1.03);
+
+}
+
+.site-background::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(2,6,11,.92),
+            rgba(2,10,18,.60),
+            rgba(2,6,11,.92)
+        );
+
+}
+
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+.site-header {
+
+    position:
+        sticky;
+
+    top:
+        0;
+
+    z-index:
+        100;
+
+    min-height:
+        82px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        10px 48px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(2,7,12,.98),
+            rgba(3,10,17,.94)
+        );
+
+    border-bottom:
+        1px solid
+        rgba(22,140,255,.22);
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.38);
+
+    backdrop-filter:
+        blur(14px);
+
+}
+
+
+/* ==========================================================
+   MARCA
+   ========================================================== */
+
+.brand {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    min-width:
+        0;
+
+}
+
+
+.brand-logo {
+
+    width:
+        53px;
+
+    height:
+        53px;
+
+    flex:
+        0 0 53px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        4px;
+
+    background:
+        #fff;
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        0 0 0 1px
+        rgba(255,255,255,.10);
+
+}
+
+
+.brand-logo img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+}
+
+
+.brand-text {
+
+    min-width:
+        0;
+
+}
+
+
+.brand-institution {
+
+    margin:
+        0 0 3px;
+
+    color:
+        #d9e8f5;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.9px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.brand-title {
+
+    margin:
+        0;
+
+    color:
+        #fff;
+
+    font-family:
+        Oswald,
+        Arial,
+        sans-serif;
+
+    font-size:
+        21px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        .5px;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* ==========================================================
+   NAVEGACIÓN
+   ========================================================== */
+
+.main-nav {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+}
+
+
+.main-nav > a,
+.dropdown > button {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        42px;
+
+    padding:
+        0 15px;
+
+    color:
+        #a9bdce;
+
+    background:
+        transparent;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius:
+        7px;
+
+    text-decoration:
+        none;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .3px;
+
+    cursor:
+        pointer;
+
+    transition:
+        .2s;
+
+}
+
+
+.main-nav > a:hover,
+.dropdown:hover > button {
+
+    color:
+        #fff;
+
+    background:
+        rgba(22,140,255,.08);
+
+    border-color:
+        rgba(22,140,255,.18);
+
+}
+
+
+/* ==========================================================
+   DROPDOWN INSTITUCIONAL
+   ========================================================== */
+
+.dropdown {
+
+    position:
+        relative;
+
+}
+
+
+.dropdown > button {
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+}
+
+
+.arrow {
+
+    margin-left:
+        7px;
+
+    font-size:
+        9px;
+
+    opacity:
+        .7;
+
+}
+
+
+.dropdown-menu {
+
+    position:
+        absolute;
+
+    top:
+        calc(100% + 8px);
+
+    right:
+        0;
+
+    width:
+        230px;
+
+    padding:
+        8px;
+
+    background:
+        rgba(5,13,22,.98);
+
+    border:
+        1px solid
+        rgba(22,140,255,.20);
+
+    border-radius:
+        9px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.50);
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transform:
+        translateY(-6px);
+
+    transition:
+        .18s;
+
+}
+
+
+.dropdown:hover .dropdown-menu {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.dropdown-menu a {
+
+    display:
+        block;
+
+    padding:
+        12px 13px;
+
+    color:
+        #a8bacb;
+
+    border-radius:
+        6px;
+
+    text-decoration:
+        none;
+
+    font-size:
+        11px;
+
+    font-weight:
+        600;
+
+    transition:
+        .15s;
+
+}
+
+
+.dropdown-menu a:hover {
+
+    color:
+        #fff;
+
+    background:
+        rgba(22,140,255,.10);
+
+}
+
+
+/* ==========================================================
+   CONTENEDOR
+   ========================================================== */
+
+.container {
+
+    width:
+        min(
+            1160px,
+            calc(100% - 56px)
+        );
+
+    margin:
+        0 auto;
+
+}
+
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.hero {
+
+    position:
+        relative;
+
+    min-height:
+        610px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    overflow:
+        hidden;
+
+}
+
+
+.hero::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        -180px;
+
+    top:
+        50%;
+
+    width:
+        550px;
+
+    height:
+        550px;
+
+    transform:
+        translateY(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(8,120,209,.17),
+            transparent 68%
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+.hero-content {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    max-width:
+        780px;
+
+    padding:
+        80px 0 95px;
+
+}
+
+
+.eyebrow {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        18px;
+
+    color:
+        var(--blue-soft);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        3px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.eyebrow::before {
+
+    content:
+        "";
+
+    width:
+        28px;
+
+    height:
+        1px;
+
+    background:
+        var(--blue-light);
+
+}
+
+
+.hero h1 {
+
+    margin:
+        0;
+
+    color:
+        #fff;
+
+    font-family:
+        Oswald,
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(
+            62px,
+            9vw,
+            110px
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        .91;
+
+    letter-spacing:
+        -1px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.hero h1 span {
+
+    display:
+        block;
+
+    color:
+        var(--blue-light);
+
+}
+
+
+.hero-subtitle {
+
+    max-width:
+        680px;
+
+    margin:
+        26px 0 0;
+
+    color:
+        #b8cad9;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.75;
+
+}
+
+
+.hero-text {
+
+    max-width:
+        680px;
+
+    margin:
+        12px 0 0;
+
+    color:
+        #748da3;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.75;
+
+}
+
+
+/* ==========================================================
+   HERO DECORACIÓN
+   ========================================================== */
+
+.hero-line {
+
+    width:
+        105px;
+
+    height:
+        3px;
+
+    margin-top:
+        30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue-light),
+            transparent
+        );
+
+}
+
+
+.hero-badge {
+
+    position:
+        absolute;
+
+    right:
+        20px;
+
+    bottom:
+        60px;
+
+    width:
+        210px;
+
+    height:
+        210px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    opacity:
+        .10;
+
+    pointer-events:
+        none;
+
+}
+
+
+.hero-badge img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+}
+
+
+/* ==========================================================
+   SEPARADOR
+   ========================================================== */
+
+.section-separator {
+
+    height:
+        1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(22,140,255,.45),
+            transparent
+        );
+
+}
+
+
+/* ==========================================================
+   AVISO
+   ========================================================== */
+
+.notice-section {
+
+    padding:
+        38px 0;
+
+}
+
+
+.notice {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        18px;
+
+    padding:
+        23px 25px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(8,120,209,.10),
+            rgba(5,15,24,.86)
+        );
+
+    border:
+        1px solid
+        rgba(22,140,255,.20);
+
+    border-left:
+        3px solid
+        var(--blue-light);
+
+    border-radius:
+        10px;
+
+}
+
+
+.notice-icon {
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    flex:
+        0 0 36px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    color:
+        #fff;
+
+    background:
+        var(--blue);
+
+    border-radius:
+        7px;
+
+    font-size:
+        15px;
+
+    font-weight:
+        800;
+
+}
+
+
+.notice strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        5px;
+
+    color:
+        #fff;
+
+    font-family:
+        Oswald,
+        Arial,
+        sans-serif;
+
+    font-size:
+        17px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.notice p {
+
+    margin:
+        0;
+
+    color:
+        #91a8bb;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.65;
+
+}
+
+
+/* ==========================================================
+   SECCIONES
+   ========================================================== */
+
+.section {
+
+    padding:
+        72px 0;
+
+}
+
+
+.section-header {
+
+    margin-bottom:
+        35px;
+
+}
+
+
+.section-kicker {
+
+    margin-bottom:
+        8px;
+
+    color:
+        var(--blue-light);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2.5px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.section-title {
+
+    margin:
+        0;
+
+    color:
+        #fff;
+
+    font-family:
+        Oswald,
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(
+            34px,
+            5vw,
+            48px
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        1;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.section-description {
+
+    max-width:
+        720px;
+
+    margin:
+        15px 0 0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.75;
+
+}
+
+
+/* ==========================================================
+   TARJETAS
+   ========================================================== */
+
+.cards {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
+
+    gap:
+        18px;
+
+}
+
+
+.card {
+
+    min-height:
+        180px;
+
+    padding:
+        25px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(10,27,42,.95),
+            rgba(4,11,18,.96)
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        10px;
+
+    transition:
+        .25s;
+
+}
+
+
+.card:hover {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(22,140,255,.30);
+
+    box-shadow:
+        0 18px 40px
+        rgba(0,0,0,.25);
+
+}
+
+
+.card-icon {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        20px;
+
+    color:
+        #fff;
+
+    background:
+        rgba(8,120,209,.16);
+
+    border:
+        1px solid
+        rgba(22,140,255,.20);
+
+    border-radius:
+        8px;
+
+    font-size:
+        16px;
+
+    font-weight:
+        800;
+
+}
+
+
+.card h3 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        #fff;
+
+    font-family:
+        Oswald,
+        Arial,
+        sans-serif;
+
+    font-size:
+        21px;
+
+    font-weight:
+        500;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.card p {
+
+    margin:
+        0;
+
+    color:
+        #7f97aa;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* ==========================================================
+   CONTACTO
+   ========================================================== */
+
+.contact-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
+
+    gap:
+        18px;
+
+}
+
+
+.contact-item {
+
+    padding:
+        24px;
+
+    background:
+        rgba(6,18,29,.90);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        9px;
+
+}
+
+
+.contact-label {
+
+    margin-bottom:
+        8px;
+
+    color:
+        var(--blue-light);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.8px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.contact-value {
+
+    color:
+        #e4edf5;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.55;
+
+}
+
+
+/* ==========================================================
+   INSTITUCIONAL
+   ========================================================== */
+
+.about-box {
+
+    max-width:
+        900px;
+
+    padding:
+        35px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(9,25,40,.94),
+            rgba(4,11,18,.96)
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        11px;
+
+}
+
+
+.about-box p {
+
+    margin:
+        0;
+
+    color:
+        #93a9ba;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.9;
+
+}
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.site-footer {
+
+    margin-top:
+        35px;
+
+    padding:
+        38px 0;
+
+    background:
+        rgba(2,7,12,.96);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+
+.footer-inner {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+}
+
+
+.footer-brand {
+
+    color:
+        #dbe7f0;
+
+    font-family:
+        Oswald,
+        Arial,
+        sans-serif;
+
+    font-size:
+        16px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.footer-text {
+
+    margin-top:
+        5px;
+
+    color:
+        #526a7e;
+
+    font-size:
+        10px;
+
+}
+
+
+.footer-admin {
+
+    color:
+        #668097;
+
+    text-decoration:
+        none;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+}
+
+
+.footer-admin:hover {
+
+    color:
+        var(--blue-light);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 950px) {
+
+    .site-header {
+
+        padding:
+            10px 25px;
+
+    }
+
+    .main-nav {
+
+        display:
+            none;
+
+    }
+
+    .hero {
+
+        min-height:
+            550px;
+
+    }
+
+    .hero-badge {
+
+        right:
+            -20px;
+
+        opacity:
+            .07;
+
+    }
+
+    .cards,
+    .contact-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 680px) {
+
+    .site-header {
+
+        min-height:
+            70px;
+
+        padding:
+            9px 17px;
+
+    }
+
+    .brand-logo {
+
+        width:
+            45px;
+
+        height:
+            45px;
+
+        flex-basis:
+            45px;
+
+    }
+
+    .brand-institution {
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            1.2px;
+
+    }
+
+    .brand-title {
+
+        font-size:
+            17px;
+
+    }
+
+    .container {
+
+        width:
+            calc(100% - 32px);
+
+    }
+
+    .hero {
+
+        min-height:
+            520px;
+
+    }
+
+    .hero-content {
+
+        padding:
+            65px 0 75px;
+
+    }
+
+    .hero h1 {
+
+        font-size:
+            clamp(
+                55px,
+                18vw,
+                82px
+            );
+
+    }
+
+    .hero-subtitle {
+
+        font-size:
+            14px;
+
+    }
+
+    .hero-badge {
+
+        width:
+            150px;
+
+        height:
+            150px;
+
+        right:
+            -35px;
+
+        bottom:
+            25px;
+
+    }
+
+    .section {
+
+        padding:
+            55px 0;
+
+    }
+
+    .cards,
+    .contact-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .notice {
+
+        padding:
+            19px;
+
+    }
+
+    .about-box {
+
+        padding:
+            24px;
+
+    }
+
+    .footer-inner {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 430px) {
+
+    .brand-institution {
+
+        display:
+            none;
+
+    }
+
+    .brand-title {
+
+        font-size:
+            16px;
+
+    }
+
+    .hero h1 {
+
+        font-size:
+            53px;
+
+    }
+
+    .hero-subtitle {
+
+        font-size:
+            13px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<!-- =========================================================
-     BARRA SUPERIOR
-     ========================================================= -->
 
-<div class="top-alert">
-    <div class="container top-alert-inner">
+<!-- ========================================================
+     FONDO
+     ======================================================== -->
 
-        <div class="portal-status">
-            <span class="status-dot"></span>
-
-            <span>
-                Portal informativo · {{ c.department }}
-            </span>
-        </div>
-
-        <a href="#contacto">
-            Información de contacto
-        </a>
-
-    </div>
-</div>
+<div
+    class="site-background"
+    id="siteBackground"
+></div>
 
 
-<!-- =========================================================
-     ENCABEZADO
-     ========================================================= -->
+
+<!-- ========================================================
+     HEADER
+     ======================================================== -->
 
 <header class="site-header">
 
-    <div class="container header-inner">
 
-        <!-- MARCA -->
+    <div class="brand">
 
-        <a
-            class="brand"
-            href="#inicio"
-            aria-label="Inicio"
-        >
 
-            <span class="brand-shield">
+        <div class="brand-logo">
 
-                <img
-                    src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}"
-                    alt="Escudo Policía de la Provincia de Córdoba"
-                >
+            <img
+                id="headerLogo"
+                src="{{ url_for('static', filename='escudo.png') }}"
+                alt="Escudo institucional"
+            >
 
-            </span>
+        </div>
 
-            <span class="brand-copy">
 
-                <small>
-                    {{ c.institution }}
-                </small>
+        <div class="brand-text">
 
-                <strong>
-                    {{ c.department }}
-                </strong>
+            <div class="brand-institution">
+                {{ c.institution }}
+            </div>
 
-            </span>
+            <div class="brand-title">
+                {{ c.department }}
+            </div>
 
+        </div>
+
+
+    </div>
+
+
+
+    <nav class="main-nav">
+
+
+        <a href="#inicio">
+            Inicio
         </a>
 
 
-        <!-- NAVEGACIÓN -->
-
-       <nav class="main-nav">
-
-    <a href="#inicio">Inicio</a>
-
-    <div class="nav-dropdown">
-        <button class="nav-dropdown-btn">
-            Institucional
-            <span class="dropdown-arrow">▾</span>
-        </button>
-
-        <div class="dropdown-menu">
-            <a href="#institucional">Quiénes somos</a>
-            <a href="#autoridades">Autoridades</a>
-            <a href="#funciones">Misión y funciones</a>
-            <a href="#dependencias">Dependencias</a>
-        </div>
-    </div>
-
-    <a href="#seguridad">Seguridad vial</a>
-    <a href="#contacto">Contacto</a>
-
-</nav>
-
-    </div>
-
-</header>
+        <div class="dropdown">
 
 
-<!-- =========================================================
-     HERO PRINCIPAL
-     ========================================================= -->
+            <button type="button">
 
-<main id="inicio">
+                Institucional
 
-<section class="hero">
+                <span class="arrow">
+                    ▼
+                </span>
 
-    <!--
-        IMPORTANTE:
-        No hay imagen del escudo acá.
+            </button>
 
-        La imagen policial se coloca mediante CSS
-        como fondo de toda esta sección.
-    -->
 
-    <div class="hero-overlay"></div>
+            <div class="dropdown-menu">
 
-    <div class="container hero-inner">
+                <a href="#institucional">
+                    Sobre la institución
+                </a>
 
-        <div class="hero-copy">
+                <a href="#informacion">
+                    Información
+                </a>
 
-            <div class="eyebrow">
-
-                <span></span>
-
-                ÁREA DE TRÁNSITO
+                <a href="#contacto">
+                    Contacto
+                </a>
 
             </div>
 
 
+        </div>
+
+
+        <a href="#informacion">
+            Información
+        </a>
+
+
+        <a href="#contacto">
+            Contacto
+        </a>
+
+
+    </nav>
+
+
+</header>
+
+
+
+<!-- ========================================================
+     HERO
+     ======================================================== -->
+
+<main id="inicio">
+
+
+<section class="hero">
+
+
+    <div class="container">
+
+
+        <div class="hero-content">
+
+
+            <div class="eyebrow">
+                {{ c.institution }}
+            </div>
+
+
             <h1>
+
                 {{ c.title }}
+
+                <span>
+                    Santa María
+                </span>
+
             </h1>
 
 
-            <h2>
-                {{ c.department }}
-            </h2>
+            <p class="hero-subtitle">
+                {{ c.subtitle }}
+            </p>
 
 
             <p class="hero-text">
@@ -164,614 +1883,58 @@
             </p>
 
 
-            <!-- BOTONES -->
+            <div class="hero-line"></div>
 
-            <div class="hero-actions">
-
-                <a
-                    class="btn btn-primary"
-                    href="#institucional"
-                >
-                    Conocer el área
-                    <span>→</span>
-                </a>
-
-
-                <a
-                    class="btn btn-secondary"
-                    href="#contacto"
-                >
-                    Ver contactos
-                </a>
-
-            </div>
-
-
-            <!-- DATOS RÁPIDOS -->
-
-            <div class="hero-meta">
-
-                <div class="hero-meta-item">
-
-                    <strong>
-                        {{ c.emergency }}
-                    </strong>
-
-                    <span>
-                        EMERGENCIAS
-                    </span>
-
-                </div>
-
-
-                <div class="hero-meta-item">
-
-                    <strong>
-                        24/7
-                    </strong>
-
-                    <span>
-                        ATENCIÓN DE EMERGENCIAS
-                    </span>
-
-                </div>
-
-
-                <div class="hero-meta-item">
-
-                    <strong>
-                        SM
-                    </strong>
-
-                    <span>
-                        SANTA MARÍA · CÓRDOBA
-                    </span>
-
-                </div>
-
-            </div>
 
         </div>
+
 
     </div>
 
-</section>
 
 
-<!-- =========================================================
-     INSTITUCIONAL
-     ========================================================= -->
+    <div class="hero-badge">
 
-<section id="institucional" class="institutional-section">
-
-    <div class="container">
-
-        <div class="institutional-header">
-
-            <span class="section-label">
-                INSTITUCIONAL
-            </span>
-
-            <h2>
-                Departamental Santa María
-            </h2>
-
-            <p>
-                Información institucional del Área de Tránsito
-                de la Policía de la Provincia de Córdoba.
-            </p>
-
-        </div>
-
-
-        <!-- QUIÉNES SOMOS -->
-
-        <div class="institutional-main">
-
-            <div class="institutional-text">
-
-                <span class="institutional-number">
-                    01
-                </span>
-
-                <h3>
-                    Quiénes somos
-                </h3>
-
-                <p>
-                    El Área de Tránsito de la Departamental Santa María
-                    tiene como finalidad contribuir al ordenamiento,
-                    prevención y seguridad vial dentro de su jurisdicción.
-                </p>
-
-                <p>
-                    Este espacio tiene como objetivo brindar información
-                    clara y accesible a la comunidad sobre tránsito,
-                    prevención, seguridad vial y canales de contacto.
-                </p>
-
-            </div>
-
-
-            <div class="institutional-highlight">
-
-                <div class="highlight-line"></div>
-
-                <strong>
-                    SEGURIDAD
-                </strong>
-
-                <span>
-                    PREVENCIÓN · SERVICIO · COMUNIDAD
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <!-- MISIÓN Y FUNCIONES -->
-
-        <div class="institutional-grid">
-
-            <article class="institutional-card">
-
-                <span class="institutional-number">
-                    02
-                </span>
-
-                <h3>
-                    Nuestra misión
-                </h3>
-
-                <p>
-                    Promover una circulación segura mediante la
-                    prevención, el ordenamiento del tránsito y la
-                    concientización de la comunidad.
-                </p>
-
-            </article>
-
-
-            <article class="institutional-card">
-
-                <span class="institutional-number">
-                    03
-                </span>
-
-                <h3>
-                    Funciones
-                </h3>
-
-                <p>
-                    Desarrollar tareas vinculadas al control,
-                    prevención y seguridad vial, conforme a las
-                    competencias correspondientes.
-                </p>
-
-            </article>
-
-
-            <article class="institutional-card">
-
-                <span class="institutional-number">
-                    04
-                </span>
-
-                <h3>
-                    Compromiso
-                </h3>
-
-                <p>
-                    Trabajar junto a la comunidad para fomentar
-                    conductas responsables y reducir los riesgos
-                    asociados a la circulación vial.
-                </p>
-
-            </article>
-
-        </div>
-
-
-        <!-- ESTRUCTURA -->
-
-        <div
-            id="autoridades"
-            class="institutional-structure"
+        <img
+            id="heroLogo"
+            src="{{ url_for('static', filename='escudo.png') }}"
+            alt=""
         >
 
-            <div>
-
-                <span class="section-label">
-                    ESTRUCTURA
-                </span>
-
-                <h3>
-                    Organización institucional
-                </h3>
-
-            </div>
-
-            <div class="structure-items">
-
-                <div class="structure-item">
-
-                    <span>01</span>
-
-                    <div>
-                        <strong>
-                            Policía de la Provincia de Córdoba
-                        </strong>
-
-                        <small>
-                            Institución
-                        </small>
-                    </div>
-
-                </div>
-
-
-                <div class="structure-item">
-
-                    <span>02</span>
-
-                    <div>
-                        <strong>
-                            Departamental Santa María
-                        </strong>
-
-                        <small>
-                            Dependencia
-                        </small>
-                    </div>
-
-                </div>
-
-
-                <div
-                    id="funciones"
-                    class="structure-item"
-                >
-
-                    <span>03</span>
-
-                    <div>
-                        <strong>
-                            Área de Tránsito
-                        </strong>
-
-                        <small>
-                            Área operativa
-                        </small>
-                    </div>
-
-                </div>
-
-
-                <div
-                    id="dependencias"
-                    class="structure-item"
-                >
-
-                    <span>04</span>
-
-                    <div>
-                        <strong>
-                            Seguridad vial
-                        </strong>
-
-                        <small>
-                            Prevención y servicio
-                        </small>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
+
 
 </section>
 
 
-<!-- =========================================================
-     SEGURIDAD VIAL
-     ========================================================= -->
 
-<section id="seguridad" class="safety-section">
+<div class="section-separator"></div>
+
+
+
+<!-- ========================================================
+     AVISO
+     ======================================================== -->
+
+<section class="notice-section">
+
 
     <div class="container">
 
-        <div class="safety-header">
 
-            <span class="section-label">
-                SEGURIDAD VIAL
-            </span>
-
-            <h2>
-                Información para circular
-            </h2>
-
-            <p>
-                Recomendaciones y pautas de prevención para
-                contribuir a una circulación más segura.
-            </p>
-
-        </div>
+        <div class="notice">
 
 
-        <!-- =================================================
-             INFORMACIÓN PRINCIPAL
-             ================================================= -->
-
-        <div class="safety-grid">
-
-
-            <!-- DOCUMENTACIÓN -->
-
-            <article class="safety-card">
-
-                <div class="safety-icon">
-                    01
-                </div>
-
-                <h3>
-                    Documentación
-                </h3>
-
-                <p>
-                    Antes de circular, verificá contar con la
-                    documentación correspondiente y en condiciones.
-                </p>
-
-                <ul>
-                    <li>Licencia de conducir</li>
-                    <li>Documentación del vehículo</li>
-                    <li>Seguro obligatorio</li>
-                    <li>Elementos de seguridad</li>
-                </ul>
-
-            </article>
-
-
-            <!-- PREVENCIÓN -->
-
-            <article class="safety-card">
-
-                <div class="safety-icon">
-                    02
-                </div>
-
-                <h3>
-                    Prevención
-                </h3>
-
-                <p>
-                    Una conducción responsable permite reducir
-                    los riesgos y prevenir siniestros viales.
-                </p>
-
-                <ul>
-                    <li>Respetá las velocidades permitidas</li>
-                    <li>No utilices el celular al conducir</li>
-                    <li>Usá siempre el cinturón de seguridad</li>
-                    <li>No conduzcas bajo los efectos del alcohol</li>
-                </ul>
-
-            </article>
-
-
-            <!-- MOTOCICLETAS -->
-
-            <article class="safety-card">
-
-                <div class="safety-icon">
-                    03
-                </div>
-
-                <h3>
-                    Motociclistas
-                </h3>
-
-                <p>
-                    Los usuarios de motocicletas deben extremar
-                    las medidas de protección y prevención.
-                </p>
-
-                <ul>
-                    <li>Utilizá casco homologado</li>
-                    <li>Respetá las señales de tránsito</li>
-                    <li>Mantené las luces correspondientes</li>
-                    <li>Evitá maniobras riesgosas</li>
-                </ul>
-
-            </article>
-
-
-            <!-- PEATONES -->
-
-            <article class="safety-card">
-
-                <div class="safety-icon">
-                    04
-                </div>
-
-                <h3>
-                    Peatones
-                </h3>
-
-                <p>
-                    La seguridad vial también depende del cuidado
-                    de quienes circulan a pie.
-                </p>
-
-                <ul>
-                    <li>Cruzá por lugares habilitados</li>
-                    <li>Respetá los semáforos</li>
-                    <li>Prestá atención al tránsito</li>
-                    <li>Evitá distracciones</li>
-                </ul>
-
-            </article>
-
-        </div>
-
-
-        <!-- =================================================
-             SINIESTRO VIAL
-             ================================================= -->
-
-        <div class="accident-box">
-
-            <div class="accident-content">
-
-                <span class="section-label">
-                    EN CASO DE SINIESTRO
-                </span>
-
-                <h3>
-                    ¿Qué hacer ante un accidente?
-                </h3>
-
-                <p>
-                    Ante una situación de emergencia, mantené la
-                    calma y priorizá la seguridad de las personas.
-                </p>
-
+            <div class="notice-icon">
+                !
             </div>
 
-
-            <div class="accident-steps">
-
-                <div class="accident-step">
-
-                    <strong>
-                        01
-                    </strong>
-
-                    <span>
-                        Detenete en un lugar seguro
-                    </span>
-
-                </div>
-
-
-                <div class="accident-step">
-
-                    <strong>
-                        02
-                    </strong>
-
-                    <span>
-                        Señalizá la zona
-                    </span>
-
-                </div>
-
-
-                <div class="accident-step">
-
-                    <strong>
-                        03
-                    </strong>
-
-                    <span>
-                        Comunicate con emergencias
-                    </span>
-
-                </div>
-
-
-                <div class="accident-step">
-
-                    <strong>
-                        04
-                    </strong>
-
-                    <span>
-                        No muevas personas lesionadas salvo riesgo
-                        inmediato
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             EMERGENCIAS
-             ================================================= -->
-
-        <div class="emergency-panel">
 
             <div>
-
-                <span class="section-label">
-                    EMERGENCIAS
-                </span>
-
-                <h3>
-                    Ante una emergencia
-                </h3>
-
-                <p>
-                    Si existe una situación que requiere asistencia
-                    inmediata, utilizá los canales oficiales de
-                    emergencia.
-                </p>
-
-            </div>
-
-
-            <div class="emergency-number">
-
-                <span>
-                    EMERGENCIAS
-                </span>
 
                 <strong>
-                    {{ c.emergency }}
+                    Información importante
                 </strong>
-
-                <small>
-                    Atención permanente
-                </small>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CONTACTO
-     ========================================================= -->
-
-<section
-    id="contacto"
-    class="contact-section"
->
-
-    <div class="container">
-
-        <div class="contact-box">
-
-            <div class="contact-main">
-
-                <span class="section-label">
-                    CONTACTO
-                </span>
-
-                <h2>
-                    Información de contacto
-                </h2>
 
                 <p>
                     {{ c.notice }}
@@ -780,155 +1943,514 @@
             </div>
 
 
-            <div class="contact-data">
-
-                <div class="contact-item">
-
-                    <span>
-                        EMERGENCIAS
-                    </span>
-
-                    <strong>
-                        {{ c.emergency }}
-                    </strong>
-
-                </div>
-
-
-                <div class="contact-item">
-
-                    <span>
-                        TELÉFONO
-                    </span>
-
-                    <strong>
-                        {{ c.phone }}
-                    </strong>
-
-                </div>
-
-
-                <div class="contact-item">
-
-                    <span>
-                        UBICACIÓN
-                    </span>
-
-                    <strong>
-                        {{ c.location }}
-                    </strong>
-
-                </div>
-
-
-                <div class="contact-item">
-
-                    <span>
-                        HORARIOS
-                    </span>
-
-                    <strong>
-                        {{ c.hours }}
-                    </strong>
-
-                </div>
-
-            </div>
-
         </div>
 
+
     </div>
+
 
 </section>
 
 
-<!-- =========================================================
-     ADMINISTRACIÓN
-     ========================================================= -->
+
+<!-- ========================================================
+     INFORMACIÓN
+     ======================================================== -->
 
 <section
-    id="admin"
-    class="admin-section"
+    class="section"
+    id="informacion"
 >
+
 
     <div class="container">
 
-        <div class="admin-box">
 
-            <div>
+        <div class="section-header">
 
-                <span class="section-label">
-                    ADMINISTRACIÓN
-                </span>
 
-                <h2>
-                    Acceso administrativo
-                </h2>
-
-                <p>
-                    Área destinada a la administración y
-                    actualización de la información del portal.
-                </p>
-
+            <div class="section-kicker">
+                Información al ciudadano
             </div>
 
-            <div>
 
-                <a
-                    href="/admin"
-                    class="btn btn-primary"
-                >
-                    Ingresar
-                    <span>→</span>
-                </a>
+            <h2 class="section-title">
+                Información
+            </h2>
 
-            </div>
+
+            <p class="section-description">
+                Espacio destinado a brindar información
+                institucional y orientación a la comunidad
+                sobre tránsito y seguridad vial.
+            </p>
+
 
         </div>
 
+
+
+        <div class="cards">
+
+
+            <article class="card">
+
+
+                <div class="card-icon">
+                    01
+                </div>
+
+
+                <h3>
+                    Seguridad vial
+                </h3>
+
+
+                <p>
+                    Recomendaciones y contenidos de interés
+                    para promover una circulación segura y
+                    responsable.
+                </p>
+
+
+            </article>
+
+
+
+            <article class="card">
+
+
+                <div class="card-icon">
+                    02
+                </div>
+
+
+                <h3>
+                    Tránsito
+                </h3>
+
+
+                <p>
+                    Información relacionada con controles,
+                    prevención y orientación para conductores
+                    y ciudadanos.
+                </p>
+
+
+            </article>
+
+
+
+            <article class="card">
+
+
+                <div class="card-icon">
+                    03
+                </div>
+
+
+                <h3>
+                    Comunidad
+                </h3>
+
+
+                <p>
+                    Un canal institucional destinado a
+                    facilitar el acceso a información útil
+                    para la comunidad.
+                </p>
+
+
+            </article>
+
+
+        </div>
+
+
     </div>
 
+
 </section>
+
+
+
+<!-- ========================================================
+     INSTITUCIONAL
+     ======================================================== -->
+
+<section
+    class="section"
+    id="institucional"
+>
+
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+
+            <div class="section-kicker">
+                Institucional
+            </div>
+
+
+            <h2 class="section-title">
+                Nuestra función
+            </h2>
+
+
+        </div>
+
+
+
+        <div class="about-box">
+
+
+            <p>
+                {{ c.about }}
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ========================================================
+     CONTACTO
+     ======================================================== -->
+
+<section
+    class="section"
+    id="contacto"
+>
+
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+
+            <div class="section-kicker">
+                Atención
+            </div>
+
+
+            <h2 class="section-title">
+                Contacto
+            </h2>
+
+
+            <p class="section-description">
+                Información disponible para orientación y
+                atención a la comunidad.
+            </p>
+
+
+        </div>
+
+
+
+        <div class="contact-grid">
+
+
+            <div class="contact-item">
+
+
+                <div class="contact-label">
+                    Teléfono
+                </div>
+
+
+                <div class="contact-value">
+                    {{ c.phone }}
+                </div>
+
+
+            </div>
+
+
+
+            <div class="contact-item">
+
+
+                <div class="contact-label">
+                    Emergencias
+                </div>
+
+
+                <div class="contact-value">
+                    {{ c.emergency }}
+                </div>
+
+
+            </div>
+
+
+
+            <div class="contact-item">
+
+
+                <div class="contact-label">
+                    Ubicación
+                </div>
+
+
+                <div class="contact-value">
+                    {{ c.location }}
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
 
 </main>
 
 
-<!-- =========================================================
-     PIE DE PÁGINA
-     ========================================================= -->
+
+<!-- ========================================================
+     FOOTER
+     ======================================================== -->
 
 <footer class="site-footer">
 
-    <div class="container footer-inner">
 
-        <div>
+    <div class="container">
 
-            <strong>
-                {{ c.department }}
-            </strong>
 
-            <span>
-                {{ c.institution }}
-            </span>
+        <div class="footer-inner">
+
+
+            <div>
+
+
+                <div class="footer-brand">
+                    {{ c.department }}
+                </div>
+
+
+                <div class="footer-text">
+                    {{ c.institution }}
+                </div>
+
+
+            </div>
+
+
+            <a
+                href="/login"
+                class="footer-admin"
+            >
+                Acceso administrativo
+            </a>
+
 
         </div>
 
-
-        <div>
-
-            <span>
-                Portal informativo
-            </span>
-
-            <span>
-                Santa María · Córdoba
-            </span>
-
-        </div>
 
     </div>
 
+
 </footer>
 
+
+
+<!-- ========================================================
+     CARGA DINÁMICA DE IMÁGENES
+     ======================================================== -->
+
+<script>
+
+(function () {
+
+    /*
+     * Intentamos encontrar automáticamente la imagen
+     * que haya subido el administrador.
+     *
+     * El backend guarda los archivos como:
+     *
+     * logo.png / logo.jpg / logo.jpeg / logo.webp
+     *
+     * y:
+     *
+     * background.png / background.jpg / etc.
+     */
+
+
+    const extensions = [
+        "png",
+        "jpg",
+        "jpeg",
+        "webp"
+    ];
+
+
+    function findImage(baseName, callback) {
+
+        let index = 0;
+
+
+        function tryNext() {
+
+            if (index >= extensions.length) {
+
+                callback(null);
+
+                return;
+
+            }
+
+
+            const extension =
+                extensions[index++];
+
+
+            const url =
+                "/uploads/" +
+                baseName +
+                "." +
+                extension;
+
+
+            const img =
+                new Image();
+
+
+            img.onload =
+                function () {
+
+                    callback(url);
+
+                };
+
+
+            img.onerror =
+                function () {
+
+                    tryNext();
+
+                };
+
+
+            img.src =
+                url +
+                "?v=" +
+                Date.now();
+
+        }
+
+
+        tryNext();
+
+    }
+
+
+
+    /*
+     * ESCUDO
+     */
+
+    findImage(
+        "logo",
+        function (url) {
+
+            if (!url) {
+                return;
+            }
+
+
+            const headerLogo =
+                document.getElementById(
+                    "headerLogo"
+                );
+
+
+            const heroLogo =
+                document.getElementById(
+                    "heroLogo"
+                );
+
+
+            if (headerLogo) {
+
+                headerLogo.src =
+                    url;
+
+            }
+
+
+            if (heroLogo) {
+
+                heroLogo.src =
+                    url;
+
+            }
+
+        }
+    );
+
+
+
+    /*
+     * FONDO
+     */
+
+    findImage(
+        "background",
+        function (url) {
+
+            if (!url) {
+                return;
+            }
+
+
+            const background =
+                document.getElementById(
+                    "siteBackground"
+                );
+
+
+            if (!background) {
+                return;
+            }
+
+
+            background.style.backgroundImage =
+                "linear-gradient(" +
+                "rgba(2,7,12,.84)," +
+                "rgba(2,7,12,.94)" +
+                ")," +
+                "url('" +
+                url +
+                "')";
+
+        }
+    );
+
+
+})();
+
+</script>
+
+
 </body>
+
 </html>
