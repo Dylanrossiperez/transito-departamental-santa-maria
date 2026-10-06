@@ -1,45 +1,1059 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Editar sitio</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Administración | Tránsito Departamental Santa María</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            box-sizing:border-box;
+        }
+
+        :root{
+            --black:#05080d;
+            --dark:#07111c;
+            --dark2:#0b1724;
+            --blue:#0878d1;
+            --blue2:#168cff;
+            --text:#e7eef6;
+            --muted:#8fa3b8;
+            --border:rgba(255,255,255,.09);
+            --danger:#d84b4b;
+        }
+
+        body{
+            margin:0;
+
+            min-height:100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(8,120,209,.14),
+                    transparent 35%
+                ),
+                var(--black);
+
+            color:var(--text);
+
+            font-family:Inter,Arial,sans-serif;
+        }
+
+
+        /* ==============================================
+           ENCABEZADO
+           ============================================== */
+
+        .admin-header{
+            height:78px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            padding:0 35px;
+
+            background:rgba(4,8,14,.96);
+
+            border-bottom:1px solid rgba(22,140,255,.20);
+
+            box-shadow:0 8px 30px rgba(0,0,0,.30);
+        }
+
+
+        .admin-brand{
+            display:flex;
+            align-items:center;
+
+            gap:14px;
+        }
+
+
+        .admin-logo{
+            width:43px;
+            height:43px;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            background:#fff;
+
+            border-radius:8px;
+
+            padding:3px;
+        }
+
+
+        .admin-logo img{
+            width:100%;
+            height:100%;
+
+            object-fit:contain;
+        }
+
+
+        .admin-brand strong{
+            display:block;
+
+            color:#fff;
+
+            font-family:Oswald,Arial,sans-serif;
+
+            font-size:20px;
+
+            letter-spacing:.5px;
+        }
+
+
+        .admin-brand span{
+            display:block;
+
+            margin-top:2px;
+
+            color:#758da5;
+
+            font-size:9px;
+
+            font-weight:800;
+
+            letter-spacing:1.5px;
+
+            text-transform:uppercase;
+        }
+
+
+        .admin-actions{
+            display:flex;
+            align-items:center;
+
+            gap:10px;
+        }
+
+
+        .admin-actions a{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+
+            min-height:38px;
+
+            padding:0 15px;
+
+            color:#cbd8e5;
+
+            text-decoration:none;
+
+            font-size:12px;
+            font-weight:700;
+
+            border:1px solid var(--border);
+
+            border-radius:6px;
+
+            transition:.2s;
+        }
+
+
+        .admin-actions a:hover{
+            color:#fff;
+
+            background:rgba(255,255,255,.05);
+
+            border-color:rgba(255,255,255,.20);
+        }
+
+
+        .logout{
+            color:#fff !important;
+
+            background:#152333 !important;
+
+            border-color:rgba(255,255,255,.12) !important;
+        }
+
+
+        .logout:hover{
+            background:#25394e !important;
+        }
+
+
+        /* ==============================================
+           CONTENIDO
+           ============================================== */
+
+        .admin-wrapper{
+            width:min(1150px,calc(100% - 40px));
+
+            margin:50px auto 80px;
+        }
+
+
+        .page-title{
+            margin-bottom:35px;
+        }
+
+
+        .page-title small{
+            display:block;
+
+            margin-bottom:8px;
+
+            color:var(--blue2);
+
+            font-size:10px;
+
+            font-weight:800;
+
+            letter-spacing:2.5px;
+
+            text-transform:uppercase;
+        }
+
+
+        .page-title h1{
+            margin:0 0 10px;
+
+            color:#fff;
+
+            font-family:Oswald,Arial,sans-serif;
+
+            font-size:46px;
+
+            line-height:1;
+
+            text-transform:uppercase;
+        }
+
+
+        .page-title p{
+            max-width:700px;
+
+            margin:0;
+
+            color:var(--muted);
+
+            font-size:14px;
+
+            line-height:1.7;
+        }
+
+
+        /* ==============================================
+           ALERTA
+           ============================================== */
+
+        .flash{
+            margin-bottom:25px;
+
+            padding:15px 18px;
+
+            background:rgba(22,140,255,.10);
+
+            border:1px solid rgba(22,140,255,.25);
+
+            border-left:3px solid var(--blue2);
+
+            border-radius:7px;
+
+            color:#cfe5fa;
+
+            font-size:13px;
+        }
+
+
+        /* ==============================================
+           FORMULARIO
+           ============================================== */
+
+        .admin-form{
+            display:grid;
+
+            gap:22px;
+        }
+
+
+        .admin-section{
+            padding:30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(11,24,38,.98),
+                    rgba(6,13,22,.98)
+                );
+
+            border:1px solid var(--border);
+
+            border-radius:11px;
+
+            box-shadow:0 15px 40px rgba(0,0,0,.16);
+        }
+
+
+        .section-heading{
+            display:flex;
+            align-items:center;
+
+            gap:14px;
+
+            margin-bottom:25px;
+
+            padding-bottom:17px;
+
+            border-bottom:1px solid rgba(255,255,255,.07);
+        }
+
+
+        .section-number{
+            color:var(--blue2);
+
+            font-family:Oswald,Arial,sans-serif;
+
+            font-size:16px;
+
+            letter-spacing:1px;
+        }
+
+
+        .section-heading h2{
+            margin:0;
+
+            color:#fff;
+
+            font-family:Oswald,Arial,sans-serif;
+
+            font-size:25px;
+
+            font-weight:600;
+
+            text-transform:uppercase;
+        }
+
+
+        .section-heading p{
+            margin:3px 0 0;
+
+            color:#72869b;
+
+            font-size:11px;
+        }
+
+
+        .field-grid{
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:20px;
+        }
+
+
+        .field{
+            display:flex;
+            flex-direction:column;
+        }
+
+
+        .field.full{
+            grid-column:1 / -1;
+        }
+
+
+        label{
+            margin-bottom:8px;
+
+            color:#d7e2ed;
+
+            font-size:12px;
+
+            font-weight:700;
+        }
+
+
+        label span{
+            color:#637b93;
+
+            font-size:10px;
+
+            font-weight:500;
+        }
+
+
+        input,
+        textarea{
+            width:100%;
+
+            padding:13px 14px;
+
+            color:#edf5fc;
+
+            background:#050c14;
+
+            border:1px solid rgba(255,255,255,.10);
+
+            border-radius:6px;
+
+            outline:none;
+
+            font-family:Inter,Arial,sans-serif;
+
+            font-size:13px;
+
+            transition:
+                border-color .2s,
+                box-shadow .2s,
+                background .2s;
+        }
+
+
+        input{
+            height:46px;
+        }
+
+
+        textarea{
+            min-height:125px;
+
+            resize:vertical;
+
+            line-height:1.6;
+        }
+
+
+        input:focus,
+        textarea:focus{
+            background:#07111c;
+
+            border-color:rgba(22,140,255,.65);
+
+            box-shadow:
+                0 0 0 3px rgba(22,140,255,.08);
+        }
+
+
+        /* ==============================================
+           GUARDAR
+           ============================================== */
+
+        .save-area{
+            display:flex;
+
+            align-items:center;
+            justify-content:space-between;
+
+            gap:20px;
+
+            margin-top:5px;
+
+            padding:22px 25px;
+
+            background:#07111c;
+
+            border:1px solid rgba(255,255,255,.08);
+
+            border-radius:10px;
+        }
+
+
+        .save-info{
+            color:#758ba0;
+
+            font-size:11px;
+
+            line-height:1.5;
+        }
+
+
+        .save-info strong{
+            display:block;
+
+            margin-bottom:3px;
+
+            color:#dce8f3;
+
+            font-size:12px;
+        }
+
+
+        .save-button{
+            min-width:190px;
+
+            height:48px;
+
+            padding:0 25px;
+
+            color:#fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue2),
+                    var(--blue)
+                );
+
+            border:1px solid rgba(75,175,255,.40);
+
+            border-radius:7px;
+
+            cursor:pointer;
+
+            font-family:Inter,Arial,sans-serif;
+
+            font-size:13px;
+
+            font-weight:800;
+
+            box-shadow:
+                0 8px 25px rgba(0,111,210,.18);
+
+            transition:.2s;
+        }
+
+
+        .save-button:hover{
+            transform:translateY(-1px);
+
+            box-shadow:
+                0 10px 30px rgba(0,111,210,.28);
+        }
+
+
+        /* ==============================================
+           RESPONSIVE
+           ============================================== */
+
+        @media(max-width:700px){
+
+            .admin-header{
+                height:auto;
+
+                min-height:78px;
+
+                padding:15px 18px;
+
+                gap:15px;
+
+                flex-wrap:wrap;
+            }
+
+
+            .admin-actions{
+                width:100%;
+            }
+
+
+            .admin-actions a{
+                flex:1;
+            }
+
+
+            .admin-wrapper{
+                width:calc(100% - 28px);
+
+                margin-top:35px;
+            }
+
+
+            .page-title h1{
+                font-size:38px;
+            }
+
+
+            .admin-section{
+                padding:22px;
+            }
+
+
+            .field-grid{
+                grid-template-columns:1fr;
+            }
+
+
+            .field.full{
+                grid-column:auto;
+            }
+
+
+            .save-area{
+                align-items:stretch;
+
+                flex-direction:column;
+            }
+
+
+            .save-button{
+                width:100%;
+            }
+
+        }
+
+    </style>
 </head>
+
+
 <body>
-<header class="topbar adminbar">
-  <div class="brand">
-    <img src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}" alt="">
-    <div><div class="eyebrow">PANEL ADMINISTRATIVO</div><strong>Tránsito — Santa María</strong></div>
-  </div>
-  <div class="admin-actions"><a href="{{ url_for('index') }}">Ver sitio</a><a href="{{ url_for('logout') }}">Cerrar sesión</a></div>
+
+
+<header class="admin-header">
+
+    <div class="admin-brand">
+
+        <div class="admin-logo">
+
+            <img
+                src="{{ url_for('static', filename='escudo.png') }}"
+                alt="Escudo"
+            >
+
+        </div>
+
+        <div>
+
+            <strong>
+                Panel de Administración
+            </strong>
+
+            <span>
+                Tránsito Departamental Santa María
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-actions">
+
+        <a
+            href="/"
+            target="_blank"
+        >
+            Ver página
+        </a>
+
+        <a
+            href="/logout"
+            class="logout"
+        >
+            Cerrar sesión
+        </a>
+
+    </div>
+
 </header>
-<main class="admin-main">
-  <div class="admin-heading">
-    <p class="kicker">EDITOR DE CONTENIDO</p>
-    <h1>Actualizar información</h1>
-    <p>Los cambios se guardan en una base de datos local SQLite.</p>
-  </div>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
-  {% endwith %}
-  <form method="post" class="editor">
-    {% set fields = [
-      ('institution','Institución'), ('department','Departamental'), ('title','Título principal'),
-      ('subtitle','Subtítulo'), ('hero_text','Texto de portada'), ('about','Información institucional'),
-      ('notice','Aviso institucional'), ('phone','Teléfono'), ('emergency','Emergencias'),
-      ('location','Ubicación'), ('hours','Horarios')
-    ] %}
-    {% for key, label in fields %}
-      <label>{{ label }}
-        {% if key in ['hero_text','about','notice'] %}
-          <textarea name="{{ key }}" rows="4">{{ c[key] }}</textarea>
-        {% else %}
-          <input name="{{ key }}" value="{{ c[key] }}">
+
+
+<main class="admin-wrapper">
+
+
+    <div class="page-title">
+
+        <small>
+            Administración del portal
+        </small>
+
+        <h1>
+            Editar información
+        </h1>
+
+        <p>
+            Desde este panel podés actualizar la información
+            que aparece en el sitio público sin modificar
+            directamente el código de la página.
+        </p>
+
+    </div>
+
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="flash">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
         {% endif %}
-      </label>
-    {% endfor %}
-    <button class="btn primary" type="submit">Guardar cambios</button>
-  </form>
+
+    {% endwith %}
+
+
+    <form
+        method="POST"
+        class="admin-form"
+    >
+
+
+        <!-- =================================================
+             IDENTIDAD
+             ================================================= -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    01
+                </span>
+
+                <div>
+
+                    <h2>
+                        Identidad institucional
+                    </h2>
+
+                    <p>
+                        Información principal de la institución
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="field-grid">
+
+                <div class="field">
+
+                    <label>
+                        Institución
+                    </label>
+
+                    <input
+                        type="text"
+                        name="institution"
+                        value="{{ c.institution }}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Departamental
+                    </label>
+
+                    <input
+                        type="text"
+                        name="department"
+                        value="{{ c.department }}"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PORTADA
+             ================================================= -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    02
+                </span>
+
+                <div>
+
+                    <h2>
+                        Portada
+                    </h2>
+
+                    <p>
+                        Contenido principal de la página
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="field-grid">
+
+                <div class="field full">
+
+                    <label>
+                        Título principal
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        value="{{ c.title }}"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>
+                        Subtítulo
+                    </label>
+
+                    <input
+                        type="text"
+                        name="subtitle"
+                        value="{{ c.subtitle }}"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>
+                        Texto principal
+                    </label>
+
+                    <textarea
+                        name="body"
+                    >{{ c.body }}</textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTACTO
+             ================================================= -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    03
+                </span>
+
+                <div>
+
+                    <h2>
+                        Contacto
+                    </h2>
+
+                    <p>
+                        Información para comunicarse con el área
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="field-grid">
+
+                <div class="field">
+
+                    <label>
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="text"
+                        name="phone"
+                        value="{{ c.phone }}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Emergencias
+                    </label>
+
+                    <input
+                        type="text"
+                        name="emergency"
+                        value="{{ c.emergency }}"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>
+                        Ubicación
+                    </label>
+
+                    <input
+                        type="text"
+                        name="location"
+                        value="{{ c.location }}"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Horarios
+                    </label>
+
+                    <input
+                        type="text"
+                        name="hours"
+                        value="{{ c.hours }}"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AVISO
+             ================================================= -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    04
+                </span>
+
+                <div>
+
+                    <h2>
+                        Aviso destacado
+                    </h2>
+
+                    <p>
+                        Mensaje que aparecerá en la página principal
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="field-grid">
+
+                <div class="field full">
+
+                    <label>
+                        Mensaje
+                    </label>
+
+                    <textarea
+                        name="notice"
+                        placeholder="Escribí aquí un aviso para los visitantes..."
+                    >{{ c.notice }}</textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DESCRIPCIÓN
+             ================================================= -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    05
+                </span>
+
+                <div>
+
+                    <h2>
+                        Información institucional
+                    </h2>
+
+                    <p>
+                        Descripción general del área
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="field-grid">
+
+                <div class="field full">
+
+                    <label>
+                        Descripción
+                    </label>
+
+                    <textarea
+                        name="description"
+                    >{{ c.description }}</textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             GUARDAR
+             ================================================= -->
+
+        <div class="save-area">
+
+            <div class="save-info">
+
+                <strong>
+                    Guardar modificaciones
+                </strong>
+
+                Los cambios se aplicarán al sitio público
+                después de guardar.
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                GUARDAR CAMBIOS
+            </button>
+
+        </div>
+
+
+    </form>
+
 </main>
+
+
 </body>
 </html>
