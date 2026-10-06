@@ -1,18 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Administración | Tránsito Departamental Santa María</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>
+        Administración | Tránsito Departamental Santa María
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap"
         rel="stylesheet"
     >
+
 
     <style>
 
@@ -20,9 +38,12 @@
             box-sizing: border-box;
         }
 
+
         :root {
+
             --black: #03070c;
             --black-2: #050b12;
+
             --panel: #08131f;
             --panel-2: #0b1927;
 
@@ -31,13 +52,14 @@
             --blue-soft: #55b7ff;
 
             --text: #edf5fc;
+
             --muted: #8da4ba;
             --muted-2: #62788d;
 
             --border: rgba(255,255,255,.09);
-            --border-blue: rgba(22,140,255,.25);
 
             --success: #28a86b;
+
         }
 
 
@@ -47,7 +69,9 @@
 
 
         body {
+
             margin: 0;
+
             min-height: 100vh;
 
             color: var(--text);
@@ -58,22 +82,26 @@
                 sans-serif;
 
             background:
+
                 radial-gradient(
                     circle at 90% 0%,
                     rgba(8,120,209,.18),
                     transparent 32%
                 ),
+
                 radial-gradient(
                     circle at 0% 50%,
                     rgba(8,120,209,.07),
                     transparent 30%
                 ),
+
                 linear-gradient(
                     180deg,
                     #03070c 0%,
                     #050b12 50%,
                     #03070c 100%
                 );
+
         }
 
 
@@ -82,25 +110,32 @@
         }
 
 
+
         /* ==================================================
            ENCABEZADO
            ================================================== */
 
+
         .admin-header {
 
             position: sticky;
+
             top: 0;
+
             z-index: 100;
 
             min-height: 78px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             padding: 12px 38px;
 
             background:
+
                 linear-gradient(
                     180deg,
                     rgba(3,7,12,.98),
@@ -108,33 +143,41 @@
                 );
 
             border-bottom:
+
                 1px solid
                 rgba(22,140,255,.22);
 
             box-shadow:
+
                 0 12px 35px
                 rgba(0,0,0,.35);
 
             backdrop-filter: blur(12px);
+
         }
 
 
         .admin-brand {
 
             display: flex;
+
             align-items: center;
 
             gap: 14px;
+
         }
 
 
         .admin-logo {
 
             width: 48px;
+
             height: 48px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             padding: 4px;
@@ -144,17 +187,23 @@
             border-radius: 10px;
 
             box-shadow:
+
                 0 0 0 1px rgba(255,255,255,.12),
-                0 8px 20px rgba(0,0,0,.30);
+
+                0 8px 20px
+                rgba(0,0,0,.30);
+
         }
 
 
         .admin-logo img {
 
             width: 100%;
+
             height: 100%;
 
             object-fit: contain;
+
         }
 
 
@@ -170,9 +219,11 @@
                 sans-serif;
 
             font-size: 21px;
+
             font-weight: 700;
 
             letter-spacing: .4px;
+
         }
 
 
@@ -185,27 +236,33 @@
             color: #7892aa;
 
             font-size: 9px;
+
             font-weight: 800;
 
             letter-spacing: 1.7px;
 
             text-transform: uppercase;
+
         }
 
 
         .admin-actions {
 
             display: flex;
+
             align-items: center;
 
             gap: 10px;
+
         }
 
 
         .admin-actions a {
 
             display: inline-flex;
+
             align-items: center;
+
             justify-content: center;
 
             min-height: 40px;
@@ -217,9 +274,11 @@
             text-decoration: none;
 
             font-size: 12px;
+
             font-weight: 700;
 
-            background: rgba(255,255,255,.025);
+            background:
+                rgba(255,255,255,.025);
 
             border:
                 1px solid
@@ -228,10 +287,12 @@
             border-radius: 7px;
 
             transition:
+
                 background .2s,
                 border-color .2s,
                 color .2s,
                 transform .2s;
+
         }
 
 
@@ -245,7 +306,9 @@
             border-color:
                 rgba(22,140,255,.35);
 
-            transform: translateY(-1px);
+            transform:
+                translateY(-1px);
+
         }
 
 
@@ -254,6 +317,7 @@
             color: #fff;
 
             background:
+
                 linear-gradient(
                     135deg,
                     #142538,
@@ -262,23 +326,15 @@
 
             border-color:
                 rgba(100,160,210,.20);
+
         }
 
-
-        .admin-actions .logout:hover {
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #1b344e,
-                    #11263a
-                );
-        }
 
 
         /* ==================================================
-           CONTENIDO PRINCIPAL
+           CONTENIDO
            ================================================== */
+
 
         .admin-wrapper {
 
@@ -290,12 +346,14 @@
 
             margin:
                 55px auto 90px;
+
         }
 
 
         .page-title {
 
             margin-bottom: 38px;
+
         }
 
 
@@ -308,11 +366,13 @@
             color: var(--blue-light);
 
             font-size: 10px;
+
             font-weight: 800;
 
             letter-spacing: 3px;
 
             text-transform: uppercase;
+
         }
 
 
@@ -327,17 +387,15 @@
                 Arial,
                 sans-serif;
 
-            font-size: clamp(
-                40px,
-                5vw,
-                58px
-            );
+            font-size:
+                clamp(40px, 5vw, 58px);
 
             line-height: .98;
 
             letter-spacing: -.5px;
 
             text-transform: uppercase;
+
         }
 
 
@@ -352,16 +410,20 @@
             font-size: 14px;
 
             line-height: 1.75;
+
         }
 
 
+
         /* ==================================================
-           MENSAJE
+           MENSAJES
            ================================================== */
+
 
         .flash {
 
             display: flex;
+
             align-items: center;
 
             min-height: 52px;
@@ -373,6 +435,7 @@
             color: #d9edff;
 
             background:
+
                 linear-gradient(
                     135deg,
                     rgba(22,140,255,.13),
@@ -380,10 +443,12 @@
                 );
 
             border:
+
                 1px solid
                 rgba(22,140,255,.25);
 
             border-left:
+
                 3px solid
                 var(--blue-light);
 
@@ -392,20 +457,25 @@
             font-size: 13px;
 
             box-shadow:
+
                 0 10px 25px
                 rgba(0,0,0,.15);
+
         }
+
 
 
         /* ==================================================
            FORMULARIO
            ================================================== */
 
+
         .admin-form {
 
             display: grid;
 
             gap: 24px;
+
         }
 
 
@@ -418,6 +488,7 @@
             overflow: hidden;
 
             background:
+
                 linear-gradient(
                     145deg,
                     rgba(10,25,39,.98),
@@ -425,14 +496,17 @@
                 );
 
             border:
+
                 1px solid
                 var(--border);
 
             border-radius: 13px;
 
             box-shadow:
+
                 0 18px 45px
                 rgba(0,0,0,.18);
+
         }
 
 
@@ -443,12 +517,15 @@
             position: absolute;
 
             left: 0;
+
             top: 0;
 
             width: 100%;
+
             height: 1px;
 
             background:
+
                 linear-gradient(
                     90deg,
                     transparent,
@@ -457,6 +534,7 @@
                 );
 
             opacity: .65;
+
         }
 
 
@@ -464,16 +542,20 @@
 
             border-color:
                 rgba(22,140,255,.15);
+
         }
 
 
+
         /* ==================================================
-           TITULO DE SECCION
+           ENCABEZADO DE SECCION
            ================================================== */
+
 
         .section-heading {
 
             display: flex;
+
             align-items: center;
 
             gap: 15px;
@@ -485,6 +567,7 @@
             border-bottom:
                 1px solid
                 rgba(255,255,255,.07);
+
         }
 
 
@@ -501,9 +584,11 @@
                 sans-serif;
 
             font-size: 18px;
+
             font-weight: 600;
 
             letter-spacing: 1px;
+
         }
 
 
@@ -519,11 +604,13 @@
                 sans-serif;
 
             font-size: 26px;
+
             font-weight: 600;
 
             letter-spacing: .3px;
 
             text-transform: uppercase;
+
         }
 
 
@@ -537,12 +624,15 @@
             font-size: 11px;
 
             line-height: 1.4;
+
         }
+
 
 
         /* ==================================================
            CAMPOS
            ================================================== */
+
 
         .field-grid {
 
@@ -552,6 +642,7 @@
                 repeat(2, minmax(0, 1fr));
 
             gap: 21px;
+
         }
 
 
@@ -560,6 +651,7 @@
             display: flex;
 
             flex-direction: column;
+
         }
 
 
@@ -567,12 +659,14 @@
 
             grid-column:
                 1 / -1;
+
         }
 
 
         label {
 
             display: flex;
+
             align-items: center;
 
             margin-bottom: 8px;
@@ -580,7 +674,9 @@
             color: #d7e3ee;
 
             font-size: 12px;
+
             font-weight: 700;
+
         }
 
 
@@ -592,7 +688,9 @@
                 var(--muted-2);
 
             font-size: 10px;
+
             font-weight: 500;
+
         }
 
 
@@ -607,6 +705,7 @@
                 rgba(2,8,14,.90);
 
             border:
+
                 1px solid
                 rgba(255,255,255,.10);
 
@@ -622,10 +721,11 @@
             font-size: 13px;
 
             transition:
+
                 border-color .2s,
                 box-shadow .2s,
-                background .2s,
-                transform .2s;
+                background .2s;
+
         }
 
 
@@ -635,6 +735,7 @@
 
             padding:
                 0 14px;
+
         }
 
 
@@ -648,6 +749,7 @@
             resize: vertical;
 
             line-height: 1.65;
+
         }
 
 
@@ -656,14 +758,7 @@
 
             color:
                 #52697e;
-        }
 
-
-        input:hover,
-        textarea:hover {
-
-            border-color:
-                rgba(255,255,255,.16);
         }
 
 
@@ -677,17 +772,18 @@
                 rgba(22,140,255,.70);
 
             box-shadow:
-                0 0 0 3px
-                rgba(22,140,255,.09),
 
-                0 8px 20px
-                rgba(0,0,0,.15);
+                0 0 0 3px
+                rgba(22,140,255,.09);
+
         }
 
 
+
         /* ==================================================
-           CONTACTO DESTACADO
+           CONTACTO
            ================================================== */
+
 
         .contact-grid {
 
@@ -699,6 +795,7 @@
             gap: 16px;
 
             margin-bottom: 20px;
+
         }
 
 
@@ -709,6 +806,7 @@
             padding: 17px;
 
             background:
+
                 linear-gradient(
                     145deg,
                     rgba(12,34,54,.75),
@@ -716,10 +814,12 @@
                 );
 
             border:
+
                 1px solid
                 rgba(22,140,255,.13);
 
             border-radius: 8px;
+
         }
 
 
@@ -730,7 +830,9 @@
             position: absolute;
 
             left: 0;
+
             top: 14px;
+
             bottom: 14px;
 
             width: 2px;
@@ -739,6 +841,7 @@
                 var(--blue-light);
 
             border-radius: 5px;
+
         }
 
 
@@ -747,11 +850,13 @@
             display: block;
 
             margin-left: 9px;
+
             margin-bottom: 3px;
 
             color: #fff;
 
             font-size: 12px;
+
         }
 
 
@@ -767,18 +872,267 @@
             font-size: 11px;
 
             line-height: 1.5;
+
         }
+
+
+
+        /* ==================================================
+           APARIENCIA
+           ================================================== */
+
+
+        .appearance-intro {
+
+            margin-bottom: 22px;
+
+            padding: 15px 17px;
+
+            color: #91a9bd;
+
+            background:
+                rgba(22,140,255,.045);
+
+            border:
+                1px solid
+                rgba(22,140,255,.10);
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .appearance-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 20px;
+
+        }
+
+
+        .appearance-card {
+
+            position: relative;
+
+            min-height: 190px;
+
+            padding: 20px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(4,13,22,.95),
+                    rgba(7,20,32,.85)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius: 9px;
+
+        }
+
+
+        .appearance-card h3 {
+
+            margin:
+                0 0 7px;
+
+            color: #fff;
+
+            font-family:
+                Oswald,
+                Arial,
+                sans-serif;
+
+            font-size: 19px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .appearance-card p {
+
+            margin:
+                0 0 18px;
+
+            color:
+                var(--muted-2);
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .appearance-preview {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            height: 82px;
+
+            margin-bottom: 15px;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #06111d,
+                    #0b3150
+                );
+
+            border:
+                1px solid
+                rgba(22,140,255,.18);
+
+            border-radius: 7px;
+
+        }
+
+
+        .appearance-preview.logo-preview img {
+
+            max-width: 75px;
+
+            max-height: 75px;
+
+            object-fit: contain;
+
+        }
+
+
+        .appearance-preview.background-preview {
+
+            position: relative;
+
+            background:
+
+                linear-gradient(
+                    rgba(0,10,18,.62),
+                    rgba(0,10,18,.62)
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #06111d,
+                    #0b3150
+                );
+
+        }
+
+
+        .background-preview span {
+
+            position: relative;
+
+            z-index: 2;
+
+            color:
+                rgba(255,255,255,.70);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .appearance-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color:
+                #8ca3b7;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        .status-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                var(--success);
+
+            box-shadow:
+                0 0 9px
+                rgba(40,168,107,.45);
+
+        }
+
+
+        .appearance-note {
+
+            grid-column:
+                1 / -1;
+
+            padding: 16px 18px;
+
+            color:
+                #7f95a9;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px dashed
+                rgba(255,255,255,.09);
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+        }
+
 
 
         /* ==================================================
            GUARDAR
            ================================================== */
 
+
         .save-area {
 
             display: flex;
 
             align-items: center;
+
             justify-content: space-between;
 
             gap: 25px;
@@ -789,6 +1143,7 @@
                 22px 25px;
 
             background:
+
                 linear-gradient(
                     135deg,
                     #071522,
@@ -796,14 +1151,17 @@
                 );
 
             border:
+
                 1px solid
                 rgba(22,140,255,.16);
 
             border-radius: 11px;
 
             box-shadow:
+
                 0 12px 35px
                 rgba(0,0,0,.20);
+
         }
 
 
@@ -815,6 +1173,7 @@
             font-size: 11px;
 
             line-height: 1.55;
+
         }
 
 
@@ -828,12 +1187,14 @@
                 #dce8f3;
 
             font-size: 12px;
+
         }
 
 
         .save-button {
 
             min-width: 205px;
+
             height: 50px;
 
             padding:
@@ -842,6 +1203,7 @@
             color: #fff;
 
             background:
+
                 linear-gradient(
                     135deg,
                     var(--blue-light),
@@ -849,6 +1211,7 @@
                 );
 
             border:
+
                 1px solid
                 rgba(75,175,255,.45);
 
@@ -862,18 +1225,22 @@
                 sans-serif;
 
             font-size: 12px;
+
             font-weight: 800;
 
             letter-spacing: .4px;
 
             box-shadow:
+
                 0 10px 28px
                 rgba(0,111,210,.20);
 
             transition:
+
                 transform .2s,
                 box-shadow .2s,
                 filter .2s;
+
         }
 
 
@@ -886,8 +1253,10 @@
                 brightness(1.08);
 
             box-shadow:
+
                 0 14px 35px
                 rgba(0,111,210,.30);
+
         }
 
 
@@ -895,14 +1264,18 @@
 
             transform:
                 translateY(0);
+
         }
+
 
 
         /* ==================================================
            RESPONSIVE
            ================================================== */
 
+
         @media (max-width: 800px) {
+
 
             .admin-header {
 
@@ -912,18 +1285,21 @@
                 flex-wrap: wrap;
 
                 gap: 14px;
+
             }
 
 
             .admin-actions {
 
                 width: 100%;
+
             }
 
 
             .admin-actions a {
 
                 flex: 1;
+
             }
 
 
@@ -934,19 +1310,24 @@
 
                 margin:
                     35px auto 60px;
+
             }
 
 
             .admin-section {
 
                 padding: 23px;
+
             }
 
 
             .field-grid,
-            .contact-grid {
+            .contact-grid,
+            .appearance-grid {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
+
             }
 
 
@@ -954,6 +1335,15 @@
 
                 grid-column:
                     auto;
+
+            }
+
+
+            .appearance-note {
+
+                grid-column:
+                    auto;
+
             }
 
 
@@ -964,47 +1354,58 @@
 
                 flex-direction:
                     column;
+
             }
 
 
             .save-button {
 
                 width: 100%;
+
             }
+
         }
 
 
         @media (max-width: 520px) {
 
+
             .admin-brand strong {
 
                 font-size: 18px;
+
             }
 
 
             .admin-brand span {
 
                 font-size: 8px;
+
                 letter-spacing: 1.2px;
+
             }
 
 
             .admin-logo {
 
                 width: 43px;
+
                 height: 43px;
+
             }
 
 
             .page-title h1 {
 
                 font-size: 39px;
+
             }
 
 
             .page-title p {
 
                 font-size: 13px;
+
             }
 
 
@@ -1012,29 +1413,36 @@
 
                 align-items:
                     flex-start;
+
             }
 
 
             .section-heading h2 {
 
                 font-size: 22px;
+
             }
 
 
             .admin-section {
 
                 padding: 19px;
+
             }
 
 
             .save-area {
 
                 padding: 18px;
+
             }
+
         }
 
     </style>
+
 </head>
+
 
 
 <body>
@@ -1042,7 +1450,9 @@
 
 <header class="admin-header">
 
+
     <div class="admin-brand">
+
 
         <div class="admin-logo">
 
@@ -1066,10 +1476,13 @@
 
         </div>
 
+
     </div>
 
 
+
     <div class="admin-actions">
+
 
         <a
             href="/"
@@ -1086,7 +1499,9 @@
             Cerrar sesión
         </a>
 
+
     </div>
+
 
 </header>
 
@@ -1095,7 +1510,9 @@
 <main class="admin-wrapper">
 
 
+
     <div class="page-title">
+
 
         <small>
             Administración del portal
@@ -1113,23 +1530,30 @@
             directamente el código de la página.
         </p>
 
+
     </div>
 
 
 
     {% with messages = get_flashed_messages() %}
 
+
         {% if messages %}
 
+
             {% for message in messages %}
+
 
                 <div class="flash">
                     {{ message }}
                 </div>
 
+
             {% endfor %}
 
+
         {% endif %}
+
 
     {% endwith %}
 
@@ -1141,14 +1565,17 @@
     >
 
 
+
         <!-- ==================================================
-             01 - IDENTIDAD
+             01 - IDENTIDAD INSTITUCIONAL
              ================================================== -->
+
 
         <section class="admin-section">
 
 
             <div class="section-heading">
+
 
                 <span class="section-number">
                     01
@@ -1167,6 +1594,7 @@
 
                 </div>
 
+
             </div>
 
 
@@ -1176,9 +1604,11 @@
 
                 <div class="field">
 
+
                     <label>
                         Institución
                     </label>
+
 
                     <input
                         type="text"
@@ -1186,15 +1616,18 @@
                         value="{{ c.institution }}"
                     >
 
+
                 </div>
 
 
 
                 <div class="field">
 
+
                     <label>
                         Departamental
                     </label>
+
 
                     <input
                         type="text"
@@ -1202,10 +1635,12 @@
                         value="{{ c.department }}"
                     >
 
+
                 </div>
 
 
             </div>
+
 
         </section>
 
@@ -1215,10 +1650,12 @@
              02 - PORTADA
              ================================================== -->
 
+
         <section class="admin-section">
 
 
             <div class="section-heading">
+
 
                 <span class="section-number">
                     02
@@ -1237,6 +1674,7 @@
 
                 </div>
 
+
             </div>
 
 
@@ -1246,9 +1684,11 @@
 
                 <div class="field full">
 
+
                     <label>
                         Título principal
                     </label>
+
 
                     <input
                         type="text"
@@ -1256,15 +1696,18 @@
                         value="{{ c.title }}"
                     >
 
+
                 </div>
 
 
 
                 <div class="field full">
 
+
                     <label>
                         Subtítulo
                     </label>
+
 
                     <input
                         type="text"
@@ -1272,25 +1715,30 @@
                         value="{{ c.subtitle }}"
                     >
 
+
                 </div>
 
 
 
                 <div class="field full">
 
+
                     <label>
                         Texto principal
                     </label>
+
 
                     <textarea
                         name="hero_text"
                         placeholder="Escribí el texto principal de la portada..."
                     >{{ c.hero_text }}</textarea>
 
+
                 </div>
 
 
             </div>
+
 
         </section>
 
@@ -1300,10 +1748,12 @@
              03 - CONTACTO Y EMERGENCIAS
              ================================================== -->
 
+
         <section class="admin-section">
 
 
             <div class="section-heading">
+
 
                 <span class="section-number">
                     03
@@ -1322,36 +1772,46 @@
 
                 </div>
 
+
             </div>
 
 
 
             <div class="contact-grid">
 
+
                 <div class="contact-card">
+
 
                     <strong>
                         Teléfono
                     </strong>
 
+
                     <span>
                         Número principal de contacto
                     </span>
 
+
                 </div>
 
 
+
                 <div class="contact-card">
+
 
                     <strong>
                         Emergencias
                     </strong>
 
+
                     <span>
                         Número utilizado para situaciones de emergencia
                     </span>
 
+
                 </div>
+
 
             </div>
 
@@ -1362,9 +1822,11 @@
 
                 <div class="field">
 
+
                     <label>
                         Teléfono
                     </label>
+
 
                     <input
                         type="text"
@@ -1373,15 +1835,18 @@
                         placeholder="Ej.: 03547 123456"
                     >
 
+
                 </div>
 
 
 
                 <div class="field">
 
+
                     <label>
                         Emergencias
                     </label>
+
 
                     <input
                         type="text"
@@ -1390,15 +1855,18 @@
                         placeholder="Ej.: 911"
                     >
 
+
                 </div>
 
 
 
                 <div class="field full">
 
+
                     <label>
                         Ubicación
                     </label>
+
 
                     <input
                         type="text"
@@ -1407,15 +1875,18 @@
                         placeholder="Ej.: Santa María, Córdoba"
                     >
 
+
                 </div>
 
 
 
                 <div class="field full">
 
+
                     <label>
                         Horarios de atención
                     </label>
+
 
                     <input
                         type="text"
@@ -1424,23 +1895,27 @@
                         placeholder="Ej.: Lunes a viernes de 08:00 a 16:00"
                     >
 
+
                 </div>
 
 
             </div>
+
 
         </section>
 
 
 
         <!-- ==================================================
-             04 - AVISO
+             04 - AVISO DESTACADO
              ================================================== -->
+
 
         <section class="admin-section">
 
 
             <div class="section-heading">
+
 
                 <span class="section-number">
                     04
@@ -1459,6 +1934,7 @@
 
                 </div>
 
+
             </div>
 
 
@@ -1468,19 +1944,23 @@
 
                 <div class="field full">
 
+
                     <label>
                         Mensaje
                     </label>
+
 
                     <textarea
                         name="notice"
                         placeholder="Escribí aquí un aviso para los visitantes..."
                     >{{ c.notice }}</textarea>
 
+
                 </div>
 
 
             </div>
+
 
         </section>
 
@@ -1490,10 +1970,12 @@
              05 - INFORMACIÓN INSTITUCIONAL
              ================================================== -->
 
+
         <section class="admin-section">
 
 
             <div class="section-heading">
+
 
                 <span class="section-number">
                     05
@@ -1512,6 +1994,7 @@
 
                 </div>
 
+
             </div>
 
 
@@ -1521,48 +2004,312 @@
 
                 <div class="field full">
 
+
                     <label>
                         Descripción
                     </label>
+
 
                     <textarea
                         name="about"
                         placeholder="Escribí aquí la descripción institucional..."
                     >{{ c.about }}</textarea>
 
+
                 </div>
 
 
             </div>
+
 
         </section>
 
 
 
         <!-- ==================================================
-             GUARDAR
+             06 - APARIENCIA
              ================================================== -->
+
+
+        <section class="admin-section">
+
+
+            <div class="section-heading">
+
+
+                <span class="section-number">
+                    06
+                </span>
+
+
+                <div>
+
+                    <h2>
+                        Apariencia
+                    </h2>
+
+                    <p>
+                        Elementos visuales y presentación del portal
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="appearance-intro">
+
+                Desde esta sección podremos administrar los
+                elementos visuales del sitio. La carga de nuevas
+                imágenes se conectará en el próximo paso para
+                conservarlas correctamente en el servidor.
+
+            </div>
+
+
+
+            <div class="appearance-grid">
+
+
+                <!-- LOGO -->
+
+
+                <div class="appearance-card">
+
+
+                    <h3>
+                        Escudo institucional
+                    </h3>
+
+
+                    <p>
+                        Logo que aparece actualmente en el
+                        encabezado del sitio y del panel.
+                    </p>
+
+
+                    <div class="appearance-preview logo-preview">
+
+
+                        <img
+                            src="{{ url_for('static', filename='escudo.png') }}"
+                            alt="Escudo institucional"
+                        >
+
+
+                    </div>
+
+
+                    <div class="appearance-status">
+
+                        <span class="status-dot"></span>
+
+                        Logo actual
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FONDO -->
+
+
+                <div class="appearance-card">
+
+
+                    <h3>
+                        Fondo principal
+                    </h3>
+
+
+                    <p>
+                        Imagen utilizada como fondo visual
+                        de la página principal.
+                    </p>
+
+
+                    <div class="appearance-preview background-preview">
+
+
+                        <span>
+                            Imagen de fondo
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="appearance-status">
+
+                        <span class="status-dot"></span>
+
+                        Fondo configurado
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ESTILO -->
+
+
+                <div class="appearance-card">
+
+
+                    <h3>
+                        Estilo visual
+                    </h3>
+
+
+                    <p>
+                        La identidad visual actual utiliza
+                        azul, negro y tonos oscuros.
+                    </p>
+
+
+                    <div class="appearance-preview">
+
+
+                        <div
+                            style="
+                                width:75%;
+                                height:18px;
+                                border-radius:5px;
+                                background:linear-gradient(
+                                    90deg,
+                                    #05080d 0%,
+                                    #07111c 55%,
+                                    #168cff 100%
+                                );
+                            "
+                        ></div>
+
+
+                    </div>
+
+
+                    <div class="appearance-status">
+
+                        <span class="status-dot"></span>
+
+                        Azul / Negro
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DIFUMINADO -->
+
+
+                <div class="appearance-card">
+
+
+                    <h3>
+                        Fondo difuminado
+                    </h3>
+
+
+                    <p>
+                        El fondo puede utilizar una capa oscura
+                        para mejorar la lectura del contenido.
+                    </p>
+
+
+                    <div class="appearance-preview background-preview">
+
+
+                        <div
+                            style="
+                                width:75%;
+                                height:48px;
+                                border-radius:7px;
+                                background:
+                                    linear-gradient(
+                                        135deg,
+                                        rgba(255,255,255,.08),
+                                        rgba(255,255,255,.02)
+                                    );
+                                filter:blur(1px);
+                            "
+                        ></div>
+
+
+                    </div>
+
+
+                    <div class="appearance-status">
+
+                        <span class="status-dot"></span>
+
+                        Efecto disponible
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="appearance-note">
+
+                    <strong style="color:#c5d8e8;">
+                        Próximo paso:
+                    </strong>
+
+                    habilitaremos la carga de imágenes desde este
+                    panel para que puedas cambiar el escudo y el
+                    fondo sin entrar nuevamente a GitHub.
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             GUARDAR CAMBIOS
+             ================================================== -->
+
 
         <div class="save-area">
 
 
             <div class="save-info">
 
+
                 <strong>
                     Guardar modificaciones
                 </strong>
 
-                Los cambios se aplicarán al sitio público
-                después de guardar.
+
+                Los cambios de información se aplicarán al
+                sitio público después de guardar.
+
 
             </div>
+
 
 
             <button
                 type="submit"
                 class="save-button"
             >
+
                 GUARDAR CAMBIOS
+
             </button>
 
 
@@ -1575,5 +2322,7 @@
 </main>
 
 
+
 </body>
+
 </html>
