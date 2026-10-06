@@ -4,11 +4,17 @@ from pathlib import Path
 import os
 from functools import wraps
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
+
 DATA_DIR = Path(os.getenv("DATA_DIR", str(BASE_DIR / "data")))
+
 DB_PATH = DATA_DIR / "site.db"
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder="app/templates",
+    static_folder="app/static"
+)
 app.secret_key = os.getenv("SECRET_KEY", "cambiar-esta-clave-secreta")
 
 DEFAULTS = {
@@ -90,6 +96,7 @@ def admin():
         flash("Cambios guardados correctamente.", "success")
         return redirect(url_for("admin"))
     return render_template("admin.html", c=get_content())
+init_db()
 
 if __name__ == "__main__":
     init_db()
