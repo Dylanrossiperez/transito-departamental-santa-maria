@@ -8,16 +8,21 @@
   --text:#17202a;
   --muted:#66717c;
   --line:#dfe4e8;
-  --red:#a60f1b;
-  --red2:#d11b28;
-  --red-soft:#f8e9eb;
+ --blue:#0877c9;
+--blue2:#1599ed;
+--blue-soft:#e8f4fc;
   --silver:#bfc7cf;
   --max:1180px;
 }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:#fff;color:var(--text);font-family:Inter,Arial,sans-serif}
+body{
+  margin:0;
+  background:var(--black);
+  color:var(--white);
+  font-family:Inter,Arial,sans-serif;
+}
 a{color:inherit}
 .container{width:min(var(--max),calc(100% - 40px));margin:auto}
 
@@ -26,7 +31,7 @@ a{color:inherit}
 .top-alert a{margin-left:auto;color:#fff;text-decoration:none;font-weight:700}
 .status-dot{width:7px;height:7px;background:#b71925;border-radius:50%;box-shadow:0 0 0 4px rgba(183,25,37,.14)}
 
-.site-header{position:sticky;top:0;z-index:50;background:rgba(5,7,10,.97);backdrop-filter:blur(10px);border-bottom:2px solid var(--red)}
+.site-header{position:sticky;top:0;z-index:50;background:rgba(5,7,10,.97);backdrop-filter:blur(10px);border-bottom:2px solid var(--blue)
 .header-inner{min-height:78px;display:flex;align-items:center;gap:28px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:290px}
 .brand-shield{width:50px;height:50px;display:grid;place-items:center;background:#fff;border-radius:50%;overflow:hidden}
@@ -40,20 +45,51 @@ a{color:inherit}
 .admin-button{font-size:11px;font-weight:800;text-decoration:none;color:#fff;border:1px solid #4b5661;padding:11px 14px}
 .admin-button:hover{border-color:#fff;background:#111820}
 
-.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#05070a 0%,#0a0f15 53%,#26090d 100%);color:#fff;min-height:640px}
+.hero{
+  position:relative; overflow:hidden; background:#03070b; color:#fff; min-height:640px; isolation:isolate;}
+.hero::before{content:"";position:absolute;inset:-25px;z-index:-2;background-image:url("/static/policia-fondo-hero.jpg");background-size:cover;background-position:center;background-repeat:no-repeat;filter:blur(7px);transform:scale(1.06);
+}
+.hero::after{content:"";position:absolute;inset:0; z-index:-1;background:linear-gradient(90deg,rgba(2,7,12,.97) 0%,rgba(3,12,22,.88) 42%,rgba(4,22,38,.65) 75%,rgba(2,7,12,.82) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.25),
+      rgba(0,0,0,.65)
+    );
+}
 .hero-grid{position:absolute;inset:0;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to right,black,transparent)}
-.hero-glow{position:absolute;width:520px;height:520px;right:-130px;top:-80px;border-radius:50%;background:radial-gradient(circle,rgba(190,19,33,.35),transparent 68%)}
+.hero-glow{
+  position:absolute;
+  width:520px;
+  height:520px;
+  right:-130px;
+  top:-80px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(8,119,201,.35),
+    transparent 68%
+  );
+}
 .hero-inner{min-height:640px;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;position:relative}
 .hero-copy{padding:70px 0}
 .eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:800;color:#dce1e6;display:flex;align-items:center;gap:9px}
-.eyebrow span{width:28px;height:2px;background:var(--red2)}
+.eyebrow span{width:28px;height:2px;background:var(--blue2)
 .hero h1{font:700 clamp(68px,9vw,126px)/.86 Oswald,sans-serif;text-transform:uppercase;letter-spacing:-2px;margin:24px 0 3px}
 .hero-subtitle{font:600 clamp(21px,3vw,34px) Oswald,sans-serif;text-transform:uppercase;letter-spacing:1px;color:#d3d9df;margin:0}
 .hero-text{max-width:650px;color:#aeb8c2;font-size:16px;line-height:1.8;margin:25px 0 0}
 .hero-actions{display:flex;gap:12px;margin-top:30px}
 .btn{display:inline-flex;align-items:center;gap:15px;padding:14px 20px;text-decoration:none;font-size:12px;font-weight:800}
-.btn-primary{background:var(--red);color:#fff}
-.btn-primary:hover{background:var(--red2)}
+.btn-primary{
+  background:var(--blue);
+  color:#fff;
+  border:1px solid var(--blue2);
+  box-shadow:0 8px 25px rgba(8,119,201,.30);
+}
+
+.btn-primary:hover{
+  background:var(--blue2);
+}
 .btn-secondary{border:1px solid #59636d;color:#fff}
 .btn-secondary:hover{border-color:#fff}
 .hero-meta{display:flex;gap:0;margin-top:50px;border-top:1px solid #2a333c;padding-top:20px;max-width:650px}
