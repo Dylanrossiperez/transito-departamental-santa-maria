@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: transito-santa-maria
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: starter
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATA_DIR
+        value: /var/data
+    disk:
+      name: transito-data
+      mountPath: /var/data
+      sizeGB: 1
