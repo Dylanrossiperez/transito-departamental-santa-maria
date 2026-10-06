@@ -6,10 +6,8 @@ from flask import (
     url_for,
     session,
     flash,
-    send_from_directory,
-    abort
+    send_from_directory
 )
-
 import sqlite3
 from pathlib import Path
 import os
@@ -518,7 +516,7 @@ def admin():
 
 @app.route("/uploads/logo")
 def uploaded_logo():
-    # Primero buscamos un logo subido con nombre logo.*
+    # 1. Buscar primero un logo subido
     for extension in ALLOWED_IMAGE_EXTENSIONS:
         candidate = UPLOAD_DIR / f"logo.{extension}"
 
@@ -528,7 +526,8 @@ def uploaded_logo():
                 candidate.name
             )
 
-    # Si no existe logo subido, usamos el escudo estático
+    # 2. Si no existe un logo subido,
+    # usar el escudo incluido en /app/static/
     static_logo = BASE_DIR / "app" / "static" / "escudo-policia-cordoba.jpeg"
 
     if static_logo.is_file():
