@@ -511,15 +511,61 @@ def upload_background():
 # SERVIR IMÁGENES SUBIDAS
 # ============================================================
 
-@app.route(
-    "/uploads/<path:filename>"
-)
+@app.route("/uploads/<path:filename>")
 def uploaded_file(filename):
 
-    return send_from_directory(
-        UPLOAD_DIR,
-        filename
-    )
+    requested = UPLOAD_DIR / filename
+
+    # Si el archivo existe exactamente con ese nombre,
+    # lo servimos normalmente.
+    if requested.is_file():
+        return send_from_directory(
+            UPLOAD_DIR,
+            filename
+        )
+
+    # Si no existe, buscamos la misma imagen
+    # con cualquiera de las extensiones permitidas.
+    stem = Path(filename).stem
+
+    for extension in ALLOWED_IMAGE_EXTENSIONS:
+        candidate = UPLOAD_DIR / f"{stem}.{extension}"
+
+        if candidate.is_file():
+            return send_from_directory(
+                UPLOAD_DIR,
+                candidate.name
+            )
+
+    return "Imagen no encontrada", 404
+    @app.route("/uploads/logo")
+def uploaded_logo():
+
+    for extension in ALLOWED_IMAGE_EXTENSIONS:
+        candidate = UPLOAD_DIR / f"logo.{extension}"
+
+        if candidate.is_file():
+            return send_from_directory(
+                UPLOAD_DIR,
+                candidate.name
+            )
+
+    return "Logo no encontrado", 404
+
+
+@app.route("/uploads/background")
+def uploaded_background():
+
+    for extension in ALLOWED_IMAGE_EXTENSIONS:
+        candidate = UPLOAD_DIR / f"background.{extension}"
+
+        if candidate.is_file():
+            return send_from_directory(
+                UPLOAD_DIR,
+                candidate.name
+            )
+
+    return "Fondo no encontrado", 404
 
 
 # ============================================================
