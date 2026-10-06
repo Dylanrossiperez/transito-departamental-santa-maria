@@ -516,40 +516,28 @@ def admin():
 # SUBIR ESCUDO
 # ============================================================
 
-@app.route(
-    "/admin/upload-logo",
-    methods=["POST"]
-)
-@admin_required
-def upload_logo():
+@app.route("/uploads/logo")
+def uploaded_logo():
+    # Primero buscamos un logo subido con nombre logo.*
+    for extension in ALLOWED_IMAGE_EXTENSIONS:
+        candidate = UPLOAD_DIR / f"logo.{extension}"
 
-    file = request.files.get(
-        "logo"
-    )
+        if candidate.is_file():
+            return send_from_directory(
+                UPLOAD_DIR,
+                candidate.name
+            )
 
-    success, message = save_uploaded_image(
-        file,
-        "logo"
-    )
+    # Si no existe logo subido, usamos el escudo estático
+    static_logo = BASE_DIR / "app" / "static" / "escudo-policia-cordoba.jpeg"
 
-    if success:
-
-        flash(
-            "Escudo actualizado correctamente.",
-            "success"
+    if static_logo.is_file():
+        return send_from_directory(
+            static_logo.parent,
+            static_logo.name
         )
 
-    else:
-
-        flash(
-            f"No se pudo actualizar el escudo: {message}",
-            "error"
-        )
-
-    return redirect(
-        url_for("admin")
-    )
-
+    return "Logo no encontrado", 404
 
 # ============================================================
 # SUBIR FONDO
