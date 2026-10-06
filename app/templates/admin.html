@@ -14,7 +14,6 @@
         Administración | Tránsito Departamental Santa María
     </title>
 
-
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -31,13 +30,11 @@
         rel="stylesheet"
     >
 
-
     <style>
 
         * {
             box-sizing: border-box;
         }
-
 
         :root {
 
@@ -49,7 +46,6 @@
 
             --blue: #0878d1;
             --blue-light: #168cff;
-            --blue-soft: #55b7ff;
 
             --text: #edf5fc;
 
@@ -59,14 +55,13 @@
             --border: rgba(255,255,255,.09);
 
             --success: #28a86b;
+            --danger: #d95c5c;
 
         }
-
 
         html {
             scroll-behavior: smooth;
         }
-
 
         body {
 
@@ -104,17 +99,9 @@
 
         }
 
-
-        a {
-            color: inherit;
-        }
-
-
-
-        /* ==================================================
-           ENCABEZADO
-           ================================================== */
-
+        /* =====================================================
+           HEADER
+           ===================================================== */
 
         .admin-header {
 
@@ -156,7 +143,6 @@
 
         }
 
-
         .admin-brand {
 
             display: flex;
@@ -166,7 +152,6 @@
             gap: 14px;
 
         }
-
 
         .admin-logo {
 
@@ -186,15 +171,7 @@
 
             border-radius: 10px;
 
-            box-shadow:
-
-                0 0 0 1px rgba(255,255,255,.12),
-
-                0 8px 20px
-                rgba(0,0,0,.30);
-
         }
-
 
         .admin-logo img {
 
@@ -205,7 +182,6 @@
             object-fit: contain;
 
         }
-
 
         .admin-brand strong {
 
@@ -220,12 +196,9 @@
 
             font-size: 21px;
 
-            font-weight: 700;
-
             letter-spacing: .4px;
 
         }
-
 
         .admin-brand span {
 
@@ -245,17 +218,13 @@
 
         }
 
-
         .admin-actions {
 
             display: flex;
 
-            align-items: center;
-
             gap: 10px;
 
         }
-
 
         .admin-actions a {
 
@@ -286,15 +255,9 @@
 
             border-radius: 7px;
 
-            transition:
-
-                background .2s,
-                border-color .2s,
-                color .2s,
-                transform .2s;
+            transition: .2s;
 
         }
-
 
         .admin-actions a:hover {
 
@@ -306,35 +269,11 @@
             border-color:
                 rgba(22,140,255,.35);
 
-            transform:
-                translateY(-1px);
-
         }
 
-
-        .admin-actions .logout {
-
-            color: #fff;
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #142538,
-                    #0d1a29
-                );
-
-            border-color:
-                rgba(100,160,210,.20);
-
-        }
-
-
-
-        /* ==================================================
+        /* =====================================================
            CONTENIDO
-           ================================================== */
-
+           ===================================================== */
 
         .admin-wrapper {
 
@@ -349,13 +288,11 @@
 
         }
 
-
         .page-title {
 
             margin-bottom: 38px;
 
         }
-
 
         .page-title small {
 
@@ -375,7 +312,6 @@
 
         }
 
-
         .page-title h1 {
 
             margin: 0 0 12px;
@@ -390,14 +326,9 @@
             font-size:
                 clamp(40px, 5vw, 58px);
 
-            line-height: .98;
-
-            letter-spacing: -.5px;
-
             text-transform: uppercase;
 
         }
-
 
         .page-title p {
 
@@ -413,42 +344,26 @@
 
         }
 
-
-
-        /* ==================================================
+        /* =====================================================
            MENSAJES
-           ================================================== */
-
+           ===================================================== */
 
         .flash {
 
-            display: flex;
+            margin-bottom: 20px;
 
-            align-items: center;
+            padding: 15px 18px;
 
-            min-height: 52px;
-
-            margin-bottom: 25px;
-
-            padding: 13px 18px;
-
-            color: #d9edff;
+            color: #dceeff;
 
             background:
-
-                linear-gradient(
-                    135deg,
-                    rgba(22,140,255,.13),
-                    rgba(8,120,209,.05)
-                );
+                rgba(22,140,255,.08);
 
             border:
-
                 1px solid
-                rgba(22,140,255,.25);
+                rgba(22,140,255,.22);
 
             border-left:
-
                 3px solid
                 var(--blue-light);
 
@@ -456,19 +371,11 @@
 
             font-size: 13px;
 
-            box-shadow:
-
-                0 10px 25px
-                rgba(0,0,0,.15);
-
         }
 
-
-
-        /* ==================================================
-           FORMULARIO
-           ================================================== */
-
+        /* =====================================================
+           SECCIONES
+           ===================================================== */
 
         .admin-form {
 
@@ -478,14 +385,9 @@
 
         }
 
-
         .admin-section {
 
-            position: relative;
-
             padding: 31px;
-
-            overflow: hidden;
 
             background:
 
@@ -496,61 +398,16 @@
                 );
 
             border:
-
                 1px solid
                 var(--border);
 
             border-radius: 13px;
 
             box-shadow:
-
                 0 18px 45px
                 rgba(0,0,0,.18);
 
         }
-
-
-        .admin-section::before {
-
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-
-            top: 0;
-
-            width: 100%;
-
-            height: 1px;
-
-            background:
-
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(22,140,255,.50),
-                    transparent
-                );
-
-            opacity: .65;
-
-        }
-
-
-        .admin-section:hover {
-
-            border-color:
-                rgba(22,140,255,.15);
-
-        }
-
-
-
-        /* ==================================================
-           ENCABEZADO DE SECCION
-           ================================================== */
-
 
         .section-heading {
 
@@ -570,10 +427,7 @@
 
         }
 
-
         .section-number {
-
-            min-width: 37px;
 
             color:
                 var(--blue-light);
@@ -585,12 +439,7 @@
 
             font-size: 18px;
 
-            font-weight: 600;
-
-            letter-spacing: 1px;
-
         }
-
 
         .section-heading h2 {
 
@@ -605,14 +454,9 @@
 
             font-size: 26px;
 
-            font-weight: 600;
-
-            letter-spacing: .3px;
-
             text-transform: uppercase;
 
         }
-
 
         .section-heading p {
 
@@ -623,28 +467,22 @@
 
             font-size: 11px;
 
-            line-height: 1.4;
-
         }
 
-
-
-        /* ==================================================
+        /* =====================================================
            CAMPOS
-           ================================================== */
-
+           ===================================================== */
 
         .field-grid {
 
             display: grid;
 
             grid-template-columns:
-                repeat(2, minmax(0, 1fr));
+                repeat(2, minmax(0,1fr));
 
             gap: 21px;
 
         }
-
 
         .field {
 
@@ -654,7 +492,6 @@
 
         }
 
-
         .field.full {
 
             grid-column:
@@ -662,12 +499,7 @@
 
         }
 
-
         label {
-
-            display: flex;
-
-            align-items: center;
 
             margin-bottom: 8px;
 
@@ -678,21 +510,6 @@
             font-weight: 700;
 
         }
-
-
-        label span {
-
-            margin-left: 6px;
-
-            color:
-                var(--muted-2);
-
-            font-size: 10px;
-
-            font-weight: 500;
-
-        }
-
 
         input,
         textarea {
@@ -705,7 +522,6 @@
                 rgba(2,8,14,.90);
 
             border:
-
                 1px solid
                 rgba(255,255,255,.10);
 
@@ -720,14 +536,7 @@
 
             font-size: 13px;
 
-            transition:
-
-                border-color .2s,
-                box-shadow .2s,
-                background .2s;
-
         }
-
 
         input {
 
@@ -738,7 +547,6 @@
 
         }
 
-
         textarea {
 
             min-height: 125px;
@@ -748,145 +556,29 @@
 
             resize: vertical;
 
-            line-height: 1.65;
-
         }
-
-
-        input::placeholder,
-        textarea::placeholder {
-
-            color:
-                #52697e;
-
-        }
-
 
         input:focus,
         textarea:focus {
-
-            background:
-                #07121e;
 
             border-color:
                 rgba(22,140,255,.70);
 
             box-shadow:
-
                 0 0 0 3px
                 rgba(22,140,255,.09);
 
         }
 
-
-
-        /* ==================================================
-           CONTACTO
-           ================================================== */
-
-
-        .contact-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-
-            gap: 16px;
-
-            margin-bottom: 20px;
-
-        }
-
-
-        .contact-card {
-
-            position: relative;
-
-            padding: 17px;
-
-            background:
-
-                linear-gradient(
-                    145deg,
-                    rgba(12,34,54,.75),
-                    rgba(5,14,23,.75)
-                );
-
-            border:
-
-                1px solid
-                rgba(22,140,255,.13);
-
-            border-radius: 8px;
-
-        }
-
-
-        .contact-card::before {
-
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-
-            top: 14px;
-
-            bottom: 14px;
-
-            width: 2px;
-
-            background:
-                var(--blue-light);
-
-            border-radius: 5px;
-
-        }
-
-
-        .contact-card strong {
-
-            display: block;
-
-            margin-left: 9px;
-
-            margin-bottom: 3px;
-
-            color: #fff;
-
-            font-size: 12px;
-
-        }
-
-
-        .contact-card span {
-
-            display: block;
-
-            margin-left: 9px;
-
-            color:
-                var(--muted);
-
-            font-size: 11px;
-
-            line-height: 1.5;
-
-        }
-
-
-
-        /* ==================================================
+        /* =====================================================
            APARIENCIA
-           ================================================== */
-
+           ===================================================== */
 
         .appearance-intro {
 
-            margin-bottom: 22px;
+            margin-bottom: 24px;
 
-            padding: 15px 17px;
+            padding: 16px 18px;
 
             color: #91a9bd;
 
@@ -901,28 +593,22 @@
 
             font-size: 12px;
 
-            line-height: 1.6;
+            line-height: 1.65;
 
         }
-
 
         .appearance-grid {
 
             display: grid;
 
             grid-template-columns:
-                repeat(2, minmax(0, 1fr));
+                repeat(2, minmax(0,1fr));
 
             gap: 20px;
 
         }
 
-
         .appearance-card {
-
-            position: relative;
-
-            min-height: 190px;
 
             padding: 20px;
 
@@ -942,7 +628,6 @@
 
         }
 
-
         .appearance-card h3 {
 
             margin:
@@ -955,12 +640,11 @@
                 Arial,
                 sans-serif;
 
-            font-size: 19px;
+            font-size: 20px;
 
             text-transform: uppercase;
 
         }
-
 
         .appearance-card p {
 
@@ -976,8 +660,11 @@
 
         }
 
+        /* =====================================================
+           PREVISUALIZACIONES
+           ===================================================== */
 
-        .appearance-preview {
+        .preview {
 
             display: flex;
 
@@ -985,68 +672,58 @@
 
             justify-content: center;
 
-            height: 82px;
+            height: 150px;
 
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+
+            padding: 15px;
 
             overflow: hidden;
 
             background:
-
-                linear-gradient(
-                    135deg,
-                    #06111d,
-                    #0b3150
-                );
+                #02070c;
 
             border:
                 1px solid
                 rgba(22,140,255,.18);
 
-            border-radius: 7px;
+            border-radius: 8px;
 
         }
 
+        .preview img {
 
-        .appearance-preview.logo-preview img {
+            max-width: 100%;
 
-            max-width: 75px;
-
-            max-height: 75px;
+            max-height: 120px;
 
             object-fit: contain;
 
         }
 
-
-        .appearance-preview.background-preview {
+        .background-preview {
 
             position: relative;
 
             background:
 
                 linear-gradient(
-                    rgba(0,10,18,.62),
-                    rgba(0,10,18,.62)
+                    rgba(0,10,18,.58),
+                    rgba(0,10,18,.70)
                 ),
 
-                linear-gradient(
-                    135deg,
-                    #06111d,
-                    #0b3150
+                radial-gradient(
+                    circle at center,
+                    #144c72,
+                    #03070c
                 );
 
         }
 
-
         .background-preview span {
 
-            position: relative;
-
-            z-index: 2;
-
             color:
-                rgba(255,255,255,.70);
+                rgba(255,255,255,.72);
 
             font-size: 10px;
 
@@ -1058,74 +735,122 @@
 
         }
 
+        /* =====================================================
+           UPLOAD
+           ===================================================== */
 
-        .appearance-status {
+        .upload-form {
 
-            display: inline-flex;
+            display: flex;
 
-            align-items: center;
+            flex-direction: column;
 
-            gap: 7px;
+            gap: 12px;
+
+        }
+
+        .file-input {
+
+            width: 100%;
+
+            height: auto;
+
+            padding: 12px;
 
             color:
-                #8ca3b7;
+                #91a9bd;
 
-            font-size: 10px;
+            background:
+                rgba(0,0,0,.25);
+
+            border:
+                1px dashed
+                rgba(255,255,255,.15);
+
+        }
+
+        .file-input::file-selector-button {
+
+            margin-right: 10px;
+
+            padding:
+                9px 13px;
+
+            color: #fff;
+
+            background:
+                #0b2439;
+
+            border:
+                1px solid
+                rgba(22,140,255,.30);
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 11px;
 
             font-weight: 700;
 
         }
 
+        .upload-button {
 
-        .status-dot {
+            height: 43px;
 
-            width: 7px;
-
-            height: 7px;
-
-            border-radius: 50%;
+            color: #fff;
 
             background:
-                var(--success);
 
-            box-shadow:
-                0 0 9px
-                rgba(40,168,107,.45);
-
-        }
-
-
-        .appearance-note {
-
-            grid-column:
-                1 / -1;
-
-            padding: 16px 18px;
-
-            color:
-                #7f95a9;
-
-            background:
-                rgba(255,255,255,.025);
+                linear-gradient(
+                    135deg,
+                    var(--blue-light),
+                    var(--blue)
+                );
 
             border:
-                1px dashed
-                rgba(255,255,255,.09);
+                1px solid
+                rgba(75,175,255,.45);
 
-            border-radius: 8px;
+            border-radius: 7px;
+
+            cursor: pointer;
 
             font-size: 11px;
 
-            line-height: 1.6;
+            font-weight: 800;
+
+            letter-spacing: .4px;
+
+            transition: .2s;
 
         }
 
+        .upload-button:hover {
 
+            filter:
+                brightness(1.08);
 
-        /* ==================================================
-           GUARDAR
-           ================================================== */
+            transform:
+                translateY(-1px);
 
+        }
+
+        .upload-help {
+
+            color:
+                #52697e;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+        }
+
+        /* =====================================================
+           BOTÓN GUARDAR
+           ===================================================== */
 
         .save-area {
 
@@ -1136,8 +861,6 @@
             justify-content: space-between;
 
             gap: 25px;
-
-            margin-top: 4px;
 
             padding:
                 22px 25px;
@@ -1151,19 +874,12 @@
                 );
 
             border:
-
                 1px solid
                 rgba(22,140,255,.16);
 
             border-radius: 11px;
 
-            box-shadow:
-
-                0 12px 35px
-                rgba(0,0,0,.20);
-
         }
-
 
         .save-info {
 
@@ -1175,7 +891,6 @@
             line-height: 1.55;
 
         }
-
 
         .save-info strong {
 
@@ -1190,15 +905,11 @@
 
         }
 
-
         .save-button {
 
             min-width: 205px;
 
             height: 50px;
-
-            padding:
-                0 27px;
 
             color: #fff;
 
@@ -1211,7 +922,6 @@
                 );
 
             border:
-
                 1px solid
                 rgba(75,175,255,.45);
 
@@ -1219,63 +929,17 @@
 
             cursor: pointer;
 
-            font-family:
-                Inter,
-                Arial,
-                sans-serif;
-
             font-size: 12px;
 
             font-weight: 800;
 
-            letter-spacing: .4px;
-
-            box-shadow:
-
-                0 10px 28px
-                rgba(0,111,210,.20);
-
-            transition:
-
-                transform .2s,
-                box-shadow .2s,
-                filter .2s;
-
         }
 
-
-        .save-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            filter:
-                brightness(1.08);
-
-            box-shadow:
-
-                0 14px 35px
-                rgba(0,111,210,.30);
-
-        }
-
-
-        .save-button:active {
-
-            transform:
-                translateY(0);
-
-        }
-
-
-
-        /* ==================================================
+        /* =====================================================
            RESPONSIVE
-           ================================================== */
-
+           ===================================================== */
 
         @media (max-width: 800px) {
-
 
             .admin-header {
 
@@ -1288,20 +952,17 @@
 
             }
 
-
             .admin-actions {
 
                 width: 100%;
 
             }
 
-
             .admin-actions a {
 
                 flex: 1;
 
             }
-
 
             .admin-wrapper {
 
@@ -1313,50 +974,34 @@
 
             }
 
-
             .admin-section {
 
                 padding: 23px;
 
             }
 
-
             .field-grid,
-            .contact-grid,
             .appearance-grid {
 
-                grid-template-columns:
-                    1fr;
+                grid-template-columns: 1fr;
 
             }
-
 
             .field.full {
 
-                grid-column:
-                    auto;
+                grid-column: auto;
 
             }
-
-
-            .appearance-note {
-
-                grid-column:
-                    auto;
-
-            }
-
 
             .save-area {
-
-                align-items:
-                    stretch;
 
                 flex-direction:
                     column;
 
-            }
+                align-items:
+                    stretch;
 
+            }
 
             .save-button {
 
@@ -1366,25 +1011,13 @@
 
         }
 
-
         @media (max-width: 520px) {
-
 
             .admin-brand strong {
 
                 font-size: 18px;
 
             }
-
-
-            .admin-brand span {
-
-                font-size: 8px;
-
-                letter-spacing: 1.2px;
-
-            }
-
 
             .admin-logo {
 
@@ -1394,46 +1027,15 @@
 
             }
 
-
             .page-title h1 {
 
                 font-size: 39px;
 
             }
 
-
-            .page-title p {
-
-                font-size: 13px;
-
-            }
-
-
-            .section-heading {
-
-                align-items:
-                    flex-start;
-
-            }
-
-
-            .section-heading h2 {
-
-                font-size: 22px;
-
-            }
-
-
             .admin-section {
 
                 padding: 19px;
-
-            }
-
-
-            .save-area {
-
-                padding: 18px;
 
             }
 
@@ -1444,7 +1046,6 @@
 </head>
 
 
-
 <body>
 
 
@@ -1453,16 +1054,14 @@
 
     <div class="admin-brand">
 
-
         <div class="admin-logo">
 
             <img
                 src="{{ url_for('static', filename='escudo.png') }}"
-                alt="Escudo Policía de Córdoba"
+                alt="Escudo"
             >
 
         </div>
-
 
         <div>
 
@@ -1476,13 +1075,10 @@
 
         </div>
 
-
     </div>
 
 
-
     <div class="admin-actions">
-
 
         <a
             href="/"
@@ -1491,14 +1087,11 @@
             Ver página
         </a>
 
-
         <a
             href="/logout"
-            class="logout"
         >
             Cerrar sesión
         </a>
-
 
     </div>
 
@@ -1506,57 +1099,43 @@
 </header>
 
 
-
 <main class="admin-wrapper">
 
 
-
     <div class="page-title">
-
 
         <small>
             Administración del portal
         </small>
 
-
         <h1>
             Editar información
         </h1>
 
-
         <p>
-            Desde este panel podés actualizar la información
-            que aparece en el sitio público sin modificar
-            directamente el código de la página.
+            Administrá desde este panel la información y
+            apariencia del sitio de Tránsito Departamental
+            Santa María.
         </p>
-
 
     </div>
 
 
-
     {% with messages = get_flashed_messages() %}
-
 
         {% if messages %}
 
-
             {% for message in messages %}
-
 
                 <div class="flash">
                     {{ message }}
                 </div>
 
-
             {% endfor %}
-
 
         {% endif %}
 
-
     {% endwith %}
-
 
 
     <form
@@ -1565,22 +1144,17 @@
     >
 
 
-
-        <!-- ==================================================
-             01 - IDENTIDAD INSTITUCIONAL
-             ================================================== -->
-
+        <!-- =================================================
+             01
+             ================================================= -->
 
         <section class="admin-section">
 
-
             <div class="section-heading">
-
 
                 <span class="section-number">
                     01
                 </span>
-
 
                 <div>
 
@@ -1589,26 +1163,21 @@
                     </h2>
 
                     <p>
-                        Información principal de la institución
+                        Información principal
                     </p>
 
                 </div>
 
-
             </div>
-
 
 
             <div class="field-grid">
 
-
                 <div class="field">
-
 
                     <label>
                         Institución
                     </label>
-
 
                     <input
                         type="text"
@@ -1616,18 +1185,14 @@
                         value="{{ c.institution }}"
                     >
 
-
                 </div>
-
 
 
                 <div class="field">
 
-
                     <label>
                         Departamental
                     </label>
-
 
                     <input
                         type="text"
@@ -1635,32 +1200,24 @@
                         value="{{ c.department }}"
                     >
 
-
                 </div>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- ==================================================
-             02 - PORTADA
-             ================================================== -->
-
+        <!-- =================================================
+             02
+             ================================================= -->
 
         <section class="admin-section">
 
-
             <div class="section-heading">
-
 
                 <span class="section-number">
                     02
                 </span>
-
 
                 <div>
 
@@ -1669,26 +1226,21 @@
                     </h2>
 
                     <p>
-                        Contenido principal que verá el visitante
+                        Contenido principal
                     </p>
 
                 </div>
 
-
             </div>
-
 
 
             <div class="field-grid">
 
-
                 <div class="field full">
-
 
                     <label>
                         Título principal
                     </label>
-
 
                     <input
                         type="text"
@@ -1696,18 +1248,14 @@
                         value="{{ c.title }}"
                     >
 
-
                 </div>
-
 
 
                 <div class="field full">
 
-
                     <label>
                         Subtítulo
                     </label>
-
 
                     <input
                         type="text"
@@ -1715,50 +1263,37 @@
                         value="{{ c.subtitle }}"
                     >
 
-
                 </div>
 
 
-
                 <div class="field full">
-
 
                     <label>
                         Texto principal
                     </label>
 
-
                     <textarea
                         name="hero_text"
-                        placeholder="Escribí el texto principal de la portada..."
                     >{{ c.hero_text }}</textarea>
-
 
                 </div>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- ==================================================
-             03 - CONTACTO Y EMERGENCIAS
-             ================================================== -->
-
+        <!-- =================================================
+             03
+             ================================================= -->
 
         <section class="admin-section">
 
-
             <div class="section-heading">
-
 
                 <span class="section-number">
                     03
                 </span>
-
 
                 <div>
 
@@ -1767,160 +1302,91 @@
                     </h2>
 
                     <p>
-                        Información para comunicarse con el área
+                        Información de contacto
                     </p>
 
                 </div>
 
-
             </div>
-
-
-
-            <div class="contact-grid">
-
-
-                <div class="contact-card">
-
-
-                    <strong>
-                        Teléfono
-                    </strong>
-
-
-                    <span>
-                        Número principal de contacto
-                    </span>
-
-
-                </div>
-
-
-
-                <div class="contact-card">
-
-
-                    <strong>
-                        Emergencias
-                    </strong>
-
-
-                    <span>
-                        Número utilizado para situaciones de emergencia
-                    </span>
-
-
-                </div>
-
-
-            </div>
-
 
 
             <div class="field-grid">
 
-
                 <div class="field">
-
 
                     <label>
                         Teléfono
                     </label>
-
 
                     <input
                         type="text"
                         name="phone"
                         value="{{ c.phone }}"
-                        placeholder="Ej.: 03547 123456"
                     >
-
 
                 </div>
 
 
-
                 <div class="field">
-
 
                     <label>
                         Emergencias
                     </label>
 
-
                     <input
                         type="text"
                         name="emergency"
                         value="{{ c.emergency }}"
-                        placeholder="Ej.: 911"
                     >
-
 
                 </div>
 
 
-
                 <div class="field full">
-
 
                     <label>
                         Ubicación
                     </label>
 
-
                     <input
                         type="text"
                         name="location"
                         value="{{ c.location }}"
-                        placeholder="Ej.: Santa María, Córdoba"
                     >
-
 
                 </div>
 
 
-
                 <div class="field full">
 
-
                     <label>
-                        Horarios de atención
+                        Horarios
                     </label>
-
 
                     <input
                         type="text"
                         name="hours"
                         value="{{ c.hours }}"
-                        placeholder="Ej.: Lunes a viernes de 08:00 a 16:00"
                     >
-
 
                 </div>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- ==================================================
-             04 - AVISO DESTACADO
-             ================================================== -->
-
+        <!-- =================================================
+             04
+             ================================================= -->
 
         <section class="admin-section">
 
-
             <div class="section-heading">
-
 
                 <span class="section-number">
                     04
                 </span>
-
 
                 <div>
 
@@ -1929,58 +1395,44 @@
                     </h2>
 
                     <p>
-                        Mensaje que aparecerá en la página principal
+                        Mensaje para los visitantes
                     </p>
 
                 </div>
 
-
             </div>
-
 
 
             <div class="field-grid">
 
-
                 <div class="field full">
-
 
                     <label>
                         Mensaje
                     </label>
 
-
                     <textarea
                         name="notice"
-                        placeholder="Escribí aquí un aviso para los visitantes..."
                     >{{ c.notice }}</textarea>
-
 
                 </div>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- ==================================================
-             05 - INFORMACIÓN INSTITUCIONAL
-             ================================================== -->
-
+        <!-- =================================================
+             05
+             ================================================= -->
 
         <section class="admin-section">
 
-
             <div class="section-heading">
-
 
                 <span class="section-number">
                     05
                 </span>
-
 
                 <div>
 
@@ -1989,58 +1441,45 @@
                     </h2>
 
                     <p>
-                        Descripción general del área de Tránsito
+                        Descripción del área
                     </p>
 
                 </div>
 
-
             </div>
-
 
 
             <div class="field-grid">
 
-
                 <div class="field full">
-
 
                     <label>
                         Descripción
                     </label>
 
-
                     <textarea
                         name="about"
-                        placeholder="Escribí aquí la descripción institucional..."
                     >{{ c.about }}</textarea>
-
 
                 </div>
 
-
             </div>
-
 
         </section>
 
 
-
-        <!-- ==================================================
-             06 - APARIENCIA
-             ================================================== -->
-
+        <!-- =================================================
+             06 APARIENCIA
+             ================================================= -->
 
         <section class="admin-section">
 
 
             <div class="section-heading">
 
-
                 <span class="section-number">
                     06
                 </span>
-
 
                 <div>
 
@@ -2049,31 +1488,29 @@
                     </h2>
 
                     <p>
-                        Elementos visuales y presentación del portal
+                        Imágenes y elementos visuales
                     </p>
 
                 </div>
 
-
             </div>
-
 
 
             <div class="appearance-intro">
 
-                Desde esta sección podremos administrar los
-                elementos visuales del sitio. La carga de nuevas
-                imágenes se conectará en el próximo paso para
-                conservarlas correctamente en el servidor.
+                Desde aquí podés cambiar el escudo institucional
+                y la imagen de fondo del sitio. Se admiten
+                archivos PNG, JPG, JPEG y WEBP de hasta 8 MB.
 
             </div>
-
 
 
             <div class="appearance-grid">
 
 
-                <!-- LOGO -->
+                <!-- ==========================================
+                     ESCUDO
+                     ========================================== -->
 
 
                 <div class="appearance-card">
@@ -2085,189 +1522,132 @@
 
 
                     <p>
-                        Logo que aparece actualmente en el
-                        encabezado del sitio y del panel.
+                        Imagen que identifica a la Policía de
+                        la Provincia de Córdoba.
                     </p>
 
 
-                    <div class="appearance-preview logo-preview">
+                    <div class="preview">
 
 
                         <img
                             src="{{ url_for('static', filename='escudo.png') }}"
-                            alt="Escudo institucional"
+                            alt="Escudo actual"
+                            onerror="this.style.display='none';"
                         >
 
 
                     </div>
 
 
-                    <div class="appearance-status">
+                    <form
+                        action="/admin/upload-logo"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        class="upload-form"
+                    >
 
-                        <span class="status-dot"></span>
 
-                        Logo actual
+                        <input
+                            type="file"
+                            name="logo"
+                            class="file-input"
+                            accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"
+                            required
+                        >
 
-                    </div>
+
+                        <button
+                            type="submit"
+                            class="upload-button"
+                        >
+
+                            SUBIR NUEVO ESCUDO
+
+                        </button>
+
+
+                        <div class="upload-help">
+
+                            Recomendado: PNG con fondo transparente.
+
+                        </div>
+
+
+                    </form>
 
 
                 </div>
 
 
 
-                <!-- FONDO -->
+                <!-- ==========================================
+                     FONDO
+                     ========================================== -->
 
 
                 <div class="appearance-card">
 
 
                     <h3>
-                        Fondo principal
+                        Imagen de fondo
                     </h3>
 
 
                     <p>
-                        Imagen utilizada como fondo visual
-                        de la página principal.
+                        Imagen que utilizaremos como fondo
+                        institucional del sitio.
                     </p>
 
 
-                    <div class="appearance-preview background-preview">
+                    <div class="preview background-preview">
 
 
                         <span>
-                            Imagen de fondo
+                            FONDO INSTITUCIONAL
                         </span>
 
 
                     </div>
 
 
-                    <div class="appearance-status">
-
-                        <span class="status-dot"></span>
-
-                        Fondo configurado
-
-                    </div>
-
-
-                </div>
+                    <form
+                        action="/admin/upload-background"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        class="upload-form"
+                    >
 
 
-
-                <!-- ESTILO -->
-
-
-                <div class="appearance-card">
-
-
-                    <h3>
-                        Estilo visual
-                    </h3>
+                        <input
+                            type="file"
+                            name="background"
+                            class="file-input"
+                            accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"
+                            required
+                        >
 
 
-                    <p>
-                        La identidad visual actual utiliza
-                        azul, negro y tonos oscuros.
-                    </p>
+                        <button
+                            type="submit"
+                            class="upload-button"
+                        >
+
+                            SUBIR NUEVO FONDO
+
+                        </button>
 
 
-                    <div class="appearance-preview">
+                        <div class="upload-help">
+
+                            Recomendado: imagen horizontal de
+                            buena resolución.
+
+                        </div>
 
 
-                        <div
-                            style="
-                                width:75%;
-                                height:18px;
-                                border-radius:5px;
-                                background:linear-gradient(
-                                    90deg,
-                                    #05080d 0%,
-                                    #07111c 55%,
-                                    #168cff 100%
-                                );
-                            "
-                        ></div>
+                    </form>
 
-
-                    </div>
-
-
-                    <div class="appearance-status">
-
-                        <span class="status-dot"></span>
-
-                        Azul / Negro
-
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- DIFUMINADO -->
-
-
-                <div class="appearance-card">
-
-
-                    <h3>
-                        Fondo difuminado
-                    </h3>
-
-
-                    <p>
-                        El fondo puede utilizar una capa oscura
-                        para mejorar la lectura del contenido.
-                    </p>
-
-
-                    <div class="appearance-preview background-preview">
-
-
-                        <div
-                            style="
-                                width:75%;
-                                height:48px;
-                                border-radius:7px;
-                                background:
-                                    linear-gradient(
-                                        135deg,
-                                        rgba(255,255,255,.08),
-                                        rgba(255,255,255,.02)
-                                    );
-                                filter:blur(1px);
-                            "
-                        ></div>
-
-
-                    </div>
-
-
-                    <div class="appearance-status">
-
-                        <span class="status-dot"></span>
-
-                        Efecto disponible
-
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="appearance-note">
-
-                    <strong style="color:#c5d8e8;">
-                        Próximo paso:
-                    </strong>
-
-                    habilitaremos la carga de imágenes desde este
-                    panel para que puedas cambiar el escudo y el
-                    fondo sin entrar nuevamente a GitHub.
 
                 </div>
 
@@ -2278,29 +1658,23 @@
         </section>
 
 
-
-        <!-- ==================================================
-             GUARDAR CAMBIOS
-             ================================================== -->
-
+        <!-- =================================================
+             GUARDAR
+             ================================================= -->
 
         <div class="save-area">
 
 
             <div class="save-info">
 
-
                 <strong>
                     Guardar modificaciones
                 </strong>
 
-
-                Los cambios de información se aplicarán al
-                sitio público después de guardar.
-
+                Los cambios realizados en los textos se aplicarán
+                al sitio público al guardar.
 
             </div>
-
 
 
             <button
@@ -2320,7 +1694,6 @@
 
 
 </main>
-
 
 
 </body>
