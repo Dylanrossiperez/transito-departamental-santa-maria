@@ -91,6 +91,12 @@ def admin():
         return redirect(url_for("admin"))
     return render_template("admin.html", c=get_content())
 
+# Inicializar la base de datos también cuando Flask se ejecuta con Gunicorn
+init_db()
+
 if __name__ == "__main__":
-    init_db()
-    app.run(host="0.0.0.0", port=int(os.getenv("PORT", "5000")), debug=False)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "5000")),
+        debug=False
+    )
