@@ -1,13 +1,4 @@
-from flask import (
-    Flask,
-    render_template,
-    request,
-    redirect,
-    url_for,
-    session,
-    flash,
-    send_from_directory
-)
+from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
 
 import sqlite3
 from pathlib import Path
@@ -513,7 +504,6 @@ def upload_background():
 
 @app.route("/uploads/<path:filename>")
 def uploaded_file(filename):
-
     requested = UPLOAD_DIR / filename
 
     # Si el archivo existe exactamente con ese nombre,
@@ -538,9 +528,10 @@ def uploaded_file(filename):
             )
 
     return "Imagen no encontrada", 404
-    @app.route("/uploads/logo")
-def uploaded_logo():
 
+
+@app.route("/uploads/logo")
+def uploaded_logo():
     for extension in ALLOWED_IMAGE_EXTENSIONS:
         candidate = UPLOAD_DIR / f"logo.{extension}"
 
@@ -555,7 +546,6 @@ def uploaded_logo():
 
 @app.route("/uploads/background")
 def uploaded_background():
-
     for extension in ALLOWED_IMAGE_EXTENSIONS:
         candidate = UPLOAD_DIR / f"background.{extension}"
 
@@ -566,7 +556,6 @@ def uploaded_background():
             )
 
     return "Fondo no encontrado", 404
-
 
 # ============================================================
 # INICIALIZACIÓN
