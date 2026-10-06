@@ -1,4 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    session,
+    flash,
+    send_from_directory,
+    abort
+)
 
 import sqlite3
 from pathlib import Path
@@ -21,25 +31,6 @@ DATA_DIR = Path(
 )
 
 DB_PATH = DATA_DIR / "site.db"
-
-
-app = Flask(
-    __name__,
-    template_folder="app/templates",
-    static_folder="app/static"
-)
-
-
-app.secret_key = os.getenv(
-    "SECRET_KEY",
-    "cambiar-esta-clave-secreta"
-)
-
-
-# ============================================================
-# CONFIGURACIÓN DE IMÁGENES
-# ============================================================
-
 UPLOAD_DIR = DATA_DIR / "uploads"
 
 ALLOWED_IMAGE_EXTENSIONS = {
@@ -49,7 +40,23 @@ ALLOWED_IMAGE_EXTENSIONS = {
     "webp"
 }
 
-MAX_IMAGE_SIZE = 8 * 1024 * 1024  # 8 MB
+MAX_IMAGE_SIZE = 8 * 1024 * 1024
+
+
+# ============================================================
+# FLASK
+# ============================================================
+
+app = Flask(
+    __name__,
+    template_folder="app/templates",
+    static_folder="app/static"
+)
+
+app.secret_key = os.getenv(
+    "SECRET_KEY",
+    "cambiar-esta-clave-secreta"
+)
 
 
 # ============================================================
@@ -89,7 +96,7 @@ DEFAULTS = {
         "La información publicada debe mantenerse actualizada por el personal responsable.",
 
     "about":
-        "Este sitio puede utilizarse para publicar información institucional, recomendaciones de seguridad vial, operativos preventivos, documentación y vías de contacto.",
+        "Este sitio puede utilizarse para publicar información institucional, recomendaciones de seguridad vial, operativos preventivos, documentación y vías de contacto."
 }
 
 
@@ -98,11 +105,8 @@ DEFAULTS = {
 # ============================================================
 
 def db():
-
     conn = sqlite3.connect(DB_PATH)
-
     conn.row_factory = sqlite3.Row
-
     return conn
 
 
@@ -134,11 +138,13 @@ def init_db():
             INSERT OR IGNORE INTO content(key, value)
             VALUES (?, ?)
             """,
-            (key, value)
+            (
+                key,
+                value
+            )
         )
 
     conn.commit()
-
     conn.close()
 
 
@@ -193,26 +199,61 @@ def allowed_image(filename):
     if "." not in filename:
         return False
 
-    extension = filename.rsplit(
-        ".",
-        1
-    )[1].lower()
+    extension = (
+        filename
+        .rsplit(".", 1)[1]
+        .lower()
+    )
 
     return extension in ALLOWED_IMAGE_EXTENSIONS
 
 
-def save_uploaded_image(
-    file,
-    filename
-):
+def get_image_path(name):
+
+    """
+    Busca una imagen por nombre lógico.
+
+    Ejemplos:
+
+        get_image_path("logo")
+        get_image_path("background")
+
+    Busca automáticamente:
+
+        logo.png
+        logo.jpg
+        logo.jpeg
+        logo.webp
+
+    y lo mismo para background.
+    """
+
+    for extension in ALLOWED_IMAGE_EXTENSIONS:
+
+        candidate = (
+            UPLOAD_DIR /
+            f"{name}.{extension}"
+        )
+
+        if candidate.is_file():
+            return candidate
+
+    return None
+
+
+def save_uploaded_image(file, filename):
 
     if not file:
-
-        return False, "No se recibió ninguna imagen."
+        return (
+            False,
+            "No se recibió ninguna imagen."
+        )
 
     if not file.filename:
-
-        return False, "No seleccionaste ningún archivo."
+        return (
+            False,
+            "No seleccionaste ningún archivo."
+        )
 
     if not allowed_image(file.filename):
 
@@ -222,12 +263,27 @@ def save_uploaded_image(
             "Usá PNG, JPG, JPEG o WEBP."
         )
 
-    # Comprobamos tamaño
-    file.stream.seek(0, os.SEEK_END)
+    # --------------------------------------------------------
+    # COMPROBAR TAMAÑO
+    # --------------------------------------------------------
 
-    size = file.stream.tell()
+    try:
 
-    file.stream.seek(0)
+        file.stream.seek(
+            0,
+            os.SEEK_END
+        )
+
+        size = file.stream.tell()
+
+        file.stream.seek(0)
+
+    except Exception:
+
+        return (
+            False,
+            "No se pudo comprobar el tamaño de la imagen."
+        )
 
     if size > MAX_IMAGE_SIZE:
 
@@ -236,20 +292,45 @@ def save_uploaded_image(
             "La imagen supera el límite de 8 MB."
         )
 
-    extension = Path(
-        secure_filename(file.filename)
-    ).suffix.lower()
+    # --------------------------------------------------------
+    # OBTENER EXTENSIÓN
+    # --------------------------------------------------------
 
-    if not extension:
+    safe_name = secure_filename(
+        file.filename
+    )
+
+    extension = (
+        Path(safe_name)
+        .suffix
+        .lower()
+    )
+
+    if extension not in {
+        ".png",
+        ".jpg",
+        ".jpeg",
+        ".webp"
+    }:
 
         return (
             False,
-            "No se pudo determinar el formato."
+            "Formato de imagen no válido."
         )
 
-    final_path = UPLOAD_DIR / f"{filename}{extension}"
+    # --------------------------------------------------------
+    # NOMBRE FINAL
+    # --------------------------------------------------------
 
-    # Eliminamos versiones anteriores
+    final_path = (
+        UPLOAD_DIR /
+        f"{filename}{extension}"
+    )
+
+    # --------------------------------------------------------
+    # ELIMINAR VERSIONES ANTERIORES
+    # --------------------------------------------------------
+
     for old_file in UPLOAD_DIR.glob(
         f"{filename}.*"
     ):
@@ -260,9 +341,19 @@ def save_uploaded_image(
                 old_file.unlink()
 
         except OSError:
+
             pass
 
+    # --------------------------------------------------------
+    # GUARDAR
+    # --------------------------------------------------------
+
     try:
+
+        UPLOAD_DIR.mkdir(
+            parents=True,
+            exist_ok=True
+        )
 
         file.save(final_path)
 
@@ -277,7 +368,10 @@ def save_uploaded_image(
             f"No se pudo guardar la imagen: {error}"
         )
 
-    return True, final_path.name
+    return (
+        True,
+        final_path.name
+    )
 
 
 # ============================================================
@@ -305,20 +399,22 @@ def login():
 
     if request.method == "POST":
 
-        # IMPORTANTE:
-        # Para producción conviene mover la contraseña
-        # a una variable de entorno en Render.
+        password = request.form.get(
+            "password",
+            ""
+        )
 
-        if request.form.get(
-            "password"
-        ) == "transito2026":
+        expected_password = os.getenv(
+            "ADMIN_PASSWORD",
+            "transito2026"
+        )
+
+        if password == expected_password:
 
             session["admin"] = True
 
             return redirect(
-                request.args.get(
-                    "next"
-                )
+                request.args.get("next")
                 or url_for("admin")
             )
 
@@ -362,10 +458,6 @@ def admin():
         conn = db()
 
         try:
-
-            # -----------------------------------------------
-            # GUARDAR CAMPOS DE TEXTO
-            # -----------------------------------------------
 
             for key in DEFAULTS:
 
@@ -502,60 +594,155 @@ def upload_background():
 # SERVIR IMÁGENES SUBIDAS
 # ============================================================
 
-@app.route("/uploads/<path:filename>")
+@app.route(
+    "/uploads/<path:filename>"
+)
 def uploaded_file(filename):
-    requested = UPLOAD_DIR / filename
 
-    # Si el archivo existe exactamente con ese nombre,
-    # lo servimos normalmente.
+    requested = (
+        UPLOAD_DIR /
+        filename
+    )
+
+    # --------------------------------------------------------
+    # ARCHIVO EXACTO
+    # --------------------------------------------------------
+
     if requested.is_file():
+
         return send_from_directory(
             UPLOAD_DIR,
             filename
         )
 
-    # Si no existe, buscamos la misma imagen
-    # con cualquiera de las extensiones permitidas.
-    stem = Path(filename).stem
+    # --------------------------------------------------------
+    # BUSCAR POR NOMBRE SIN IMPORTAR EXTENSIÓN
+    # --------------------------------------------------------
 
-    for extension in ALLOWED_IMAGE_EXTENSIONS:
-        candidate = UPLOAD_DIR / f"{stem}.{extension}"
+    stem = Path(
+        filename
+    ).stem
 
-        if candidate.is_file():
+    if stem:
+
+        image_path = get_image_path(
+            stem
+        )
+
+        if image_path:
+
             return send_from_directory(
                 UPLOAD_DIR,
-                candidate.name
+                image_path.name
             )
 
-    return "Imagen no encontrada", 404
+    return (
+        "Imagen no encontrada",
+        404
+    )
 
+
+# ============================================================
+# RUTA DIRECTA DEL LOGO
+# ============================================================
 
 @app.route("/uploads/logo")
 def uploaded_logo():
-    for extension in ALLOWED_IMAGE_EXTENSIONS:
-        candidate = UPLOAD_DIR / f"logo.{extension}"
 
-        if candidate.is_file():
-            return send_from_directory(
-                UPLOAD_DIR,
-                candidate.name
-            )
+    image_path = get_image_path(
+        "logo"
+    )
 
-    return "Logo no encontrado", 404
+    if not image_path:
 
+        return (
+            "Logo no encontrado",
+            404
+        )
+
+    response = send_from_directory(
+        UPLOAD_DIR,
+        image_path.name
+    )
+
+    # Evitar que el navegador conserve una imagen vieja
+    response.headers["Cache-Control"] = (
+        "no-cache, no-store, must-revalidate"
+    )
+
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
+
+
+# ============================================================
+# RUTA DIRECTA DEL FONDO
+# ============================================================
 
 @app.route("/uploads/background")
 def uploaded_background():
-    for extension in ALLOWED_IMAGE_EXTENSIONS:
-        candidate = UPLOAD_DIR / f"background.{extension}"
 
-        if candidate.is_file():
-            return send_from_directory(
-                UPLOAD_DIR,
-                candidate.name
-            )
+    image_path = get_image_path(
+        "background"
+    )
 
-    return "Fondo no encontrado", 404
+    if not image_path:
+
+        return (
+            "Fondo no encontrado",
+            404
+        )
+
+    response = send_from_directory(
+        UPLOAD_DIR,
+        image_path.name
+    )
+
+    response.headers["Cache-Control"] = (
+        "no-cache, no-store, must-revalidate"
+    )
+
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
+
+
+# ============================================================
+# ESTADO DE IMÁGENES
+# ============================================================
+
+@app.route("/uploads/status")
+@admin_required
+def uploads_status():
+
+    logo = get_image_path(
+        "logo"
+    )
+
+    background = get_image_path(
+        "background"
+    )
+
+    return {
+        "upload_directory": str(
+            UPLOAD_DIR
+        ),
+
+        "logo": (
+            logo.name
+            if logo
+            else None
+        ),
+
+        "background": (
+            background.name
+            if background
+            else None
+        )
+    }
+
 
 # ============================================================
 # INICIALIZACIÓN
