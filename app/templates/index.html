@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ c.title }} | {{ c.department }}</title>
+  <meta name="description" content="{{ c.subtitle }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <img src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}" alt="Escudo Policía de la Provincia de Córdoba">
+    <div>
+      <div class="eyebrow">{{ c.institution }}</div>
+      <strong>{{ c.department }}</strong>
+    </div>
+  </div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#informacion">Información</a>
+    <a href="#seguridad">Seguridad vial</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+<section id="inicio" class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="badge">ÁREA OPERATIVA</span>
+    <h1>{{ c.title }}</h1>
+    <h2>{{ c.department }}</h2>
+    <p>{{ c.hero_text }}</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#informacion">Ver información</a>
+      <a class="btn outline" href="#contacto">Contactar</a>
+    </div>
+  </div>
+</section>
+
+<section id="informacion" class="section">
+  <div class="section-title">
+    <span>01</span>
+    <div>
+      <p class="kicker">INFORMACIÓN INSTITUCIONAL</p>
+      <h2>Tránsito y prevención</h2>
+    </div>
+  </div>
+  <div class="grid two">
+    <article class="card">
+      <div class="icon">🚔</div>
+      <h3>Objetivo</h3>
+      <p>{{ c.about }}</p>
+    </article>
+    <article class="card">
+      <div class="icon">🛡️</div>
+      <h3>Prevención</h3>
+      <p>{{ c.notice }}</p>
+    </article>
+  </div>
+</section>
+
+<section id="seguridad" class="section dark">
+  <div class="section-title light">
+    <span>02</span>
+    <div>
+      <p class="kicker">RECOMENDACIONES</p>
+      <h2>Seguridad vial</h2>
+    </div>
+  </div>
+  <div class="grid three">
+    <article class="tip"><b>01</b><h3>Documentación</h3><p>Verificá que la documentación requerida se encuentre vigente antes de circular.</p></article>
+    <article class="tip"><b>02</b><h3>Conducción segura</h3><p>Respetá velocidades, señalización, semáforos y prioridades de paso.</p></article>
+    <article class="tip"><b>03</b><h3>Prevención</h3><p>No conduzcas bajo efectos de alcohol u otras sustancias y utilizá siempre los elementos de seguridad.</p></article>
+  </div>
+</section>
+
+<section id="contacto" class="section">
+  <div class="section-title">
+    <span>03</span>
+    <div>
+      <p class="kicker">CONTACTO</p>
+      <h2>Información útil</h2>
+    </div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-item"><small>EMERGENCIAS</small><strong>{{ c.emergency }}</strong></div>
+    <div class="contact-item"><small>TELÉFONO</small><strong>{{ c.phone }}</strong></div>
+    <div class="contact-item"><small>UBICACIÓN</small><strong>{{ c.location }}</strong></div>
+    <div class="contact-item"><small>HORARIOS</small><strong>{{ c.hours }}</strong></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div><img src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}" alt=""><span>{{ c.institution }}<br><b>{{ c.department }}</b></span></div>
+  <a class="admin-link" href="{{ url_for('login') }}">Acceso administrativo</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editar sitio</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar adminbar">
+  <div class="brand">
+    <img src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}" alt="">
+    <div><div class="eyebrow">PANEL ADMINISTRATIVO</div><strong>Tránsito — Santa María</strong></div>
+  </div>
+  <div class="admin-actions"><a href="{{ url_for('index') }}">Ver sitio</a><a href="{{ url_for('logout') }}">Cerrar sesión</a></div>
+</header>
+<main class="admin-main">
+  <div class="admin-heading">
+    <p class="kicker">EDITOR DE CONTENIDO</p>
+    <h1>Actualizar información</h1>
+    <p>Los cambios se guardan en una base de datos local SQLite.</p>
+  </div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
+  {% endwith %}
+  <form method="post" class="editor">
+    {% set fields = [
+      ('institution','Institución'), ('department','Departamental'), ('title','Título principal'),
+      ('subtitle','Subtítulo'), ('hero_text','Texto de portada'), ('about','Información institucional'),
+      ('notice','Aviso institucional'), ('phone','Teléfono'), ('emergency','Emergencias'),
+      ('location','Ubicación'), ('hours','Horarios')
+    ] %}
+    {% for key, label in fields %}
+      <label>{{ label }}
+        {% if key in ['hero_text','about','notice'] %}
+          <textarea name="{{ key }}" rows="4">{{ c[key] }}</textarea>
+        {% else %}
+          <input name="{{ key }}" value="{{ c[key] }}">
+        {% endif %}
+      </label>
+    {% endfor %}
+    <button class="btn primary" type="submit">Guardar cambios</button>
+  </form>
+</main>
+</body>
+</html>
