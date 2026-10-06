@@ -1,192 +1,621 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ c.title }} | {{ c.department }}</title>
-  <meta name="description" content="{{ c.subtitle }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ c.title }} | {{ c.department }}</title>
+
+    <meta name="description" content="{{ c.subtitle }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 </head>
+
 <body>
 
-  <div class="top-alert">
+<!-- =========================================================
+     BARRA SUPERIOR
+     ========================================================= -->
+
+<div class="top-alert">
     <div class="container top-alert-inner">
-      <span class="status-dot"></span>
-      <span>Portal informativo · {{ c.department }}</span>
-      <a href="#contacto">Información de contacto</a>
-    </div>
-  </div>
 
-  <header class="site-header">
+        <div class="portal-status">
+            <span class="status-dot"></span>
+
+            <span>
+                Portal informativo · {{ c.department }}
+            </span>
+        </div>
+
+        <a href="#contacto">
+            Información de contacto
+        </a>
+
+    </div>
+</div>
+
+
+<!-- =========================================================
+     ENCABEZADO
+     ========================================================= -->
+
+<header class="site-header">
+
     <div class="container header-inner">
-      <a class="brand" href="#inicio" aria-label="Inicio">
-        <span class="brand-shield">
-          <img src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}" alt="Escudo Policía de la Provincia de Córdoba">
-        </span>
-        <span class="brand-copy">
-          <small>{{ c.institution }}</small>
-          <strong>{{ c.department }}</strong>
-        </span>
-      </a>
 
-      <nav class="desktop-nav" aria-label="Navegación principal">
-        <a href="#inicio">Inicio</a>
-        <a href="#informacion">Institucional</a>
-        <a href="#seguridad">Seguridad vial</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
+        <!-- MARCA -->
 
-      <a class="admin-button" href="{{ url_for('login') }}">Acceso administrativo</a>
+        <a
+            class="brand"
+            href="#inicio"
+            aria-label="Inicio"
+        >
+
+            <span class="brand-shield">
+
+                <img
+                    src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}"
+                    alt="Escudo Policía de la Provincia de Córdoba"
+                >
+
+            </span>
+
+            <span class="brand-copy">
+
+                <small>
+                    {{ c.institution }}
+                </small>
+
+                <strong>
+                    {{ c.department }}
+                </strong>
+
+            </span>
+
+        </a>
+
+
+        <!-- NAVEGACIÓN -->
+
+        <nav class="main-nav">
+
+            <a href="#inicio">
+                Inicio
+            </a>
+
+            <a href="#institucional">
+                Institucional
+            </a>
+
+            <a href="#seguridad">
+                Seguridad vial
+            </a>
+
+            <a href="#contacto">
+                Contacto
+            </a>
+
+            <a
+                href="#admin"
+                class="admin-link"
+            >
+                Acceso administrativo
+            </a>
+
+        </nav>
+
     </div>
-  </header>
 
-  <main id="inicio">
+</header>
 
-    <section class="hero">
-      <div class="hero-grid"></div>
-      <div class="hero-glow"></div>
 
-      <div class="container hero-inner">
+<!-- =========================================================
+     HERO PRINCIPAL
+     ========================================================= -->
+
+<main id="inicio">
+
+<section class="hero">
+
+    <!--
+        IMPORTANTE:
+        No hay imagen del escudo acá.
+
+        La imagen policial se coloca mediante CSS
+        como fondo de toda esta sección.
+    -->
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-inner">
+
         <div class="hero-copy">
-          <div class="eyebrow"><span></span> ÁREA DE TRÁNSITO</div>
-          <h1>{{ c.title }}</h1>
-          <p class="hero-subtitle">{{ c.department }}</p>
-          <p class="hero-text">{{ c.hero_text }}</p>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#informacion">Conocer el área <span>→</span></a>
-            <a class="btn btn-secondary" href="#contacto">Ver contactos</a>
-          </div>
+            <div class="eyebrow">
 
-          <div class="hero-meta">
-            <div><b>911</b><span>Emergencias</span></div>
-            <div><b>24/7</b><span>Atención de emergencias</span></div>
-            <div><b>SM</b><span>Santa María · Córdoba</span></div>
-          </div>
+                <span></span>
+
+                ÁREA DE TRÁNSITO
+
+            </div>
+
+
+            <h1>
+                {{ c.title }}
+            </h1>
+
+
+            <h2>
+                {{ c.department }}
+            </h2>
+
+
+            <p class="hero-text">
+                {{ c.hero_text }}
+            </p>
+
+
+            <!-- BOTONES -->
+
+            <div class="hero-actions">
+
+                <a
+                    class="btn btn-primary"
+                    href="#institucional"
+                >
+                    Conocer el área
+                    <span>→</span>
+                </a>
+
+
+                <a
+                    class="btn btn-secondary"
+                    href="#contacto"
+                >
+                    Ver contactos
+                </a>
+
+            </div>
+
+
+            <!-- DATOS RÁPIDOS -->
+
+            <div class="hero-meta">
+
+                <div class="hero-meta-item">
+
+                    <strong>
+                        {{ c.emergency }}
+                    </strong>
+
+                    <span>
+                        EMERGENCIAS
+                    </span>
+
+                </div>
+
+
+                <div class="hero-meta-item">
+
+                    <strong>
+                        24/7
+                    </strong>
+
+                    <span>
+                        ATENCIÓN DE EMERGENCIAS
+                    </span>
+
+                </div>
+
+
+                <div class="hero-meta-item">
+
+                    <strong>
+                        SM
+                    </strong>
+
+                    <span>
+                        SANTA MARÍA · CÓRDOBA
+                    </span>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="hero-emblem" aria-hidden="true">
-          <div class="emblem-ring">
-            <img src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}" alt="">
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <section class="quick-links">
-      <div class="container quick-grid">
-        <a href="#informacion" class="quick-card">
-          <span class="quick-icon">01</span>
-          <span><b>Información institucional</b><small>Conocé el área de Tránsito</small></span>
-          <span class="arrow">→</span>
-        </a>
-        <a href="#seguridad" class="quick-card">
-          <span class="quick-icon">02</span>
-          <span><b>Seguridad vial</b><small>Prevención y recomendaciones</small></span>
-          <span class="arrow">→</span>
-        </a>
-        <a href="#contacto" class="quick-card">
-          <span class="quick-icon">03</span>
-          <span><b>Contactos útiles</b><small>Teléfonos, ubicación y horarios</small></span>
-          <span class="arrow">→</span>
-        </a>
-      </div>
-    </section>
+</section>
 
-    <section id="informacion" class="section section-light">
-      <div class="container">
+
+<!-- =========================================================
+     INSTITUCIONAL
+     ========================================================= -->
+
+<section
+    id="institucional"
+    class="content-section"
+>
+
+    <div class="container">
+
         <div class="section-heading">
-          <div class="section-number">01</div>
-          <div>
-            <span class="section-kicker">INSTITUCIONAL</span>
-            <h2>Tránsito y prevención</h2>
-            <p>Información orientada a la comunidad para promover una circulación segura y responsable.</p>
-          </div>
+
+            <span class="section-label">
+                INSTITUCIONAL
+            </span>
+
+            <h2>
+                Área de Tránsito
+            </h2>
+
+            <p>
+                {{ c.subtitle }}
+            </p>
+
         </div>
 
-        <div class="feature-grid">
-          <article class="feature-card feature-card-main">
-            <div class="feature-top"><span class="feature-icon">◆</span><span>OBJETIVO</span></div>
-            <h3>Prevención, orientación y seguridad vial</h3>
-            <p>{{ c.about }}</p>
-          </article>
 
-          <article class="feature-card">
-            <div class="feature-top"><span class="feature-icon">✓</span><span>AVISO</span></div>
-            <h3>Información oficial</h3>
-            <p>{{ c.notice }}</p>
-          </article>
+        <div class="info-grid">
 
-          <article class="feature-card accent-card">
-            <div class="feature-top"><span class="feature-icon">!</span><span>IMPORTANTE</span></div>
-            <h3>Antes de circular</h3>
-            <p>Verificá documentación, elementos de seguridad, condiciones del vehículo y respetá siempre la señalización.</p>
-          </article>
+            <article class="info-card">
+
+                <div class="card-number">
+                    01
+                </div>
+
+                <h3>
+                    {{ c.institution }}
+                </h3>
+
+                <p>
+                    {{ c.about }}
+                </p>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <div class="card-number">
+                    02
+                </div>
+
+                <h3>
+                    Información
+                </h3>
+
+                <p>
+                    Espacio destinado a brindar información
+                    relacionada con tránsito, prevención y
+                    seguridad vial para la comunidad.
+                </p>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <div class="card-number">
+                    03
+                </div>
+
+                <h3>
+                    Comunidad
+                </h3>
+
+                <p>
+                    Nuestro objetivo es facilitar el acceso
+                    a información clara y útil para vecinos
+                    y usuarios de la vía pública.
+                </p>
+
+            </article>
+
         </div>
-      </div>
-    </section>
 
-    <section id="seguridad" class="section section-dark">
-      <div class="container">
-        <div class="section-heading heading-dark">
-          <div class="section-number">02</div>
-          <div>
-            <span class="section-kicker">PREVENCIÓN</span>
-            <h2>Seguridad vial</h2>
-            <p>Buenas prácticas para una circulación responsable.</p>
-          </div>
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SEGURIDAD VIAL
+     ========================================================= -->
+
+<section
+    id="seguridad"
+    class="safety-section"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                SEGURIDAD VIAL
+            </span>
+
+            <h2>
+                Prevención y seguridad
+            </h2>
+
+            <p>
+                Información y recomendaciones para una
+                circulación segura.
+            </p>
+
         </div>
+
 
         <div class="safety-grid">
-          <article class="safety-card"><span>01</span><h3>Documentación</h3><p>Contá con la documentación exigible y mantenela vigente.</p></article>
-          <article class="safety-card"><span>02</span><h3>Velocidad</h3><p>Respetá los límites, las condiciones de la vía y la señalización.</p></article>
-          <article class="safety-card"><span>03</span><h3>Alcohol y conducción</h3><p>No conduzcas bajo los efectos del alcohol ni de otras sustancias.</p></article>
-          <article class="safety-card"><span>04</span><h3>Elementos de seguridad</h3><p>Utilizá cinturón y los elementos de protección correspondientes.</p></article>
+
+            <div class="safety-item">
+
+                <div class="safety-icon">
+                    01
+                </div>
+
+                <div>
+
+                    <h3>
+                        Respetá las normas
+                    </h3>
+
+                    <p>
+                        Respetar las señales y normas de
+                        tránsito contribuye a prevenir
+                        accidentes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="safety-item">
+
+                <div class="safety-icon">
+                    02
+                </div>
+
+                <div>
+
+                    <h3>
+                        Conducí con responsabilidad
+                    </h3>
+
+                    <p>
+                        Evitá distracciones y mantené siempre
+                        una conducción responsable.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="safety-item">
+
+                <div class="safety-icon">
+                    03
+                </div>
+
+                <div>
+
+                    <h3>
+                        Cuidemos la comunidad
+                    </h3>
+
+                    <p>
+                        La seguridad vial es responsabilidad
+                        de todos.
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
-    </section>
 
-    <section id="contacto" class="section section-contact">
-      <div class="container">
-        <div class="section-heading">
-          <div class="section-number">03</div>
-          <div>
-            <span class="section-kicker">CONTACTO</span>
-            <h2>Información útil</h2>
-            <p>Datos institucionales para orientación y contacto.</p>
-          </div>
-        </div>
-
-        <div class="contact-layout">
-          <div class="emergency-card">
-            <span class="emergency-label">EMERGENCIAS</span>
-            <strong>{{ c.emergency }}</strong>
-            <p>Ante una emergencia, comunicate con el servicio correspondiente.</p>
-          </div>
-
-          <div class="contact-list">
-            <div class="contact-row"><span>Teléfono</span><strong>{{ c.phone }}</strong></div>
-            <div class="contact-row"><span>Ubicación</span><strong>{{ c.location }}</strong></div>
-            <div class="contact-row"><span>Horarios</span><strong>{{ c.hours }}</strong></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="{{ url_for('static', filename='escudo-policia-cordoba.jpeg') }}" alt="">
-        <div><small>{{ c.institution }}</small><strong>{{ c.department }}</strong></div>
-      </div>
-      <span class="footer-note">Portal informativo · Tránsito</span>
-      <a href="{{ url_for('login') }}">Administración →</a>
     </div>
-  </footer>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACTO
+     ========================================================= -->
+
+<section
+    id="contacto"
+    class="contact-section"
+>
+
+    <div class="container">
+
+        <div class="contact-box">
+
+            <div class="contact-main">
+
+                <span class="section-label">
+                    CONTACTO
+                </span>
+
+                <h2>
+                    Información de contacto
+                </h2>
+
+                <p>
+                    {{ c.notice }}
+                </p>
+
+            </div>
+
+
+            <div class="contact-data">
+
+                <div class="contact-item">
+
+                    <span>
+                        EMERGENCIAS
+                    </span>
+
+                    <strong>
+                        {{ c.emergency }}
+                    </strong>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        TELÉFONO
+                    </span>
+
+                    <strong>
+                        {{ c.phone }}
+                    </strong>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        UBICACIÓN
+                    </span>
+
+                    <strong>
+                        {{ c.location }}
+                    </strong>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        HORARIOS
+                    </span>
+
+                    <strong>
+                        {{ c.hours }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ADMINISTRACIÓN
+     ========================================================= -->
+
+<section
+    id="admin"
+    class="admin-section"
+>
+
+    <div class="container">
+
+        <div class="admin-box">
+
+            <div>
+
+                <span class="section-label">
+                    ADMINISTRACIÓN
+                </span>
+
+                <h2>
+                    Acceso administrativo
+                </h2>
+
+                <p>
+                    Área destinada a la administración y
+                    actualización de la información del portal.
+                </p>
+
+            </div>
+
+            <div>
+
+                <a
+                    href="/admin"
+                    class="btn btn-primary"
+                >
+                    Ingresar
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     PIE DE PÁGINA
+     ========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <strong>
+                {{ c.department }}
+            </strong>
+
+            <span>
+                {{ c.institution }}
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Portal informativo
+            </span>
+
+            <span>
+                Santa María · Córdoba
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
 
 </body>
 </html>
