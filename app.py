@@ -100,6 +100,15 @@ DEFAULTS = {
 
     "about":
         "Este sitio puede utilizarse para publicar información institucional, recomendaciones de seguridad vial, operativos preventivos, documentación y vías de contacto.",
+
+    "authorities":
+        "Información de autoridades a completar.",
+
+    "functions":
+        "Información sobre las funciones del área de Tránsito a completar.",
+
+    "dependencies":
+        "Información sobre dependencias y lugares de atención a completar.",
 }
 
 
