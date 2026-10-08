@@ -633,34 +633,7 @@ def uploaded_file(filename):
 # RUTA DIRECTA DEL LOGO
 # ============================================================
 
-@app.route("/uploads/logo")
-def uploaded_logo():
 
-    image_path = get_image_path(
-        "logo"
-    )
-
-    if not image_path:
-
-        return (
-            "Logo no encontrado",
-            404
-        )
-
-    response = send_from_directory(
-        UPLOAD_DIR,
-        image_path.name
-    )
-
-    # Evitar que el navegador conserve una imagen vieja
-    response.headers["Cache-Control"] = (
-        "no-cache, no-store, must-revalidate"
-    )
-
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0"
-
-    return response
 
 
 # ============================================================
