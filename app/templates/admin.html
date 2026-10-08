@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,11 +11,19 @@
     >
 
     <title>
-        Panel de Administración · {{ c.department }}
+        Administración | Tránsito Departamental Santa María
     </title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap"
@@ -22,1901 +32,2215 @@
 
     <style>
 
-        :root {
-            --bg: #03070c;
-            --bg-soft: #07111c;
-            --panel: #091522;
-            --panel-2: #0c1927;
-
-            --border: #1c2b3a;
-            --border-soft: rgba(255,255,255,.08);
-
-            --text: #f5f7fa;
-            --muted: #8da1b5;
-
-            --blue: #168cff;
-            --blue-dark: #0869c9;
-
-            --green: #22c55e;
-            --red: #ef4444;
-
-            --radius: 16px;
+        *{
+            box-sizing:border-box;
         }
 
-        * {
-            box-sizing: border-box;
+
+        :root{
+
+            --black:#05080d;
+
+            --dark:#07111c;
+
+            --dark2:#0b1724;
+
+            --blue:#0878d1;
+
+            --blue2:#168cff;
+
+            --text:#e7eef6;
+
+            --muted:#8fa3b8;
+
+            --border:rgba(255,255,255,.09);
+
+            --success:#27c281;
+
+            --danger:#d84b4b;
+
         }
 
-        html {
-            scroll-behavior: smooth;
+
+        html{
+            scroll-behavior:smooth;
         }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
+
+        body{
+
+            margin:0;
+
+            min-height:100vh;
 
             background:
                 radial-gradient(
-                    circle at 85% 10%,
-                    rgba(0, 120, 255, .09),
+                    circle at top right,
+                    rgba(8,120,209,.14),
                     transparent 35%
                 ),
-                linear-gradient(
-                    135deg,
-                    #02060a 0%,
-                    #050b12 45%,
-                    #071522 100%
+                var(--black);
+
+            color:var(--text);
+
+            font-family:
+                Inter,
+                Arial,
+                sans-serif;
+
+        }
+
+
+        /* ==================================================
+           ENCABEZADO
+           ================================================== */
+
+        .admin-header{
+
+            min-height:78px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:25px;
+
+            padding:0 35px;
+
+            background:rgba(4,8,14,.97);
+
+            border-bottom:
+                1px solid
+                rgba(22,140,255,.20);
+
+            box-shadow:
+                0 8px 30px
+                rgba(0,0,0,.30);
+
+            position:sticky;
+
+            top:0;
+
+            z-index:100;
+
+        }
+
+
+        .admin-brand{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:14px;
+
+            min-width:0;
+
+        }
+
+
+        .admin-logo{
+
+            width:48px;
+
+            height:48px;
+
+            flex:0 0 48px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            background:#fff;
+
+            border-radius:9px;
+
+            padding:4px;
+
+            overflow:hidden;
+
+        }
+
+
+        .admin-logo img{
+
+            width:100%;
+
+            height:100%;
+
+            object-fit:contain;
+
+        }
+
+
+        .admin-brand strong{
+
+            display:block;
+
+            color:#fff;
+
+            font-family:
+                Oswald,
+                Arial,
+                sans-serif;
+
+            font-size:20px;
+
+            letter-spacing:.5px;
+
+            white-space:nowrap;
+
+        }
+
+
+        .admin-brand span{
+
+            display:block;
+
+            margin-top:2px;
+
+            color:#758da5;
+
+            font-size:9px;
+
+            font-weight:800;
+
+            letter-spacing:1.5px;
+
+            text-transform:uppercase;
+
+        }
+
+
+        .admin-actions{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:10px;
+
+        }
+
+
+        .admin-actions a{
+
+            display:inline-flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            min-height:40px;
+
+            padding:0 16px;
+
+            color:#cbd8e5;
+
+            text-decoration:none;
+
+            font-size:12px;
+
+            font-weight:700;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:7px;
+
+            transition:.2s;
+
+        }
+
+
+        .admin-actions a:hover{
+
+            color:#fff;
+
+            background:
+                rgba(255,255,255,.05);
+
+            border-color:
+                rgba(255,255,255,.20);
+
+        }
+
+
+        .logout{
+
+            color:#fff !important;
+
+            background:#152333 !important;
+
+            border-color:
+                rgba(255,255,255,.12) !important;
+
+        }
+
+
+        .logout:hover{
+
+            background:#25394e !important;
+
+        }
+
+
+        /* ==================================================
+           CONTENEDOR
+           ================================================== */
+
+        .admin-wrapper{
+
+            width:
+                min(
+                    1150px,
+                    calc(100% - 40px)
                 );
 
-            color: var(--text);
+            margin:
+                55px auto
+                90px;
 
-            font-family: "Inter", sans-serif;
         }
 
-        a {
-            color: inherit;
+
+        .page-title{
+
+            margin-bottom:35px;
+
         }
 
-        button,
-        input,
-        textarea {
-            font: inherit;
+
+        .page-title small{
+
+            display:block;
+
+            margin-bottom:9px;
+
+            color:var(--blue2);
+
+            font-size:10px;
+
+            font-weight:800;
+
+            letter-spacing:2.5px;
+
+            text-transform:uppercase;
+
         }
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
 
-        .admin-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .page-title h1{
 
-            min-height: 88px;
+            margin:
+                0 0 11px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            color:#fff;
 
-            padding: 14px 34px;
+            font-family:
+                Oswald,
+                Arial,
+                sans-serif;
 
-            background: rgba(3, 7, 12, .94);
+            font-size:48px;
 
-            border-bottom: 1px solid var(--border);
+            line-height:1;
 
-            backdrop-filter: blur(14px);
+            text-transform:uppercase;
+
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            min-width: 0;
+
+        .page-title p{
+
+            max-width:760px;
+
+            margin:0;
+
+            color:var(--muted);
+
+            font-size:14px;
+
+            line-height:1.7;
+
         }
 
-        .brand-logo {
-            width: 54px;
-            height: 54px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* ==================================================
+           MENSAJES
+           ================================================== */
 
-            overflow: hidden;
+        .flash{
 
-            border-radius: 12px;
+            margin-bottom:25px;
 
-            background: #fff;
+            padding:
+                15px
+                18px;
 
-            border: 1px solid rgba(255,255,255,.12);
+            background:
+                rgba(22,140,255,.10);
+
+            border:
+                1px solid
+                rgba(22,140,255,.25);
+
+            border-left:
+                3px solid
+                var(--blue2);
+
+            border-radius:7px;
+
+            color:#cfe5fa;
+
+            font-size:13px;
+
         }
 
-        .brand-logo img {
-            width: 100%;
-            height: 100%;
 
-            object-fit: contain;
+        /* ==================================================
+           FORMULARIO PRINCIPAL
+           ================================================== */
+
+        .admin-form{
+
+            display:grid;
+
+            gap:22px;
+
         }
 
-        .brand-text {
-            min-width: 0;
-        }
 
-        .brand-text small {
-            display: block;
+        .admin-section{
 
-            margin-bottom: 4px;
-
-            color: #9eb0c2;
-
-            font-size: 11px;
-            font-weight: 700;
-
-            letter-spacing: 2px;
-
-            white-space: nowrap;
-        }
-
-        .brand-text strong {
-            display: block;
-
-            font-family: "Oswald", sans-serif;
-
-            font-size: 24px;
-            line-height: 1;
-
-            letter-spacing: .5px;
-
-            white-space: nowrap;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            min-height: 44px;
-
-            padding: 0 18px;
-
-            border-radius: 8px;
-
-            border: 1px solid var(--border);
-
-            background: #07111c;
-
-            color: #dce8f3;
-
-            text-decoration: none;
-
-            font-size: 14px;
-            font-weight: 700;
-
-            transition:
-                background .2s ease,
-                border-color .2s ease,
-                transform .2s ease;
-        }
-
-        .header-button:hover {
-            background: #0d1d2e;
-            border-color: #2d455c;
-            transform: translateY(-1px);
-        }
-
-        .header-button.primary {
-            background: #10263b;
-            border-color: #28445e;
-        }
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        .admin-main {
-            width: min(1360px, calc(100% - 48px));
-
-            margin: 0 auto;
-
-            padding: 62px 0 100px;
-        }
-
-        .page-intro {
-            margin-bottom: 38px;
-        }
-
-        .eyebrow {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            margin-bottom: 10px;
-
-            color: var(--blue);
-
-            font-size: 12px;
-            font-weight: 800;
-
-            letter-spacing: 3px;
-
-            text-transform: uppercase;
-        }
-
-        .eyebrow::before {
-            content: "";
-
-            width: 28px;
-            height: 2px;
-
-            background: var(--blue);
-        }
-
-        .page-intro h1 {
-            margin: 0 0 10px;
-
-            font-family: "Oswald", sans-serif;
-
-            font-size: clamp(44px, 6vw, 68px);
-            line-height: .95;
-
-            letter-spacing: .5px;
-
-            text-transform: uppercase;
-        }
-
-        .page-intro p {
-            max-width: 760px;
-
-            margin: 0;
-
-            color: #91a8bc;
-
-            font-size: 16px;
-            line-height: 1.75;
-        }
-
-        /* =====================================================
-           FLASH
-        ===================================================== */
-
-        .flash-container {
-            margin-bottom: 28px;
-        }
-
-        .flash {
-            padding: 15px 18px;
-
-            border-radius: 10px;
-
-            border: 1px solid var(--border);
-
-            background: var(--panel);
-
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .flash.success {
-            border-color: rgba(34,197,94,.35);
-            background: rgba(34,197,94,.08);
-            color: #86efac;
-        }
-
-        .flash.error {
-            border-color: rgba(239,68,68,.35);
-            background: rgba(239,68,68,.08);
-            color: #fca5a5;
-        }
-
-        /* =====================================================
-           CARDS
-        ===================================================== */
-
-        .admin-card {
-            margin-bottom: 26px;
-
-            padding: 34px 36px;
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius);
+            padding:30px;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(10, 24, 38, .98),
-                    rgba(5, 13, 22, .98)
+                    rgba(11,24,38,.98),
+                    rgba(6,13,22,.98)
                 );
 
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:11px;
+
             box-shadow:
-                0 18px 55px rgba(0,0,0,.18);
+                0 15px 40px
+                rgba(0,0,0,.16);
+
         }
 
-        .card-heading {
-            display: flex;
-            align-items: flex-start;
-            gap: 18px;
 
-            padding-bottom: 22px;
+        .section-heading{
 
-            margin-bottom: 28px;
+            display:flex;
 
-            border-bottom: 1px solid var(--border-soft);
+            align-items:center;
+
+            gap:14px;
+
+            margin-bottom:25px;
+
+            padding-bottom:17px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.07);
+
         }
 
-        .section-number {
-            min-width: 36px;
 
-            padding-top: 2px;
+        .section-number{
 
-            color: var(--blue);
+            color:var(--blue2);
 
-            font-family: "Oswald", sans-serif;
+            font-family:
+                Oswald,
+                Arial,
+                sans-serif;
 
-            font-size: 20px;
+            font-size:16px;
+
+            letter-spacing:1px;
+
         }
 
-        .card-heading h2 {
-            margin: 0 0 5px;
 
-            font-family: "Oswald", sans-serif;
+        .section-heading h2{
 
-            font-size: 28px;
+            margin:0;
 
-            text-transform: uppercase;
+            color:#fff;
 
-            letter-spacing: .3px;
+            font-family:
+                Oswald,
+                Arial,
+                sans-serif;
+
+            font-size:25px;
+
+            font-weight:600;
+
+            text-transform:uppercase;
+
         }
 
-        .card-heading p {
-            margin: 0;
 
-            color: #678096;
+        .section-heading p{
 
-            font-size: 13px;
+            margin:
+                3px 0 0;
+
+            color:#72869b;
+
+            font-size:11px;
+
         }
 
-        /* =====================================================
-           FORMULARIOS
-        ===================================================== */
 
-        .form-grid {
-            display: grid;
+        .field-grid{
+
+            display:grid;
 
             grid-template-columns:
-                repeat(2, minmax(0, 1fr));
+                1fr 1fr;
 
-            gap: 22px 24px;
+            gap:20px;
+
         }
 
-        .field {
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
+
+        .field{
+
+            display:flex;
+
+            flex-direction:column;
+
+            min-width:0;
+
         }
 
-        .field.full {
-            grid-column: 1 / -1;
+
+        .field.full{
+
+            grid-column:
+                1 / -1;
+
         }
 
-        .field label {
-            color: #dce6ef;
 
-            font-size: 13px;
-            font-weight: 700;
+        label{
+
+            margin-bottom:8px;
+
+            color:#d7e2ed;
+
+            font-size:12px;
+
+            font-weight:700;
+
         }
 
-        .field input,
-        .field textarea {
-            width: 100%;
 
-            border: 1px solid #1d3042;
+        label span{
 
-            border-radius: 8px;
+            color:#637b93;
 
-            background: #040b12;
+            font-size:10px;
 
-            color: #f4f7fa;
+            font-weight:500;
 
-            outline: none;
+        }
+
+
+        input,
+        textarea{
+
+            width:100%;
+
+            padding:
+                13px
+                14px;
+
+            color:#edf5fc;
+
+            background:#050c14;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius:6px;
+
+            outline:none;
+
+            font-family:
+                Inter,
+                Arial,
+                sans-serif;
+
+            font-size:13px;
 
             transition:
-                border-color .2s ease,
-                box-shadow .2s ease,
-                background .2s ease;
+                border-color .2s,
+                box-shadow .2s,
+                background .2s;
+
         }
 
-        .field input {
-            min-height: 54px;
 
-            padding: 0 16px;
+        input{
+
+            height:46px;
+
         }
 
-        .field textarea {
-            min-height: 120px;
 
-            padding: 14px 16px;
+        textarea{
 
-            resize: vertical;
+            min-height:125px;
 
-            line-height: 1.6;
+            resize:vertical;
+
+            line-height:1.6;
+
         }
 
-        .field input:focus,
-        .field textarea:focus {
-            border-color: var(--blue);
 
-            background: #06101a;
+        input:focus,
+        textarea:focus{
+
+            background:#07111c;
+
+            border-color:
+                rgba(22,140,255,.65);
 
             box-shadow:
-                0 0 0 3px rgba(22,140,255,.1);
+                0 0 0 3px
+                rgba(22,140,255,.08);
+
         }
 
-        .field small {
-            color: #62788c;
 
-            font-size: 12px;
+        /* ==================================================
+           SECCIÓN DE IMÁGENES
+           ================================================== */
+
+        .image-section{
+
+            overflow:hidden;
+
         }
 
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
 
-            margin-top: 28px;
+        .image-grid{
+
+            display:grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:22px;
+
         }
 
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
 
-            min-height: 48px;
+        .image-card{
 
-            padding: 0 22px;
+            padding:22px;
 
-            border: 1px solid #176fbe;
+            background:
+                rgba(3,9,16,.72);
 
-            border-radius: 8px;
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius:10px;
+
+        }
+
+
+        .image-card-header{
+
+            display:flex;
+
+            align-items:flex-start;
+
+            justify-content:space-between;
+
+            gap:15px;
+
+            margin-bottom:18px;
+
+        }
+
+
+        .image-card-title{
+
+            margin:0;
+
+            color:#fff;
+
+            font-family:
+                Oswald,
+                Arial,
+                sans-serif;
+
+            font-size:21px;
+
+            text-transform:uppercase;
+
+        }
+
+
+        .image-card-description{
+
+            margin:
+                5px 0 0;
+
+            color:#71869b;
+
+            font-size:11px;
+
+            line-height:1.5;
+
+        }
+
+
+        .image-badge{
+
+            flex:0 0 auto;
+
+            padding:
+                5px 8px;
+
+            color:#8dc9ff;
+
+            background:
+                rgba(22,140,255,.10);
+
+            border:
+                1px solid
+                rgba(22,140,255,.20);
+
+            border-radius:5px;
+
+            font-size:9px;
+
+            font-weight:800;
+
+            letter-spacing:1px;
+
+            text-transform:uppercase;
+
+        }
+
+
+        .image-preview{
+
+            width:100%;
+
+            height:220px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            margin-bottom:18px;
 
             background:
                 linear-gradient(
                     135deg,
-                    #1389f5,
-                    #086bc7
+                    #050b12,
+                    #0b1724
                 );
 
-            color: white;
+            border:
+                1px solid
+                rgba(255,255,255,.08);
 
-            cursor: pointer;
+            border-radius:8px;
 
-            font-size: 14px;
-            font-weight: 800;
+            overflow:hidden;
 
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease,
-                filter .2s ease;
+            position:relative;
+
         }
 
-        .button:hover {
-            transform: translateY(-1px);
 
-            filter: brightness(1.08);
+        .image-preview.logo-preview{
 
-            box-shadow:
-                0 10px 25px rgba(0,110,220,.2);
+            height:220px;
+
         }
 
-        /* =====================================================
-           IMAGENES
-        ===================================================== */
 
-        .image-grid {
-            display: grid;
+        .image-preview.background-preview{
 
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
+            height:220px;
 
-            gap: 26px;
         }
 
-        .image-box {
-            min-width: 0;
 
-            padding: 22px;
+        .image-preview img{
 
-            border: 1px solid #1b2d3e;
+            width:100%;
 
-            border-radius: 13px;
+            height:100%;
+
+            object-fit:contain;
+
+            display:block;
+
+        }
+
+
+        .image-preview.background-preview img{
+
+            object-fit:cover;
+
+        }
+
+
+        .image-preview::after{
+
+            content:"";
+
+            position:absolute;
+
+            inset:0;
+
+            pointer-events:none;
+
+            border:
+                1px solid
+                rgba(255,255,255,.03);
+
+        }
+
+
+        .image-empty{
+
+            display:flex;
+
+            flex-direction:column;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:8px;
+
+            padding:20px;
+
+            color:#5f7387;
+
+            text-align:center;
+
+        }
+
+
+        .image-empty-icon{
+
+            width:48px;
+
+            height:48px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius:50%;
+
+            color:#71869b;
+
+            font-size:21px;
+
+        }
+
+
+        .image-empty strong{
+
+            color:#9aabbb;
+
+            font-size:12px;
+
+        }
+
+
+        .image-empty span{
+
+            max-width:230px;
+
+            color:#596d81;
+
+            font-size:10px;
+
+            line-height:1.5;
+
+        }
+
+
+        .image-file{
+
+            margin-bottom:12px;
+
+        }
+
+
+        .image-file input[type="file"]{
+
+            height:auto;
+
+            padding:10px;
+
+            color:#9eb1c4;
+
+            background:#050c14;
+
+            border:
+                1px dashed
+                rgba(255,255,255,.16);
+
+            cursor:pointer;
+
+        }
+
+
+        .image-file input[type="file"]::file-selector-button{
+
+            margin-right:10px;
+
+            padding:
+                8px
+                12px;
+
+            color:#dcecff;
+
+            background:#122235;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius:5px;
+
+            cursor:pointer;
+
+            font-family:Inter,Arial,sans-serif;
+
+            font-size:11px;
+
+            font-weight:700;
+
+        }
+
+
+        .image-help{
+
+            margin:
+                0 0 16px;
+
+            color:#60768b;
+
+            font-size:10px;
+
+            line-height:1.5;
+
+        }
+
+
+        .image-upload-button{
+
+            width:100%;
+
+            min-height:44px;
+
+            padding:
+                0
+                18px;
+
+            color:#fff;
 
             background:
-                rgba(2, 8, 14, .75);
-        }
-
-        .image-box h3 {
-            margin: 0 0 5px;
-
-            font-family: "Oswald", sans-serif;
-
-            font-size: 22px;
-
-            text-transform: uppercase;
-        }
-
-        .image-box-description {
-            margin: 0 0 18px;
-
-            color: #70869a;
-
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .image-preview {
-            position: relative;
-
-            width: 100%;
-            height: 260px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-
-            margin-bottom: 18px;
-
-            border: 1px solid #203548;
-
-            border-radius: 10px;
-
-            background:
-                repeating-linear-gradient(
-                    45deg,
-                    #07111a,
-                    #07111a 10px,
-                    #091521 10px,
-                    #091521 20px
+                linear-gradient(
+                    135deg,
+                    #168cff,
+                    #0878d1
                 );
+
+            border:
+                1px solid
+                rgba(75,175,255,.35);
+
+            border-radius:6px;
+
+            cursor:pointer;
+
+            font-family:
+                Inter,
+                Arial,
+                sans-serif;
+
+            font-size:12px;
+
+            font-weight:800;
+
+            transition:.2s;
+
         }
 
-        .image-preview img {
-            display: block;
 
-            width: 100%;
-            height: 100%;
+        .image-upload-button:hover{
 
-            object-fit: contain;
-        }
-
-        .image-preview.background-preview img {
-            object-fit: cover;
-        }
-
-        .preview-placeholder {
-            text-align: center;
-
-            color: #60778b;
-
-            padding: 25px;
-        }
-
-        .preview-placeholder strong {
-            display: block;
-
-            margin-bottom: 5px;
-
-            color: #8499ab;
-
-            font-size: 14px;
-        }
-
-        .preview-placeholder span {
-            font-size: 12px;
-        }
-
-        .image-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 12px;
-
-            margin-bottom: 16px;
-
-            padding: 10px 12px;
-
-            border-radius: 7px;
-
-            background: #050d15;
-
-            border: 1px solid #142535;
-        }
-
-        .image-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            color: #9db0c1;
-
-            font-size: 12px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-
-            flex: 0 0 8px;
-
-            border-radius: 50%;
-
-            background: #52687a;
-        }
-
-        .status-dot.active {
-            background: var(--green);
+            transform:translateY(-1px);
 
             box-shadow:
-                0 0 0 4px rgba(34,197,94,.1);
+                0 8px 24px
+                rgba(0,111,210,.22);
+
         }
 
-        .image-filename {
-            overflow: hidden;
 
-            color: #688198;
+        .image-upload-button:disabled{
 
-            font-family: monospace;
+            opacity:.55;
 
-            font-size: 11px;
+            cursor:not-allowed;
 
-            text-overflow: ellipsis;
+            transform:none;
 
-            white-space: nowrap;
+            box-shadow:none;
+
         }
 
-        .upload-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+
+        .preview-file-name{
+
+            display:block;
+
+            min-height:15px;
+
+            margin-top:9px;
+
+            color:#668099;
+
+            font-size:10px;
+
+            overflow:hidden;
+
+            text-overflow:ellipsis;
+
+            white-space:nowrap;
+
         }
 
-        .file-input {
-            width: 100%;
 
-            padding: 10px;
+        /* ==================================================
+           GUARDAR
+           ================================================== */
 
-            border: 1px dashed #2a4155;
+        .save-area{
 
-            border-radius: 8px;
+            display:flex;
 
-            background: #050c13;
+            align-items:center;
 
-            color: #91a5b7;
+            justify-content:space-between;
 
-            cursor: pointer;
+            gap:20px;
+
+            margin-top:5px;
+
+            padding:
+                22px
+                25px;
+
+            background:#07111c;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius:10px;
+
         }
 
-        .file-input::file-selector-button {
-            margin-right: 12px;
 
-            padding: 9px 12px;
+        .save-info{
 
-            border: 1px solid #29435a;
+            color:#758ba0;
 
-            border-radius: 6px;
+            font-size:11px;
 
-            background: #0c1d2d;
+            line-height:1.5;
 
-            color: #dce7f0;
-
-            cursor: pointer;
-
-            font-weight: 700;
         }
 
-        .upload-button {
-            width: 100%;
+
+        .save-info strong{
+
+            display:block;
+
+            margin-bottom:3px;
+
+            color:#dce8f3;
+
+            font-size:12px;
+
         }
 
-        .image-help {
-            margin-top: 20px;
 
-            padding: 15px 16px;
+        .save-button{
 
-            border-left: 3px solid var(--blue);
+            min-width:210px;
 
-            background: rgba(22,140,255,.05);
+            height:48px;
 
-            color: #7890a5;
+            padding:
+                0
+                25px;
 
-            font-size: 12px;
+            color:#fff;
 
-            line-height: 1.7;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue2),
+                    var(--blue)
+                );
+
+            border:
+                1px solid
+                rgba(75,175,255,.40);
+
+            border-radius:7px;
+
+            cursor:pointer;
+
+            font-family:
+                Inter,
+                Arial,
+                sans-serif;
+
+            font-size:13px;
+
+            font-weight:800;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,111,210,.18);
+
+            transition:.2s;
+
         }
 
-        .image-help strong {
-            color: #b6c8d8;
+
+        .save-button:hover{
+
+            transform:translateY(-1px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,111,210,.28);
+
         }
 
-        /* =====================================================
-           INFORMACION TECNICA
-        ===================================================== */
 
-        .status-panel {
-            display: grid;
+        /* ==================================================
+           SEPARADOR
+           ================================================== */
 
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
+        .section-divider{
 
-            gap: 14px;
+            height:1px;
 
-            margin-top: 20px;
+            margin:
+                8px
+                0;
+
+            background:
+                rgba(255,255,255,.04);
+
         }
 
-        .status-item {
-            padding: 15px;
 
-            border: 1px solid #192c3e;
-
-            border-radius: 9px;
-
-            background: #050d15;
-        }
-
-        .status-item span {
-            display: block;
-
-            margin-bottom: 6px;
-
-            color: #657d91;
-
-            font-size: 11px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-        }
-
-        .status-item strong {
-            display: block;
-
-            overflow: hidden;
-
-            color: #dce8f2;
-
-            font-size: 13px;
-
-            text-overflow: ellipsis;
-
-            white-space: nowrap;
-        }
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        .admin-footer {
-            padding: 30px 0;
-
-            color: #4e6478;
-
-            text-align: center;
-
-            font-size: 12px;
-        }
-
-        /* =====================================================
+        /* ==================================================
            RESPONSIVE
-        ===================================================== */
+           ================================================== */
 
-        @media (max-width: 900px) {
+        @media(max-width:850px){
 
-            .admin-header {
-                padding: 12px 20px;
-            }
+            .image-grid{
 
-            .brand-text strong {
-                font-size: 20px;
-            }
+                grid-template-columns:1fr;
 
-            .brand-text small {
-                font-size: 9px;
-                letter-spacing: 1.5px;
-            }
-
-            .admin-main {
-                width: min(100% - 30px, 1360px);
-
-                padding-top: 40px;
-            }
-
-            .image-grid,
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .field.full {
-                grid-column: auto;
-            }
-
-            .status-panel {
-                grid-template-columns: 1fr;
             }
 
         }
 
-        @media (max-width: 650px) {
 
-            .admin-header {
-                position: relative;
+        @media(max-width:700px){
 
-                flex-direction: column;
-                align-items: stretch;
+            .admin-header{
 
-                gap: 14px;
+                height:auto;
+
+                min-height:78px;
+
+                padding:
+                    15px
+                    18px;
+
+                gap:15px;
+
+                flex-wrap:wrap;
+
             }
 
-            .header-actions {
-                width: 100%;
+
+            .admin-brand strong{
+
+                font-size:18px;
+
             }
 
-            .header-button {
-                flex: 1;
+
+            .admin-actions{
+
+                width:100%;
+
             }
 
-            .admin-card {
-                padding: 24px 20px;
+
+            .admin-actions a{
+
+                flex:1;
+
             }
 
-            .page-intro h1 {
-                font-size: 46px;
+
+            .admin-wrapper{
+
+                width:
+                    calc(100% - 28px);
+
+                margin-top:35px;
+
             }
 
-            .image-preview {
-                height: 210px;
+
+            .page-title h1{
+
+                font-size:38px;
+
+            }
+
+
+            .admin-section{
+
+                padding:22px;
+
+            }
+
+
+            .field-grid{
+
+                grid-template-columns:1fr;
+
+            }
+
+
+            .field.full{
+
+                grid-column:auto;
+
+            }
+
+
+            .save-area{
+
+                align-items:stretch;
+
+                flex-direction:column;
+
+            }
+
+
+            .save-button{
+
+                width:100%;
+
+            }
+
+
+            .image-card{
+
+                padding:18px;
+
             }
 
         }
 
+    
+        .field textarea{
+            width:100%;
+            min-height:120px;
+            padding:14px;
+            resize:vertical;
+            color:#dce8f3;
+            background:#07111b;
+            border:1px solid rgba(255,255,255,.10);
+            border-radius:7px;
+            outline:none;
+            font-family:Inter,Arial,sans-serif;
+            font-size:13px;
+            line-height:1.55;
+        }
+        .field textarea:focus{
+            border-color:rgba(21,151,255,.55);
+            box-shadow:0 0 0 3px rgba(21,151,255,.08);
+        }
+        .field small{
+            display:block;
+            margin-top:6px;
+            color:#71879b;
+            font-size:11px;
+            line-height:1.45;
+        }
     </style>
+
 </head>
+
 
 <body>
 
+
+<!-- ======================================================
+     ENCABEZADO
+     ====================================================== -->
+
 <header class="admin-header">
 
-    <div class="brand">
 
-        <div class="brand-logo">
+    <div class="admin-brand">
+
+
+        <div class="admin-logo">
 
             <img
                 src="{{ url_for('uploaded_logo') }}"
-                alt="Escudo de la Policía de Córdoba"
+                alt="Escudo de la Policía de la Provincia de Córdoba"
                 onerror="this.style.display='none';"
             >
 
         </div>
 
-        <div class="brand-text">
 
-            <small>
-                POLICÍA DE LA PROVINCIA DE CÓRDOBA
-            </small>
+        <div>
 
             <strong>
-                DEPARTAMENTAL SANTA MARÍA
+                Panel de Administración
             </strong>
+
+            <span>
+                Tránsito Departamental Santa María
+            </span>
 
         </div>
 
+
     </div>
 
-    <div class="header-actions">
+
+    <div class="admin-actions">
+
 
         <a
-            href="{{ url_for('index') }}"
-            class="header-button primary"
+            href="/"
             target="_blank"
         >
             Ver página
         </a>
 
+
         <a
-            href="{{ url_for('logout') }}"
-            class="header-button"
+            href="/logout"
+            class="logout"
         >
             Cerrar sesión
         </a>
 
+
     </div>
+
 
 </header>
 
 
-<main class="admin-main">
 
-    <!-- =====================================================
-         INTRO
-    ====================================================== -->
+<!-- ======================================================
+     CONTENIDO
+     ====================================================== -->
 
-    <section class="page-intro">
+<main class="admin-wrapper">
 
-        <div class="eyebrow">
+
+    <div class="page-title">
+
+
+        <small>
             Administración del portal
-        </div>
+        </small>
+
 
         <h1>
             Editar información
         </h1>
 
+
         <p>
             Desde este panel podés actualizar la información
             que aparece en el sitio público, administrar las
-            imágenes institucionales y mantener actualizado
-            el portal sin modificar directamente el código.
+            imágenes institucionales y mantener el portal
+            actualizado sin modificar directamente el código.
         </p>
 
-    </section>
+
+    </div>
 
 
-    <!-- =====================================================
+
+    <!-- ==================================================
          MENSAJES
-    ====================================================== -->
+         ================================================== -->
 
     {% with messages = get_flashed_messages(with_categories=true) %}
 
         {% if messages %}
 
-            <div class="flash-container">
+            {% for category, message in messages %}
 
-                {% for category, message in messages %}
+                <div class="flash">
 
-                    <div class="flash {{ category }}">
-                        {{ message }}
-                    </div>
+                    {{ message }}
 
-                {% endfor %}
+                </div>
 
-            </div>
+            {% endfor %}
 
         {% endif %}
 
     {% endwith %}
 
 
-    <!-- =====================================================
-         01 IDENTIDAD
-    ====================================================== -->
 
-    <section class="admin-card">
+    <!-- ==================================================
+         FORMULARIO PRINCIPAL
+         ================================================== -->
 
-        <div class="card-heading">
+    <form
+        method="POST"
+        class="admin-form"
+    >
 
-            <div class="section-number">
-                01
+
+
+        <!-- ==============================================
+             01 IDENTIDAD
+             ============================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    01
+                </span>
+
+
+                <div>
+
+                    <h2>
+                        Identidad institucional
+                    </h2>
+
+                    <p>
+                        Información principal de la institución
+                    </p>
+
+                </div>
+
             </div>
 
-            <div>
-
-                <h2>
-                    Identidad institucional
-                </h2>
-
-                <p>
-                    Información principal de la institución.
-                </p>
-
-            </div>
-
-        </div>
 
 
-        <form method="POST">
+            <div class="field-grid">
 
-            <div class="form-grid">
 
                 <div class="field">
 
-                    <label for="institution">
+                    <label>
                         Institución
                     </label>
 
                     <input
-                        id="institution"
-                        name="institution"
                         type="text"
+                        name="institution"
                         value="{{ c.institution }}"
-                        required
                     >
 
                 </div>
 
 
+
                 <div class="field">
 
-                    <label for="department">
+                    <label>
                         Departamental
                     </label>
 
                     <input
-                        id="department"
-                        name="department"
                         type="text"
+                        name="department"
                         value="{{ c.department }}"
-                        required
                     >
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==============================================
+             02 PORTADA
+             ============================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    02
+                </span>
+
+
+                <div>
+
+                    <h2>
+                        Portada
+                    </h2>
+
+                    <p>
+                        Contenido principal de la página
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="form-actions">
 
-                <button
-                    type="submit"
-                    class="button"
-                >
-                    Guardar cambios
-                </button>
-
-            </div>
-
-        </form>
-
-    </section>
+            <div class="field-grid">
 
 
-    <!-- =====================================================
-         02 PORTADA
-    ====================================================== -->
+                <div class="field full">
 
-    <section class="admin-card">
-
-        <div class="card-heading">
-
-            <div class="section-number">
-                02
-            </div>
-
-            <div>
-
-                <h2>
-                    Portada
-                </h2>
-
-                <p>
-                    Contenido principal de la página pública.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <form method="POST">
-
-            <div class="form-grid">
-
-                <div class="field">
-
-                    <label for="title">
+                    <label>
                         Título principal
                     </label>
 
                     <input
-                        id="title"
-                        name="title"
                         type="text"
+                        name="title"
                         value="{{ c.title }}"
                     >
 
                 </div>
 
 
-                <div class="field">
 
-                    <label for="subtitle">
+                <div class="field full">
+
+                    <label>
                         Subtítulo
                     </label>
 
                     <input
-                        id="subtitle"
-                        name="subtitle"
                         type="text"
+                        name="subtitle"
                         value="{{ c.subtitle }}"
                     >
 
                 </div>
 
 
+
                 <div class="field full">
 
-                    <label for="hero_text">
-                        Texto de portada
+                    <label>
+                        Texto principal
                     </label>
 
                     <textarea
-                        id="hero_text"
                         name="hero_text"
                     >{{ c.hero_text }}</textarea>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==============================================
+             03 CONTACTO
+             ============================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    03
+                </span>
+
+
+                <div>
+
+                    <h2>
+                        Contacto
+                    </h2>
+
+                    <p>
+                        Información para comunicarse con el área
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="form-actions">
 
-                <button
-                    type="submit"
-                    class="button"
-                >
-                    Guardar portada
-                </button>
+            <div class="field-grid">
 
-            </div>
-
-        </form>
-
-    </section>
-
-
-    <!-- =====================================================
-         03 CONTACTO
-    ====================================================== -->
-
-    <section class="admin-card">
-
-        <div class="card-heading">
-
-            <div class="section-number">
-                03
-            </div>
-
-            <div>
-
-                <h2>
-                    Contacto y atención
-                </h2>
-
-                <p>
-                    Información que verá la comunidad.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <form method="POST">
-
-            <div class="form-grid">
 
                 <div class="field">
 
-                    <label for="phone">
+                    <label>
                         Teléfono
                     </label>
 
                     <input
-                        id="phone"
-                        name="phone"
                         type="text"
+                        name="phone"
                         value="{{ c.phone }}"
                     >
 
                 </div>
 
 
+
                 <div class="field">
 
-                    <label for="emergency">
+                    <label>
                         Emergencias
                     </label>
 
                     <input
-                        id="emergency"
-                        name="emergency"
                         type="text"
+                        name="emergency"
                         value="{{ c.emergency }}"
                     >
 
                 </div>
 
 
-                <div class="field">
 
-                    <label for="location">
+                <div class="field full">
+
+                    <label>
                         Ubicación
                     </label>
 
                     <input
-                        id="location"
-                        name="location"
                         type="text"
+                        name="location"
                         value="{{ c.location }}"
                     >
 
                 </div>
 
 
-                <div class="field">
 
-                    <label for="hours">
+                <div class="field full">
+
+                    <label>
                         Horarios
                     </label>
 
                     <input
-                        id="hours"
-                        name="hours"
                         type="text"
+                        name="hours"
                         value="{{ c.hours }}"
                     >
 
                 </div>
 
-            </div>
-
-
-            <div class="form-actions">
-
-                <button
-                    type="submit"
-                    class="button"
-                >
-                    Guardar contacto
-                </button>
 
             </div>
 
-        </form>
 
-    </section>
+        </section>
 
 
-    <!-- =====================================================
-         04 IMAGENES
-    ====================================================== -->
 
-    <section class="admin-card">
+        <!-- ==============================================
+             04 AVISO
+             ============================================== -->
 
-        <div class="card-heading">
+        <section class="admin-section">
 
-            <div class="section-number">
-                04
-            </div>
 
-            <div>
+            <div class="section-heading">
 
-                <h2>
-                    Imágenes del sitio
-                </h2>
-
-                <p>
-                    Administrá el escudo institucional y
-                    la imagen de fondo de la portada.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="image-grid">
-
-
-            <!-- =================================================
-                 LOGO
-            ================================================== -->
-
-            <article class="image-box">
-
-                <h3>
-                    Escudo / Logo
-                </h3>
-
-                <p class="image-box-description">
-                    Imagen institucional utilizada en el
-                    encabezado del sitio.
-                </p>
-
-
-                <div class="image-preview">
-
-                    <img
-                        id="logoPreview"
-                        src="{{ url_for('uploaded_logo') }}?v={{ c.get('updated', '') }}"
-                        alt="Vista previa del escudo"
-                        onerror="showPlaceholder('logoPreview', 'logoPlaceholder');"
-                    >
-
-                    <div
-                        id="logoPlaceholder"
-                        class="preview-placeholder"
-                        style="display:none;"
-                    >
-
-                        <strong>
-                            No hay una imagen disponible
-                        </strong>
-
-                        <span>
-                            Subí el escudo desde este panel.
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="image-meta">
-
-                    <div class="image-status">
-
-                        <span
-                            id="logoStatusDot"
-                            class="status-dot"
-                        ></span>
-
-                        <span id="logoStatus">
-                            Comprobando imagen...
-                        </span>
-
-                    </div>
-
-                    <div
-                        id="logoFilename"
-                        class="image-filename"
-                    >
-                        -
-                    </div>
-
-                </div>
-
-
-                <form
-                    action="{{ url_for('upload_logo') }}"
-                    method="POST"
-                    enctype="multipart/form-data"
-                    class="upload-form"
-                >
-
-                    <input
-                        class="file-input"
-                        type="file"
-                        name="logo"
-                        accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"
-                        required
-                    >
-
-                    <button
-                        type="submit"
-                        class="button upload-button"
-                    >
-                        Subir / reemplazar escudo
-                    </button>
-
-                </form>
-
-            </article>
-
-
-            <!-- =================================================
-                 BACKGROUND
-            ================================================== -->
-
-            <article class="image-box">
-
-                <h3>
-                    Fondo de portada
-                </h3>
-
-                <p class="image-box-description">
-                    Imagen utilizada como fondo principal
-                    de la portada del sitio.
-                </p>
-
-
-                <div class="image-preview background-preview">
-
-                    <img
-                        id="backgroundPreview"
-                        src="{{ url_for('uploaded_background') }}?v={{ c.get('updated', '') }}"
-                        alt="Vista previa del fondo"
-                        onerror="showPlaceholder('backgroundPreview', 'backgroundPlaceholder');"
-                    >
-
-                    <div
-                        id="backgroundPlaceholder"
-                        class="preview-placeholder"
-                        style="display:none;"
-                    >
-
-                        <strong>
-                            No hay una imagen disponible
-                        </strong>
-
-                        <span>
-                            Subí una imagen de fondo desde este panel.
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="image-meta">
-
-                    <div class="image-status">
-
-                        <span
-                            id="backgroundStatusDot"
-                            class="status-dot"
-                        ></span>
-
-                        <span id="backgroundStatus">
-                            Comprobando imagen...
-                        </span>
-
-                    </div>
-
-                    <div
-                        id="backgroundFilename"
-                        class="image-filename"
-                    >
-                        -
-                    </div>
-
-                </div>
-
-
-                <form
-                    action="{{ url_for('upload_background') }}"
-                    method="POST"
-                    enctype="multipart/form-data"
-                    class="upload-form"
-                >
-
-                    <input
-                        class="file-input"
-                        type="file"
-                        name="background"
-                        accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"
-                        required
-                    >
-
-                    <button
-                        type="submit"
-                        class="button upload-button"
-                    >
-                        Subir / reemplazar fondo
-                    </button>
-
-                </form>
-
-            </article>
-
-        </div>
-
-
-        <div class="image-help">
-
-            <strong>Formatos permitidos:</strong>
-            PNG, JPG, JPEG y WEBP.
-
-            <br>
-
-            <strong>Tamaño máximo:</strong>
-            8 MB por imagen.
-
-            <br>
-
-            Cuando reemplazás una imagen,
-            la versión anterior se elimina automáticamente.
-
-        </div>
-
-
-        <!-- Estado técnico -->
-
-        <div class="status-panel">
-
-            <div class="status-item">
-
-                <span>
-                    Carpeta de imágenes
+                <span class="section-number">
+                    04
                 </span>
 
-                <strong id="uploadDirectory">
-                    Comprobando...
-                </strong>
+
+                <div>
+
+                    <h2>
+                        Aviso destacado
+                    </h2>
+
+                    <p>
+                        Mensaje informativo para los visitantes
+                    </p>
+
+                </div>
 
             </div>
 
 
-            <div class="status-item">
 
-                <span>
-                    Archivo del escudo
-                </span>
+            <div class="field-grid">
 
-                <strong id="statusLogo">
-                    Comprobando...
-                </strong>
-
-            </div>
-
-
-            <div class="status-item">
-
-                <span>
-                    Archivo de fondo
-                </span>
-
-                <strong id="statusBackground">
-                    Comprobando...
-                </strong>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         05 AVISO
-    ====================================================== -->
-
-    <section class="admin-card">
-
-        <div class="card-heading">
-
-            <div class="section-number">
-                05
-            </div>
-
-            <div>
-
-                <h2>
-                    Avisos institucionales
-                </h2>
-
-                <p>
-                    Mensaje general y descripción del portal.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <form method="POST">
-
-            <div class="form-grid">
 
                 <div class="field full">
 
-                    <label for="notice">
-                        Aviso
+                    <label>
+                        Mensaje
                     </label>
 
                     <textarea
-                        id="notice"
                         name="notice"
+                        placeholder="Escribí aquí un aviso para los visitantes..."
                     >{{ c.notice }}</textarea>
 
                 </div>
 
 
-                <div class="field full">
+            </div>
 
-                    <label for="about">
-                        Acerca del sitio
-                    </label>
 
-                    <textarea
-                        id="about"
-                        name="about"
-                    >{{ c.about }}</textarea>
+        </section>
+
+
+
+        <!-- ==============================================
+             05 INFORMACIÓN INSTITUCIONAL
+             ============================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-number">
+                    05
+                </span>
+
+
+                <div>
+
+                    <h2>
+                        Información institucional
+                    </h2>
+
+                    <p>
+                        Descripción general del área
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="form-actions">
 
-                <button
-                    type="submit"
-                    class="button"
-                >
-                    Guardar información
-                </button>
+            <div class="field-grid">
+
+
+                <div class="field full">
+
+                    <label>
+                        Descripción
+                    </label>
+
+                    <textarea
+                        name="about"
+                    >{{ c.about }}</textarea>
+
+                </div>
+
 
             </div>
 
-        </form>
+
+        </section>
+
+
+
+        <!-- ==============================================
+             GUARDAR CAMBIOS
+             ============================================== -->
+
+        <section class="admin-section">
+            <div class="section-heading">
+                <span class="section-number">05</span>
+                <div>
+                    <h2>Información institucional</h2>
+                    <p>Contenido de Autoridades, Funciones y Dependencias.</p>
+                </div>
+            </div>
+
+            <div class="field-grid">
+                <div class="field full">
+                    <label>Autoridades</label>
+                    <textarea name="authorities" rows="5">{{ c.authorities }}</textarea>
+                    <small>Nombres, cargos o información institucional.</small>
+                </div>
+
+                <div class="field full">
+                    <label>Funciones</label>
+                    <textarea name="functions" rows="5">{{ c.functions }}</textarea>
+                    <small>Funciones principales del área de Tránsito.</small>
+                </div>
+
+                <div class="field full">
+                    <label>Dependencias</label>
+                    <textarea name="dependencies" rows="5">{{ c.dependencies }}</textarea>
+                    <small>Dependencias, lugares de atención o información relacionada.</small>
+                </div>
+            </div>
+        </section>
+
+        <div class="save-area">
+
+
+            <div class="save-info">
+
+                <strong>
+                    Guardar modificaciones
+                </strong>
+
+                Los cambios de texto se aplicarán al sitio
+                público después de guardar.
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                GUARDAR CAMBIOS
+            </button>
+
+
+        </div>
+
+
+    </form>
+
+
+
+    <!-- ==================================================
+         06 IMÁGENES
+         ================================================== -->
+
+    <section
+        class="admin-section image-section"
+        style="margin-top:22px;"
+    >
+
+
+        <div class="section-heading">
+
+            <span class="section-number">
+                06
+            </span>
+
+
+            <div>
+
+                <h2>
+                    Imágenes del portal
+                </h2>
+
+                <p>
+                    Administrá el escudo institucional y la
+                    imagen de fondo del sitio público.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="image-grid">
+
+
+            <!-- ==========================================
+                 ESCUDO
+                 ========================================== -->
+
+            <div class="image-card">
+
+
+                <div class="image-card-header">
+
+
+                    <div>
+
+                        <h3 class="image-card-title">
+                            Escudo institucional
+                        </h3>
+
+                        <p class="image-card-description">
+                            Imagen utilizada en el encabezado
+                            del portal y en la identidad visual.
+                        </p>
+
+                    </div>
+
+
+                    <span class="image-badge">
+                        LOGO
+                    </span>
+
+
+                </div>
+
+
+
+                <div
+                    class="image-preview logo-preview"
+                    id="logoPreview"
+                >
+
+                    <img
+                        id="logoPreviewImage"
+                        src="{{ url_for('uploaded_logo') }}"
+                        alt="Escudo institucional"
+                        onerror="showImageEmpty('logoPreview')"
+                    >
+
+                </div>
+
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('upload_logo') }}"
+                    enctype="multipart/form-data"
+                    class="image-upload-form"
+                >
+
+
+                    <div class="image-file">
+
+                        <input
+                            type="file"
+                            id="logoFile"
+                            name="logo"
+                            accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"
+                            required
+                        >
+
+                    </div>
+
+
+                    <p
+                        class="image-help"
+                        id="logoFileName"
+                    >
+                        PNG, JPG, JPEG o WEBP · Máximo 8 MB.
+                    </p>
+
+
+                    <button
+                        type="submit"
+                        class="image-upload-button"
+                    >
+                        ACTUALIZAR ESCUDO
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 FONDO
+                 ========================================== -->
+
+            <div class="image-card">
+
+
+                <div class="image-card-header">
+
+
+                    <div>
+
+                        <h3 class="image-card-title">
+                            Imagen de fondo
+                        </h3>
+
+                        <p class="image-card-description">
+                            Imagen utilizada como fondo visual
+                            de la portada principal.
+                        </p>
+
+                    </div>
+
+
+                    <span class="image-badge">
+                        FONDO
+                    </span>
+
+
+                </div>
+
+
+
+                <div
+                    class="image-preview background-preview"
+                    id="backgroundPreview"
+                >
+
+                    <img
+                        id="backgroundPreviewImage"
+                        src="{{ url_for('uploaded_background') }}"
+                        alt="Imagen de fondo"
+                        onerror="showImageEmpty('backgroundPreview')"
+                    >
+
+                </div>
+
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('upload_background') }}"
+                    enctype="multipart/form-data"
+                    class="image-upload-form"
+                >
+
+
+                    <div class="image-file">
+
+                        <input
+                            type="file"
+                            id="backgroundFile"
+                            name="background"
+                            accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"
+                            required
+                        >
+
+                    </div>
+
+
+                    <p
+                        class="image-help"
+                        id="backgroundFileName"
+                    >
+                        PNG, JPG, JPEG o WEBP · Máximo 8 MB.
+                    </p>
+
+
+                    <button
+                        type="submit"
+                        class="image-upload-button"
+                    >
+                        ACTUALIZAR FONDO
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
 
     </section>
 
 
-    <footer class="admin-footer">
-
-        Panel de administración ·
-        {{ c.department }}
-
-    </footer>
 
 </main>
 
 
+
+<!-- ======================================================
+     JAVASCRIPT
+     ====================================================== -->
+
 <script>
 
-    /*
-     * ==========================================================
-     * PREVISUALIZACIÓN DE IMÁGENES
-     * ==========================================================
-     */
-
-    function showPlaceholder(imageId, placeholderId) {
-
-        const image = document.getElementById(imageId);
-        const placeholder = document.getElementById(placeholderId);
-
-        if (image) {
-            image.style.display = "none";
-        }
-
-        if (placeholder) {
-            placeholder.style.display = "block";
-        }
-    }
-
 
     /*
-     * ==========================================================
-     * ESTADO DE LAS IMÁGENES
-     * ==========================================================
+     * Muestra un estado visual cuando una imagen
+     * todavía no existe.
      */
 
-    async function loadUploadStatus() {
+    function showImageEmpty(
+        containerId
+    ){
 
-        try {
-
-            const response = await fetch(
-                "{{ url_for('uploads_status') }}",
-                {
-                    cache: "no-store"
-                }
+        const container =
+            document.getElementById(
+                containerId
             );
 
-            if (!response.ok) {
-                throw new Error("No se pudo obtener el estado.");
-            }
-
-            const data = await response.json();
-
-
-            /*
-             * Directorio
-             */
-
-            const uploadDirectory =
-                document.getElementById("uploadDirectory");
-
-            if (uploadDirectory) {
-
-                uploadDirectory.textContent =
-                    data.upload_directory || "No disponible";
-
-            }
-
-
-            /*
-             * LOGO
-             */
-
-            const logoStatus =
-                document.getElementById("logoStatus");
-
-            const logoDot =
-                document.getElementById("logoStatusDot");
-
-            const logoFilename =
-                document.getElementById("logoFilename");
-
-            const statusLogo =
-                document.getElementById("statusLogo");
-
-
-            if (data.logo) {
-
-                if (logoStatus) {
-                    logoStatus.textContent = "Imagen disponible";
-                }
-
-                if (logoDot) {
-                    logoDot.classList.add("active");
-                }
-
-                if (logoFilename) {
-                    logoFilename.textContent = data.logo;
-                }
-
-                if (statusLogo) {
-                    statusLogo.textContent = data.logo;
-                }
-
-            } else {
-
-                if (logoStatus) {
-                    logoStatus.textContent = "Usando imagen predeterminada";
-                }
-
-                if (logoFilename) {
-                    logoFilename.textContent = "Sin archivo subido";
-                }
-
-                if (statusLogo) {
-                    statusLogo.textContent = "No subido";
-                }
-
-            }
-
-
-            /*
-             * BACKGROUND
-             */
-
-            const backgroundStatus =
-                document.getElementById("backgroundStatus");
-
-            const backgroundDot =
-                document.getElementById("backgroundStatusDot");
-
-            const backgroundFilename =
-                document.getElementById("backgroundFilename");
-
-            const statusBackground =
-                document.getElementById("statusBackground");
-
-
-            if (data.background) {
-
-                if (backgroundStatus) {
-                    backgroundStatus.textContent =
-                        "Imagen disponible";
-                }
-
-                if (backgroundDot) {
-                    backgroundDot.classList.add("active");
-                }
-
-                if (backgroundFilename) {
-                    backgroundFilename.textContent =
-                        data.background;
-                }
-
-                if (statusBackground) {
-                    statusBackground.textContent =
-                        data.background;
-                }
-
-            } else {
-
-                if (backgroundStatus) {
-                    backgroundStatus.textContent =
-                        "Usando imagen predeterminada";
-                }
-
-                if (backgroundFilename) {
-                    backgroundFilename.textContent =
-                        "Sin archivo subido";
-                }
-
-                if (statusBackground) {
-                    statusBackground.textContent =
-                        "No subido";
-                }
-
-            }
-
-        } catch (error) {
-
-            console.error(
-                "Error consultando estado de imágenes:",
-                error
-            );
-
-            const logoStatus =
-                document.getElementById("logoStatus");
-
-            const backgroundStatus =
-                document.getElementById("backgroundStatus");
-
-            if (logoStatus) {
-                logoStatus.textContent =
-                    "No se pudo comprobar";
-            }
-
-            if (backgroundStatus) {
-                backgroundStatus.textContent =
-                    "No se pudo comprobar";
-            }
-
+        if(!container){
+            return;
         }
+
+
+        container.innerHTML = `
+
+            <div class="image-empty">
+
+                <div class="image-empty-icon">
+                    ◇
+                </div>
+
+                <strong>
+                    Imagen no disponible
+                </strong>
+
+                <span>
+                    Todavía no hay una imagen subida
+                    para este elemento.
+                </span>
+
+            </div>
+
+        `;
 
     }
 
 
+
     /*
-     * ==========================================================
-     * CAMBIAR PREVIEW ANTES DE SUBIR
-     * ==========================================================
+     * Vista previa del archivo seleccionado.
      */
 
-    function connectFilePreview(
-        inputSelector,
-        previewSelector,
-        placeholderSelector
-    ) {
+    function setupImagePreview(
+        inputId,
+        previewId,
+        imageId,
+        filenameId
+    ){
 
         const input =
-            document.querySelector(inputSelector);
+            document.getElementById(
+                inputId
+            );
 
         const preview =
-            document.querySelector(previewSelector);
+            document.getElementById(
+                previewId
+            );
 
-        const placeholder =
-            document.querySelector(placeholderSelector);
+        const image =
+            document.getElementById(
+                imageId
+            );
+
+        const filename =
+            document.getElementById(
+                filenameId
+            );
 
 
-        if (!input || !preview) {
+        if(!input){
             return;
         }
 
 
         input.addEventListener(
             "change",
-            function () {
+            function(){
 
-                const file = this.files[0];
+                const file =
+                    this.files &&
+                    this.files[0];
 
-                if (!file) {
+
+                if(!file){
                     return;
                 }
 
 
-                const allowedTypes = [
-                    "image/png",
-                    "image/jpeg",
-                    "image/webp"
-                ];
+                /*
+                 * Validación de tamaño.
+                 */
+
+                const maxSize =
+                    8 * 1024 * 1024;
 
 
-                if (!allowedTypes.includes(file.type)) {
-
-                    alert(
-                        "Formato no permitido. " +
-                        "Usá PNG, JPG, JPEG o WEBP."
-                    );
-
-                    this.value = "";
-
-                    return;
-                }
-
-
-                if (file.size > 8 * 1024 * 1024) {
+                if(
+                    file.size >
+                    maxSize
+                ){
 
                     alert(
                         "La imagen supera el límite de 8 MB."
@@ -1925,32 +2249,75 @@
                     this.value = "";
 
                     return;
+
                 }
 
+
+                /*
+                 * Mostrar nombre.
+                 */
+
+                if(filename){
+
+                    filename.textContent =
+                        file.name +
+                        " · " +
+                        formatFileSize(
+                            file.size
+                        );
+
+                }
+
+
+                /*
+                 * Crear vista previa.
+                 */
 
                 const reader =
                     new FileReader();
 
 
                 reader.onload =
-                    function (event) {
+                    function(event){
 
-                        preview.src =
+                        if(!image){
+                            return;
+                        }
+
+
+                        image.src =
                             event.target.result;
 
-                        preview.style.display =
+                        image.style.display =
                             "block";
 
 
-                        if (placeholder) {
-                            placeholder.style.display =
-                                "none";
+                        /*
+                         * Si el contenedor había
+                         * mostrado el mensaje de
+                         * imagen inexistente,
+                         * restauramos la imagen.
+                         */
+
+                        if(
+                            preview &&
+                            !preview.contains(image)
+                        ){
+
+                            preview.innerHTML = "";
+
+                            preview.appendChild(
+                                image
+                            );
+
                         }
 
                     };
 
 
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(
+                    file
+                );
 
             }
         );
@@ -1958,36 +2325,140 @@
     }
 
 
+
     /*
-     * ==========================================================
-     * INICIALIZACIÓN
-     * ==========================================================
+     * Formatea el tamaño del archivo.
      */
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
+    function formatFileSize(
+        bytes
+    ){
 
-            connectFilePreview(
-                'input[name="logo"]',
-                "#logoPreview",
-                "#logoPlaceholder"
-            );
+        if(
+            bytes <
+            1024
+        ){
 
-
-            connectFilePreview(
-                'input[name="background"]',
-                "#backgroundPreview",
-                "#backgroundPlaceholder"
-            );
-
-
-            loadUploadStatus();
+            return bytes +
+                " B";
 
         }
+
+
+        if(
+            bytes <
+            1024 * 1024
+        ){
+
+            return (
+                bytes / 1024
+            ).toFixed(1) +
+            " KB";
+
+        }
+
+
+        return (
+            bytes /
+            (1024 * 1024)
+        ).toFixed(2) +
+        " MB";
+
+    }
+
+
+
+    /*
+     * Vista previa del escudo.
+     */
+
+    setupImagePreview(
+        "logoFile",
+        "logoPreview",
+        "logoPreviewImage",
+        "logoFileName"
     );
+
+
+
+    /*
+     * Vista previa del fondo.
+     */
+
+    setupImagePreview(
+        "backgroundFile",
+        "backgroundPreview",
+        "backgroundPreviewImage",
+        "backgroundFileName"
+    );
+
+
+
+    /*
+     * Evitamos enviar accidentalmente imágenes
+     * demasiado grandes.
+     */
+
+    document
+        .querySelectorAll(
+            ".image-upload-form"
+        )
+        .forEach(
+            function(form){
+
+                form.addEventListener(
+                    "submit",
+                    function(event){
+
+                        const input =
+                            form.querySelector(
+                                'input[type="file"]'
+                            );
+
+
+                        if(
+                            !input ||
+                            !input.files.length
+                        ){
+
+                            event.preventDefault();
+
+                            alert(
+                                "Seleccioná una imagen antes de continuar."
+                            );
+
+                            return;
+
+                        }
+
+
+                        const file =
+                            input.files[0];
+
+
+                        if(
+                            file.size >
+                            8 * 1024 * 1024
+                        ){
+
+                            event.preventDefault();
+
+                            alert(
+                                "La imagen supera el límite de 8 MB."
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
 
 </script>
 
+
 </body>
+
 </html>
