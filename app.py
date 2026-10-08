@@ -6,7 +6,7 @@ from flask import (
     url_for,
     session,
     flash,
-    send_from_directory
+    send_from_directory,
 )
 import sqlite3
 from pathlib import Path
@@ -16,7 +16,7 @@ from werkzeug.utils import secure_filename
 
 
 # ============================================================
-# CONFIGURACIÓN
+# CONFIGURACIÓN GENERAL
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -31,14 +31,14 @@ DATA_DIR = Path(
 DB_PATH = DATA_DIR / "site.db"
 UPLOAD_DIR = DATA_DIR / "uploads"
 
-ALLOWED_IMAGE_EXTENSIONS = {
+ALLOWED_IMAGE_EXTENSIONS = (
     "png",
     "jpg",
     "jpeg",
-    "webp"
-}
+    "webp",
+)
 
-MAX_IMAGE_SIZE = 8 * 1024 * 1024
+MAX_IMAGE_SIZE = 8 * 1024 * 1024  # 8 MB
 
 
 # ============================================================
@@ -48,13 +48,18 @@ MAX_IMAGE_SIZE = 8 * 1024 * 1024
 app = Flask(
     __name__,
     template_folder="app/templates",
-    static_folder="app/static"
+    static_folder="app/static",
 )
 
 app.secret_key = os.getenv(
     "SECRET_KEY",
-    "cambiar-esta-clave-secreta"
+    "cambiar-esta-clave-secreta",
 )
+
+# Límite general de subida.
+# Se deja un poco por encima de 8 MB para contemplar
+# el multipart/form-data.
+app.config["MAX_CONTENT_LENGTH"] = 9 * 1024 * 1024
 
 
 # ============================================================
@@ -94,7 +99,7 @@ DEFAULTS = {
         "La información publicada debe mantenerse actualizada por el personal responsable.",
 
     "about":
-        "Este sitio puede utilizarse para publicar información institucional, recomendaciones de seguridad vial, operativos preventivos, documentación y vías de contacto."
+        "Este sitio puede utilizarse para publicar información institucional, recomendaciones de seguridad vial, operativos preventivos, documentación y vías de contacto.",
 }
 
 
@@ -103,12 +108,24 @@ DEFAULTS = {
 # ============================================================
 
 def db():
-    conn = sqlite3.connect(DB_PATH)
+    """
+    Abre la base SQLite.
+    """
+
+    conn = sqlite3.connect(
+        DB_PATH
+    )
+
     conn.row_factory = sqlite3.Row
+
     return conn
 
 
 def init_db():
+    """
+    Crea directorios y tabla de contenido
+    si todavía no existen.
+    """
 
     DATA_DIR.mkdir(
         parents=True,
@@ -122,18 +139,23 @@ def init_db():
 
     conn = db()
 
-    conn.execute("""
+    conn.execute(
+        """
         CREATE TABLE IF NOT EXISTS content (
             key TEXT PRIMARY KEY,
             value TEXT NOT NULL
         )
-    """)
+        """
+    )
 
     for key, value in DEFAULTS.items():
 
         conn.execute(
             """
-            INSERT OR IGNORE INTO content(key, value)
+            INSERT OR IGNORE INTO content(
+                key,
+                value
+            )
             VALUES (?, ?)
             """,
             (
@@ -147,11 +169,17 @@ def init_db():
 
 
 def get_content():
+    """
+    Obtiene todo el contenido editable.
+    """
 
     conn = db()
 
     rows = conn.execute(
-        "SELECT key, value FROM content"
+        """
+        SELECT key, value
+        FROM content
+        """
     ).fetchall()
 
     conn.close()
@@ -167,6 +195,9 @@ def get_content():
 # ============================================================
 
 def admin_required(view):
+    """
+    Protege las rutas administrativas.
+    """
 
     @wraps(view)
     def wrapped(*args, **kwargs):
@@ -180,16 +211,22 @@ def admin_required(view):
                 )
             )
 
-        return view(*args, **kwargs)
+        return view(
+            *args,
+            **kwargs
+        )
 
     return wrapped
 
 
 # ============================================================
-# FUNCIONES PARA IMÁGENES
+# IMÁGENES
 # ============================================================
 
 def allowed_image(filename):
+    """
+    Comprueba si el archivo tiene una extensión permitida.
+    """
 
     if not filename:
         return False
@@ -203,27 +240,26 @@ def allowed_image(filename):
         .lower()
     )
 
-    return extension in ALLOWED_IMAGE_EXTENSIONS
+    return (
+        extension
+        in ALLOWED_IMAGE_EXTENSIONS
+    )
 
 
 def get_image_path(name):
-
     """
     Busca una imagen por nombre lógico.
 
-    Ejemplos:
+    Ejemplo:
 
         get_image_path("logo")
-        get_image_path("background")
 
-    Busca automáticamente:
+    puede encontrar:
 
         logo.png
         logo.jpg
         logo.jpeg
         logo.webp
-
-    y lo mismo para background.
     """
 
     for extension in ALLOWED_IMAGE_EXTENSIONS:
@@ -234,26 +270,46 @@ def get_image_path(name):
         )
 
         if candidate.is_file():
+
             return candidate
 
     return None
 
 
 def save_uploaded_image(file, filename):
+    """
+    Guarda una imagen con un nombre lógico.
+
+    Ejemplo:
+
+        filename="logo"
+
+    genera:
+
+        logo.jpg
+        logo.png
+        etc.
+
+    Elimina automáticamente versiones anteriores.
+    """
 
     if not file:
+
         return (
             False,
             "No se recibió ninguna imagen."
         )
 
     if not file.filename:
+
         return (
             False,
             "No seleccionaste ningún archivo."
         )
 
-    if not allowed_image(file.filename):
+    if not allowed_image(
+        file.filename
+    ):
 
         return (
             False,
@@ -280,18 +336,20 @@ def save_uploaded_image(file, filename):
 
         return (
             False,
-            "No se pudo comprobar el tamaño de la imagen."
+            "No se pudo comprobar "
+            "el tamaño de la imagen."
         )
 
     if size > MAX_IMAGE_SIZE:
 
         return (
             False,
-            "La imagen supera el límite de 8 MB."
+            "La imagen supera "
+            "el límite de 8 MB."
         )
 
     # --------------------------------------------------------
-    # OBTENER EXTENSIÓN
+    # LIMPIAR NOMBRE ORIGINAL
     # --------------------------------------------------------
 
     safe_name = secure_filename(
@@ -304,12 +362,12 @@ def save_uploaded_image(file, filename):
         .lower()
     )
 
-    if extension not in {
+    if extension not in (
         ".png",
         ".jpg",
         ".jpeg",
-        ".webp"
-    }:
+        ".webp",
+    ):
 
         return (
             False,
@@ -317,7 +375,7 @@ def save_uploaded_image(file, filename):
         )
 
     # --------------------------------------------------------
-    # NOMBRE FINAL
+    # RUTA FINAL
     # --------------------------------------------------------
 
     final_path = (
@@ -336,6 +394,7 @@ def save_uploaded_image(file, filename):
         try:
 
             if old_file != final_path:
+
                 old_file.unlink()
 
         except OSError:
@@ -343,17 +402,23 @@ def save_uploaded_image(file, filename):
             pass
 
     # --------------------------------------------------------
-    # GUARDAR
+    # CREAR DIRECTORIO
+    # --------------------------------------------------------
+
+    UPLOAD_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    # --------------------------------------------------------
+    # GUARDAR ARCHIVO
     # --------------------------------------------------------
 
     try:
 
-        UPLOAD_DIR.mkdir(
-            parents=True,
-            exist_ok=True
+        file.save(
+            final_path
         )
-
-        file.save(final_path)
 
     except Exception as error:
 
@@ -411,8 +476,12 @@ def login():
 
             session["admin"] = True
 
+            next_page = request.args.get(
+                "next"
+            )
+
             return redirect(
-                request.args.get("next")
+                next_page
                 or url_for("admin")
             )
 
@@ -441,7 +510,7 @@ def logout():
 
 
 # ============================================================
-# ADMINISTRACIÓN
+# PANEL DE ADMINISTRACIÓN
 # ============================================================
 
 @app.route(
@@ -514,68 +583,40 @@ def admin():
 # SUBIR ESCUDO
 # ============================================================
 
-@app.route("/uploads/logo")
-def uploaded_logo():
-    # 1. Buscar primero un logo subido
-    for extension in ALLOWED_IMAGE_EXTENSIONS:
-        candidate = UPLOAD_DIR / f"logo.{extension}"
+@app.route(
+    "/admin/upload-logo",
+    methods=["POST"]
+)
+@admin_required
+def upload_logo():
 
-        if candidate.is_file():
-            return send_from_directory(
-                UPLOAD_DIR,
-                candidate.name
-            )
-
-    # 2. Si no existe un logo subido,
-    # usar el escudo incluido en /app/static/
-    static_logo = BASE_DIR / "app" / "static" / "escudo-policia-cordoba.jpeg"
-
-    if static_logo.is_file():
-        return send_from_directory(
-            static_logo.parent,
-            static_logo.name
-        )
-
-    return "Logo no encontrado", 404
-    # ============================================================
-# MOSTRAR FONDO
-# ============================================================
-
-@app.route("/uploads/background")
-def uploaded_background():
-
-    # Buscar fondo subido
-    for extension in ALLOWED_IMAGE_EXTENSIONS:
-
-        candidate = (
-            UPLOAD_DIR /
-            f"background.{extension}"
-        )
-
-        if candidate.is_file():
-
-            return send_from_directory(
-                UPLOAD_DIR,
-                candidate.name
-            )
-
-    # Si no hay fondo subido,
-    # intentar usar uno incluido en static.
-    static_background = (
-        BASE_DIR /
-        "app" /
-        "static" /
-        "background.jpeg"
+    file = request.files.get(
+        "logo"
     )
 
-    if static_background.is_file():
+    success, message = save_uploaded_image(
+        file,
+        "logo"
+    )
 
-        return send_from_directory(
-            static_background.parent,
-            static_background.name
+    if success:
+
+        flash(
+            "Escudo actualizado correctamente.",
+            "success"
         )
 
-    return "Fondo no encontrado", 404
+    else:
+
+        flash(
+            f"No se pudo actualizar el escudo: {message}",
+            "error"
+        )
+
+    return redirect(
+        url_for("admin")
+    )
+
 
 # ============================================================
 # SUBIR FONDO
@@ -617,7 +658,148 @@ def upload_background():
 
 
 # ============================================================
-# SERVIR IMÁGENES SUBIDAS
+# MOSTRAR ESCUDO
+# ============================================================
+
+@app.route(
+    "/uploads/logo"
+)
+def uploaded_logo():
+
+    # --------------------------------------------------------
+    # 1. BUSCAR LOGO SUBIDO
+    # --------------------------------------------------------
+
+    image_path = get_image_path(
+        "logo"
+    )
+
+    if image_path:
+
+        response = send_from_directory(
+            UPLOAD_DIR,
+            image_path.name
+        )
+
+        response.headers[
+            "Cache-Control"
+        ] = (
+            "no-cache, "
+            "no-store, "
+            "must-revalidate"
+        )
+
+        response.headers[
+            "Pragma"
+        ] = "no-cache"
+
+        response.headers[
+            "Expires"
+        ] = "0"
+
+        return response
+
+    # --------------------------------------------------------
+    # 2. USAR ESCUDO INCLUIDO EN STATIC
+    # --------------------------------------------------------
+
+    static_logo = (
+        BASE_DIR /
+        "app" /
+        "static" /
+        "escudo-policia-cordoba.jpeg"
+    )
+
+    if static_logo.is_file():
+
+        return send_from_directory(
+            static_logo.parent,
+            static_logo.name
+        )
+
+    return (
+        "Logo no encontrado",
+        404
+    )
+
+
+# ============================================================
+# MOSTRAR FONDO
+# ============================================================
+
+@app.route(
+    "/uploads/background"
+)
+def uploaded_background():
+
+    # --------------------------------------------------------
+    # 1. BUSCAR FONDO SUBIDO
+    # --------------------------------------------------------
+
+    image_path = get_image_path(
+        "background"
+    )
+
+    if image_path:
+
+        response = send_from_directory(
+            UPLOAD_DIR,
+            image_path.name
+        )
+
+        response.headers[
+            "Cache-Control"
+        ] = (
+            "no-cache, "
+            "no-store, "
+            "must-revalidate"
+        )
+
+        response.headers[
+            "Pragma"
+        ] = "no-cache"
+
+        response.headers[
+            "Expires"
+        ] = "0"
+
+        return response
+
+    # --------------------------------------------------------
+    # 2. USAR FONDO INCLUIDO EN STATIC
+    # --------------------------------------------------------
+
+    possible_backgrounds = (
+        "background.jpeg",
+        "background.jpg",
+        "background.png",
+        "background.webp",
+    )
+
+    for filename in possible_backgrounds:
+
+        static_background = (
+            BASE_DIR /
+            "app" /
+            "static" /
+            filename
+        )
+
+        if static_background.is_file():
+
+            return send_from_directory(
+                static_background.parent,
+                static_background.name
+            )
+
+    return (
+        "Fondo no encontrado",
+        404
+    )
+
+
+# ============================================================
+# SERVIR ARCHIVOS SUBIDOS
 # ============================================================
 
 @app.route(
@@ -625,10 +807,33 @@ def upload_background():
 )
 def uploaded_file(filename):
 
+    # --------------------------------------------------------
+    # EVITAR RUTAS EXTRAÑAS
+    # --------------------------------------------------------
+
     requested = (
         UPLOAD_DIR /
         filename
     )
+
+    try:
+
+        requested = requested.resolve()
+        upload_root = UPLOAD_DIR.resolve()
+
+        requested.relative_to(
+            upload_root
+        )
+
+    except (
+        ValueError,
+        OSError
+    ):
+
+        return (
+            "Archivo no encontrado",
+            404
+        )
 
     # --------------------------------------------------------
     # ARCHIVO EXACTO
@@ -642,7 +847,7 @@ def uploaded_file(filename):
         )
 
     # --------------------------------------------------------
-    # BUSCAR POR NOMBRE SIN IMPORTAR EXTENSIÓN
+    # BUSCAR POR NOMBRE SIN EXTENSIÓN
     # --------------------------------------------------------
 
     stem = Path(
@@ -669,50 +874,12 @@ def uploaded_file(filename):
 
 
 # ============================================================
-# RUTA DIRECTA DEL LOGO
+# ESTADO DE LAS IMÁGENES
 # ============================================================
 
-
-
-
-# ============================================================
-# RUTA DIRECTA DEL FONDO
-# ============================================================
-
-@app.route("/uploads/background")
-def uploaded_background():
-
-    image_path = get_image_path(
-        "background"
-    )
-
-    if not image_path:
-
-        return (
-            "Fondo no encontrado",
-            404
-        )
-
-    response = send_from_directory(
-        UPLOAD_DIR,
-        image_path.name
-    )
-
-    response.headers["Cache-Control"] = (
-        "no-cache, no-store, must-revalidate"
-    )
-
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0"
-
-    return response
-
-
-# ============================================================
-# ESTADO DE IMÁGENES
-# ============================================================
-
-@app.route("/uploads/status")
+@app.route(
+    "/uploads/status"
+)
 @admin_required
 def uploads_status():
 
@@ -739,8 +906,25 @@ def uploads_status():
             background.name
             if background
             else None
-        )
+        ),
     }
+
+
+# ============================================================
+# MANEJO DE ARCHIVOS DEMASIADO GRANDES
+# ============================================================
+
+@app.errorhandler(413)
+def file_too_large(error):
+
+    flash(
+        "La imagen supera el límite permitido de 8 MB.",
+        "error"
+    )
+
+    return redirect(
+        url_for("admin")
+    )
 
 
 # ============================================================
