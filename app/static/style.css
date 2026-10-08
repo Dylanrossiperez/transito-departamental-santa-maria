@@ -1473,3 +1473,31 @@ button:focus-visible{
         filter:blur(2px);
     }
 }
+/* =========================================================
+   DROPDOWN INSTITUCIONAL — CLIC / CELULAR
+   ========================================================= */
+
+.dropdown.open .dropdown-menu{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+@media (max-width:760px){
+
+    .dropdown{
+        position:static;
+    }
+
+    .dropdown-menu{
+        top:auto;
+        margin-top:6px;
+        max-height:70vh;
+        overflow-y:auto;
+    }
+
+    .dropdown.open .dropbtn{
+        color:#fff;
+        background:rgba(8,120,209,.12);
+    }
+}
