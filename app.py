@@ -537,6 +537,45 @@ def uploaded_logo():
         )
 
     return "Logo no encontrado", 404
+    # ============================================================
+# MOSTRAR FONDO
+# ============================================================
+
+@app.route("/uploads/background")
+def uploaded_background():
+
+    # Buscar fondo subido
+    for extension in ALLOWED_IMAGE_EXTENSIONS:
+
+        candidate = (
+            UPLOAD_DIR /
+            f"background.{extension}"
+        )
+
+        if candidate.is_file():
+
+            return send_from_directory(
+                UPLOAD_DIR,
+                candidate.name
+            )
+
+    # Si no hay fondo subido,
+    # intentar usar uno incluido en static.
+    static_background = (
+        BASE_DIR /
+        "app" /
+        "static" /
+        "background.jpeg"
+    )
+
+    if static_background.is_file():
+
+        return send_from_directory(
+            static_background.parent,
+            static_background.name
+        )
+
+    return "Fondo no encontrado", 404
 
 # ============================================================
 # SUBIR FONDO
