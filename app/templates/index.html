@@ -615,99 +615,38 @@
 
             <div class="structure-items">
 
-
-                <div class="structure-item">
-
-                    <span>
-                        01
-                    </span>
-
+                <div
+                    id="autoridades"
+                    class="structure-item"
+                >
+                    <span>01</span>
                     <div>
-
-                        <strong>
-                            Policía de la Provincia de Córdoba
-                        </strong>
-
-                        <small>
-                            Institución
-                        </small>
-
+                        <strong>Autoridades</strong>
+                        <small>{{ c.authorities }}</small>
                     </div>
-
                 </div>
-
-
-
-                <div class="structure-item">
-
-                    <span>
-                        02
-                    </span>
-
-                    <div>
-
-                        <strong>
-                            Departamental Santa María
-                        </strong>
-
-                        <small>
-                            Dependencia
-                        </small>
-
-                    </div>
-
-                </div>
-
-
 
                 <div
                     id="funciones"
                     class="structure-item"
                 >
-
-                    <span>
-                        03
-                    </span>
-
+                    <span>02</span>
                     <div>
-
-                        <strong>
-                            Área de Tránsito
-                        </strong>
-
-                        <small>
-                            Área operativa
-                        </small>
-
+                        <strong>Funciones</strong>
+                        <small>{{ c.functions }}</small>
                     </div>
-
                 </div>
-
-
 
                 <div
                     id="dependencias"
                     class="structure-item"
                 >
-
-                    <span>
-                        04
-                    </span>
-
+                    <span>03</span>
                     <div>
-
-                        <strong>
-                            Seguridad vial
-                        </strong>
-
-                        <small>
-                            Prevención y servicio
-                        </small>
-
+                        <strong>Dependencias</strong>
+                        <small>{{ c.dependencies }}</small>
                     </div>
-
                 </div>
-
 
             </div>
 
@@ -1343,28 +1282,7 @@
 </footer>
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const dropdown = document.querySelector(".dropdown");
-    const button = dropdown ? dropdown.querySelector(".dropbtn") : null;
 
-    if (!dropdown || !button) return;
-
-    button.addEventListener("click", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        dropdown.classList.toggle("open");
-    });
-
-    document.addEventListener("click", function () {
-        dropdown.classList.remove("open");
-    });
-
-    dropdown.addEventListener("click", function (event) {
-        event.stopPropagation();
-    });
-});
-</script>
 </body>
 
 </html>
