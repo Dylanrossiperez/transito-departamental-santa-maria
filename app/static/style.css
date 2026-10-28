@@ -1955,4 +1955,35 @@ button:focus-visible{
     }
 }
 
+/* QUIÉNES SOMOS: MISMO RECUADRO QUE LAS DEMÁS TARJETAS */
+
+#quienes-somos .about-card {
+    background: #08131f;
+    border: 1px solid #1c2b3b;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+/* Mantener el título con el estilo institucional */
+#quienes-somos .about-card h2 {
+    color: #ffffff;
+    margin-bottom: 24px;
+}
+
+/* Texto dentro del recuadro */
+#quienes-somos .about-card p {
+    color: #b8cce4;
+    line-height: 1.8;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 768px) {
+    #quienes-somos .about-card {
+        padding: 24px 20px;
+    }
+}
+
+
 
