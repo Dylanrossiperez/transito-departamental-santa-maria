@@ -1,1 +1,3 @@
-alert("¡Mi archivo JavaScript está conectado!");
+console.log("SCRIPT CARGADO CORRECTAMENTE");
+
+alert("¡Mi archivo script.js está funcionando!");
