@@ -1516,3 +1516,120 @@ button:focus-visible{
         background:rgba(8,120,209,.12);
     }
 }
+/* SECCIÓN DE TELÉFONOS */
+.contact-section {
+    padding: 55px 20px;
+    background: #f2f5f8;
+    color: #1f2937;
+    text-align: center;
+}
+
+.contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.contact-section h2 {
+    color: #17365d;
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.contact-description {
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.contact-card {
+    background: #fff;
+    padding: 25px 18px;
+    border-radius: 12px;
+    border-top: 5px solid #176b45;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+}
+
+.contact-card h3 {
+    font-size: 20px;
+}
+
+.contact-number {
+    color: #17365d;
+    font-size: 26px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.contact-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: #176b45;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-button:hover {
+    background: #104c31;
+}
+
+.emergency-button {
+    background: #c62828;
+}
+
+.emergency-button:hover {
+    background: #9e1f1f;
+}
+
+/* BOTÓN FLOTANTE EXCLUSIVO DEL 911 */
+.floating-911 {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 100px;
+    padding: 14px 18px;
+    border-radius: 50px;
+    background: #d71920;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.30);
+}
+
+.floating-911:hover {
+    background: #a90f15;
+    color: #fff;
+}
+
+.floating-911-icon {
+    font-size: 24px;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-section h2 {
+        font-size: 23px;
+    }
+
+    .floating-911 {
+        right: 14px;
+        bottom: 14px;
+        padding: 12px 16px;
+    }
+}
