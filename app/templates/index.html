@@ -130,43 +130,93 @@
 
 <body>
 <section class="mapa-seccion">
-  <h2>Ubicación de la comisaría</h2>
-  <p>Encontrá la comisaría de Alta Gracia, Córdoba.</p>
+  <h2>DIRECCIÓN DE LA SEDE UNIDAD REGIONAL DEPARTAMENTAL SANTA MARIA Y PUNTOS TURÍSTICOS</h2>
+  <p>Ubicación de la sede policial y principales puntos turísticos de Alta Gracia, Córdoba.</p>
 
   <div id="mapa"></div>
 </section>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-  // Crear el mapa centrado en Alta Gracia
-  const mapa = L.map("mapa").setView(
-    [-31.6579, -64.4280],
-    16
-  );
+  // Mapa de la sede de la Unidad Regional y puntos turísticos.
+  const mapa = L.map("mapa");
 
-  // Cargar las calles desde OpenStreetMap
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19
   }).addTo(mapa);
 
-  // Colocar el marcador de la comisaría
-  const marcador = L.marker([-31.6579, -64.4280]).addTo(mapa);
+  // Coordenadas tomadas de los enlaces de Google Maps compartidos.
+  const ubicaciones = [
+    {
+      nombre: "Unidad Regional Departamental Santa María",
+      lat: -31.6588856,
+      lng: -64.4331316,
+      enlace: "https://maps.app.goo.gl/TXpM3cjXod27SHef9",
+      tipo: "Sede policial"
+    },
+    {
+      nombre: "Museo Nacional Estancia Jesuítica de Alta Gracia – Casa del Virrey Liniers",
+      lat: -31.6576736,
+      lng: -64.4350114,
+      enlace: "https://maps.app.goo.gl/w7HZNtmM6oniyCHD8",
+      tipo: "Punto turístico"
+    },
+    {
+      nombre: "Reloj Público",
+      lat: -31.6571661,
+      lng: -64.4349105,
+      enlace: "https://maps.app.goo.gl/ZMT4GhW3yiZzPx978",
+      tipo: "Punto turístico"
+    },
+    {
+      nombre: "Museo Manuel de Falla",
+      lat: -31.6513011,
+      lng: -64.4460700,
+      enlace: "https://maps.app.goo.gl/1WBsn5iyzzSVw8Y47",
+      tipo: "Punto turístico"
+    },
+    {
+      nombre: "Museo Casa del Che",
+      lat: -31.6488073,
+      lng: -64.4414904,
+      enlace: "https://maps.app.goo.gl/DxVHPoVWyS1ASVS29",
+      tipo: "Punto turístico"
+    },
+    {
+      nombre: "La Gruta",
+      lat: -31.6541365,
+      lng: -64.4521299,
+      enlace: "https://maps.app.goo.gl/ow5LduRU1c2tarpT8",
+      tipo: "Punto turístico"
+    }
+  ];
 
-  marcador.bindPopup(`
-    <strong>Comisaría de Alta Gracia</strong><br>
-    España 112, Córdoba<br>
-    <a
-      href="https://www.google.com/maps/search/?api=1&query=Comisaria+de+Alta+Gracia+Espana+112+Cordoba+Argentina"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Cómo llegar
-    </a>
-  `);
+  const limites = [];
 
-  // Mostrar la información al abrir la página
-  marcador.openPopup();
+  ubicaciones.forEach((lugar) => {
+    const marcador = L.marker([lugar.lat, lugar.lng]).addTo(mapa);
+
+    marcador.bindPopup(`
+      <strong>${lugar.nombre}</strong><br>
+      ${lugar.tipo}<br>
+      <a href="${lugar.enlace}" target="_blank" rel="noopener noreferrer">
+        Cómo llegar con Google Maps
+      </a>
+    `);
+
+    limites.push([lugar.lat, lugar.lng]);
+  });
+
+  // Ajusta el zoom para mostrar todos los marcadores.
+  mapa.fitBounds(limites, { padding: [30, 30] });
+
+  // Abrir automáticamente la ficha de la sede policial.
+  const sede = ubicaciones[0];
+  L.popup()
+    .setLatLng([sede.lat, sede.lng])
+    .setContent(`<strong>${sede.nombre}</strong><br>Sede policial<br><a href="${sede.enlace}" target="_blank" rel="noopener noreferrer">Cómo llegar con Google Maps</a>`)
+    .openOn(mapa);
 </script>
 <!-- =========================================================
      BARRA SUPERIOR
