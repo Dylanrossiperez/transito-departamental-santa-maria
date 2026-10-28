@@ -292,7 +292,7 @@ a{
   align-items: center;
   isolation: isolate;
   overflow: hidden;
-  background: #080b0f;
+  background: red;
 }
 
 .hero::before {
