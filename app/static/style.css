@@ -1633,3 +1633,259 @@ button:focus-visible{
         padding: 12px 16px;
     }
 }
+
+/* ==========================================
+   MEJORA VISUAL: SEGURIDAD VIAL
+   Desde "Información para circular"
+   hasta el bloque de siniestros viales
+========================================== */
+
+#seguridad {
+    padding: 76px 0;
+    background: linear-gradient(180deg, #f4f7fb 0%, #ffffff 100%);
+}
+
+#seguridad .safety-header {
+    max-width: 760px;
+    margin: 0 auto 42px;
+    text-align: center;
+}
+
+#seguridad .safety-header .section-label {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 7px 14px;
+    border-radius: 30px;
+    background: #e2ebf7;
+    color: #17365d;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+#seguridad .safety-header h2 {
+    margin: 0 0 16px;
+    color: #17365d;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.2;
+    letter-spacing: -0.7px;
+}
+
+#seguridad .safety-header p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #596579;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* Tarjetas de información */
+
+#seguridad .safety-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+#seguridad .safety-card {
+    position: relative;
+    padding: 30px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(23, 54, 93, 0.07);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+}
+
+#seguridad .safety-card:hover {
+    transform: translateY(-5px);
+    border-color: #b7cbe2;
+    box-shadow: 0 15px 34px rgba(23, 54, 93, 0.12);
+}
+
+#seguridad .safety-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    background: #e8eff8;
+    color: #17365d;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+#seguridad .safety-card h3 {
+    margin: 0 0 12px;
+    color: #17365d;
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+#seguridad .safety-card p {
+    margin-bottom: 18px;
+    color: #5b6575;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+#seguridad .safety-card ul {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#seguridad .safety-card li {
+    position: relative;
+    padding-left: 27px;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#seguridad .safety-card li::before {
+    content: "✓";
+    position: absolute;
+    top: 1px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #e2f4e9;
+    color: #176b45;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* Bloque: qué hacer ante un accidente */
+
+#seguridad .accident-box {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 32px;
+    margin-top: 38px;
+    padding: 36px;
+    background: #ffffff;
+    border: 1px solid #f1c9c9;
+    border-left: 6px solid #c62828;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(120, 25, 25, 0.08);
+}
+
+#seguridad .accident-content .section-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    background: #fdeaea;
+    color: #a61d24;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+#seguridad .accident-content h3 {
+    margin: 0 0 14px;
+    color: #17365d;
+    font-size: 27px;
+    line-height: 1.3;
+}
+
+#seguridad .accident-content p {
+    margin: 0;
+    color: #596579;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+#seguridad .accident-steps {
+    display: grid;
+    gap: 15px;
+    align-content: start;
+}
+
+#seguridad .accident-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 16px;
+    background: #f7f9fc;
+    border: 1px solid #e6ebf2;
+    border-radius: 12px;
+}
+
+#seguridad .accident-step strong {
+    display: flex;
+    flex: 0 0 36px;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #17365d;
+    color: #ffffff;
+    font-size: 13px;
+}
+
+#seguridad .accident-step span {
+    padding-top: 5px;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Adaptación para tablets y celulares */
+
+@media (max-width: 768px) {
+    #seguridad {
+        padding: 52px 0;
+    }
+
+    #seguridad .safety-header {
+        margin-bottom: 28px;
+        padding: 0 8px;
+    }
+
+    #seguridad .safety-grid {
+        grid-template-columns: 1fr;
+        gap: 17px;
+    }
+
+    #seguridad .safety-card {
+        padding: 24px;
+        border-radius: 15px;
+    }
+
+    #seguridad .accident-box {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 26px;
+        padding: 23px;
+    }
+
+    #seguridad .accident-content h3 {
+        font-size: 23px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #seguridad .safety-card {
+        transition: none;
+    }
+
+    #seguridad .safety-card:hover {
+        transform: none;
+    }
+}
+
