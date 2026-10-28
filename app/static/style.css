@@ -1409,9 +1409,9 @@ footer .container{
     z-index: -1;
     background: linear-gradient(
         90deg,
-        rgba(4, 7, 10, 0.45) 0%,
-        rgba(4, 7, 10, 0.30) 55%,
-        rgba(4, 7, 10, 0.20) 100%
+        rgba(4, 7, 10, 0.60) 0%,
+        rgba(4, 7, 10, 0.45) 55%,
+        rgba(4, 7, 10, 0.35) 100%
     );
     pointer-events: none;
 }
