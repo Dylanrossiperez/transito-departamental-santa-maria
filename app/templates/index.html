@@ -2,7 +2,29 @@
 <html lang="es">
 
 <head>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 
+<style>
+  #mapa {
+    width: 100%;
+    height: 450px;
+    border-radius: 12px;
+    z-index: 1;
+  }
+
+  .mapa-seccion {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .mapa-seccion h2 {
+    margin-bottom: 10px;
+  }
+</style> 
     <meta charset="utf-8">
 
     <meta
@@ -107,8 +129,45 @@
 
 
 <body>
+<section class="mapa-seccion">
+  <h2>Ubicación de la comisaría</h2>
+  <p>Encontrá la comisaría de Alta Gracia, Córdoba.</p>
 
+  <div id="mapa"></div>
+</section>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<script>
+  // Crear el mapa centrado en Alta Gracia
+  const mapa = L.map("mapa").setView(
+    [-31.6579, -64.4280],
+    16
+  );
+
+  // Cargar las calles desde OpenStreetMap
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19
+  }).addTo(mapa);
+
+  // Colocar el marcador de la comisaría
+  const marcador = L.marker([-31.6579, -64.4280]).addTo(mapa);
+
+  marcador.bindPopup(`
+    <strong>Comisaría de Alta Gracia</strong><br>
+    España 112, Córdoba<br>
+    <a
+      href="https://www.google.com/maps/search/?api=1&query=Comisaria+de+Alta+Gracia+Espana+112+Cordoba+Argentina"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Cómo llegar
+    </a>
+  `);
+
+  // Mostrar la información al abrir la página
+  marcador.openPopup();
+</script>
 <!-- =========================================================
      BARRA SUPERIOR
      ========================================================= -->
