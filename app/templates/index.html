@@ -38,7 +38,7 @@
 
     <meta
         name="description"
-        content="Espacio orientador y preventivo de la Departamental Santa María"
+        content="{{ c.subtitle }}"
     >
 
     <link
@@ -61,6 +61,23 @@
         rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}"
     >
+
+    <!-- Recuadro para la sección "Quiénes somos", a juego con las tarjetas institucionales -->
+    <style>
+        .institutional-section .institutional-main {
+            box-sizing: border-box;
+            padding: 32px;
+            background: #08131f;
+            border: 1px solid #1c2b3b;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .institutional-section .institutional-main {
+                padding: 24px 20px;
+            }
+        }
+    </style>
 
     <!--
         =========================================================
@@ -448,14 +465,19 @@
 
                 <span></span>
 
-                SECCIÓN CENTRO ANEXO ALTA GRACIA EN LA DEPARTAMENTAL SANTA MARÍA
+                ÁREA DE TRÁNSITO
 
             </div>
 
 
             <h1>
-                CADA DECISIÓN CUENTA
+                {{ c.title }}
             </h1>
+
+
+            <h2 class="hero-subtitle">
+                {{ c.department }}
+            </h2>
 
 
             <p class="hero-text">
