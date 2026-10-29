@@ -1393,7 +1393,7 @@ footer .container{
     position: absolute;
     inset: -8px;
     z-index: -2;
-    background-image: url("/static/FONDO%20PATRULLA.jpg");
+ background-image: var(--hero-bg, url("/static/departamental.jpeg"));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
